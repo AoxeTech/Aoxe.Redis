@@ -1,4 +1,4 @@
-﻿using Zaabee.JsonUtility;
+﻿using Zaabee.Json;
 using Zaabee.Redis.ISerialize;
 
 namespace Zaabee.Redis.Json

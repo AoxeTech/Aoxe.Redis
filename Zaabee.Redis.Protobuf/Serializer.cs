@@ -1,4 +1,4 @@
-﻿using Zaabee.ProtobufUtility;
+﻿using Zaabee.Protobuf;
 using Zaabee.Redis.ISerialize;
 
 namespace Zaabee.Redis.Protobuf
