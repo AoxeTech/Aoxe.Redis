@@ -24,8 +24,8 @@ namespace Demo
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<ISerializer, Serializer>();
-            services.AddSingleton<IZaabeeRedisClient, ZaabyRedisClient>(p =>
-                new ZaabyRedisClient(new RedisConfig("192.168.78.152:6379,abortConnect=false,syncTimeout=3000"),
+            services.AddSingleton<IZaabeeRedisClient, ZaabeeRedisClient>(p =>
+                new ZaabeeRedisClient(new RedisConfig("192.168.78.152:6379,abortConnect=false,syncTimeout=3000"),
                     services.BuildServiceProvider().GetService<ISerializer>()));
         }
 

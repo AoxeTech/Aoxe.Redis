@@ -7,7 +7,7 @@ using Zaabee.Redis.ISerialize;
 
 namespace Zaabee.Redis
 {
-    public class ZaabyRedisClient : IZaabeeRedisClient
+    public class ZaabeeRedisClient : IZaabeeRedisClient
     {
         private static ConnectionMultiplexer _conn;
         private static IDatabase _db;
@@ -15,7 +15,7 @@ namespace Zaabee.Redis
         private readonly double _defaultExpireMinutes;
         private static readonly object LockObj = new object();
 
-        public ZaabyRedisClient(RedisConfig config, ISerializer serializer)
+        public ZaabeeRedisClient(RedisConfig config, ISerializer serializer)
         {
             if (_conn != null) return;
             lock (LockObj)
