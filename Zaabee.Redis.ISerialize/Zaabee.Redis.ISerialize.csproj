@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>1.0.0.1</PackageVersion>
-    <Version>1.0.0.1</Version>
+    <PackageVersion>1.0.1</PackageVersion>
+    <Version>1.0.1</Version>
     <Authors>Mutuduxf</Authors>
     <Company>Mutuduxf</Company>
     <PackageTags>Zaaby Zaabee Cache Kev/Value Redis</PackageTags>
@@ -11,7 +11,4 @@
     <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Mutuduxf/Zaabee.Redis/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Zaabee.Redis.Abstractions" Version="1.0.0.1" />
-  </ItemGroup>
 </Project>

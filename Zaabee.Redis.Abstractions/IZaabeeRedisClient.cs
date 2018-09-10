@@ -5,13 +5,15 @@ namespace Zaabee.Redis.Abstractions
 {
     public interface IZaabeeRedisClient
     {
-        void Add<T>(string key, T entity, double expireMins = 0.0);
+        #region string
 
-        void AddAsync<T>(string key, T entity, double expireMins = 0.0);
+        void Add<T>(string key, T entity, TimeSpan? expiry = null);
 
-        void AddRange<T>(IList<Tuple<string, T>> entities, double expireMins = 0.0);
+        void AddAsync<T>(string key, T entity, TimeSpan? expiry = null);
 
-        void AddRangeAsync<T>(IList<Tuple<string, T>> entities, double expireMins = 0.0);
+        void AddRange<T>(IList<Tuple<string, T>> entities, TimeSpan? expiry = null);
+
+        void AddRangeAsync<T>(IList<Tuple<string, T>> entities, TimeSpan? expiry = null);
 
         void Delete(string key);
 
@@ -24,5 +26,31 @@ namespace Zaabee.Redis.Abstractions
         T Get<T>(string key);
 
         Dictionary<string, T> Get<T>(IList<string> keys);
+
+        #endregion
+
+        #region set
+
+
+
+        #endregion
+
+        #region list
+
+
+
+        #endregion
+
+        #region hash
+
+
+
+        #endregion
+
+        #region zset
+
+
+
+        #endregion
     }
 }

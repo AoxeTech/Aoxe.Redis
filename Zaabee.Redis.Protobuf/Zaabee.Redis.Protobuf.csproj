@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>1.1.3</PackageVersion>
-    <Version>1.1.3</Version>
+    <PackageVersion>1.1.4</PackageVersion>
+    <Version>1.1.4</Version>
     <Authors>Mutuduxf</Authors>
     <Company>Mutuduxf</Company>
     <PackageTags>Zaaby Zaabee Cache Key/Value Redis Protobuf</PackageTags>
@@ -13,6 +13,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Zaabee.Protobuf" Version="1.0.5" />
-    <PackageReference Include="Zaabee.Redis.ISerialize" Version="1.0.0.1" />
+    <PackageReference Include="Zaabee.Redis.ISerialize" Version="1.0.1" />
   </ItemGroup>
 </Project>

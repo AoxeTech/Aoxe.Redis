@@ -7,12 +7,12 @@ using Zaabee.Redis.ISerialize;
 
 namespace Zaabee.Redis
 {
-    public class ZaabeeRedisClient : IZaabeeRedisClient
+    public class ZaabeeRedisClient : IZaabeeRedisClient, IDisposable
     {
-        private static ConnectionMultiplexer _conn;
-        private static IDatabase _db;
+        private readonly ConnectionMultiplexer _conn;
+        private readonly IDatabase _db;
         private readonly ISerializer _serializer;
-        private readonly double _defaultExpireMinutes;
+        private readonly TimeSpan _defaultExpiry;
         private static readonly object LockObj = new object();
 
         public ZaabeeRedisClient(RedisConfig config, ISerializer serializer)
@@ -21,48 +21,49 @@ namespace Zaabee.Redis
             lock (LockObj)
             {
                 if (_conn != null) return;
-                _defaultExpireMinutes = config.DefaultExpireMinutes;
+                _defaultExpiry = config.DefaultExpiry;
                 _serializer = serializer;
                 _conn = ConnectionMultiplexer.Connect(config.ConnectionString);
                 _db = _conn.GetDatabase();
             }
         }
 
-        public void Add<T>(string key, T entity, double mins = 10)
+        #region string
+
+        public void Add<T>(string key, T entity, TimeSpan? expiry = null)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             if (entity == null) return;
-            if (mins <= 0) mins = _defaultExpireMinutes;
-            _db.StringSet(key, _serializer.Serialize(entity), TimeSpan.FromMinutes(mins));
+            expiry = expiry ?? _defaultExpiry;
+            _db.StringSet(key, _serializer.Serialize(entity), expiry);
         }
 
-        public void AddAsync<T>(string key, T entity, double mins = 10)
+        public void AddAsync<T>(string key, T entity, TimeSpan? expiry = null)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             if (entity == null) throw new ArgumentNullException(nameof(entity));
-            if (mins <= 0) mins = _defaultExpireMinutes;
-            _db.StringSetAsync(key, _serializer.Serialize(entity),
-                TimeSpan.FromMinutes(mins));
+            expiry = expiry ?? _defaultExpiry;
+            _db.StringSetAsync(key, _serializer.Serialize(entity), expiry);
         }
 
-        public void AddRange<T>(IList<Tuple<string, T>> entitys, double mins = 10)
+        public void AddRange<T>(IList<Tuple<string, T>> entities, TimeSpan? expiry = null)
         {
-            if (entitys == null || !entitys.Any()) return;
-            if (mins <= 0) mins = _defaultExpireMinutes;
+            if (entities == null || !entities.Any()) return;
+            expiry = expiry ?? _defaultExpiry;
             var batch = _db.CreateBatch();
-            foreach (var entity in entitys)
-                batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), TimeSpan.FromMinutes(mins));
+            foreach (var entity in entities)
+                batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry);
 
             batch.Execute();
         }
 
-        public void AddRangeAsync<T>(IList<Tuple<string, T>> entitys, double mins = 10)
+        public void AddRangeAsync<T>(IList<Tuple<string, T>> entities, TimeSpan? expiry = null)
         {
-            if (entitys == null || !entitys.Any()) return;
-            if (mins <= 0) mins = _defaultExpireMinutes;
+            if (entities == null || !entities.Any()) return;
+            expiry = expiry ?? _defaultExpiry;
             var batch = _db.CreateBatch();
-            foreach (var entity in entitys)
-                batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), TimeSpan.FromMinutes(mins));
+            foreach (var entity in entities)
+                batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry);
 
             batch.ExecuteAsync(null);
         }
@@ -109,6 +110,8 @@ namespace Zaabee.Redis
 
             return result;
         }
+
+        #endregion
 
         public void Dispose()
         {

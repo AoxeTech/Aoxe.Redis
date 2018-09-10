@@ -1,18 +1,20 @@
-﻿namespace Zaabee.Redis
+﻿using System;
+
+namespace Zaabee.Redis
 {
     public class RedisConfig
     {
         public string ConnectionString { get; set; }
-        public double DefaultExpireMinutes { get; set; }
+        public TimeSpan DefaultExpiry { get; set; }
 
         public RedisConfig()
         {
         }
 
-        public RedisConfig(string connectionString, double defaultExpireMinutes = 10)
+        public RedisConfig(string connectionString, TimeSpan? defaultExpiry = null)
         {
             ConnectionString = connectionString;
-            DefaultExpireMinutes = defaultExpireMinutes;
+            DefaultExpiry = defaultExpiry ?? TimeSpan.FromMinutes(10);
         }
     }
 }
