@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Redis.Protobuf", "Za
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Redis.Jil", "Zaabee.Redis.Jil\Zaabee.Redis.Jil.csproj", "{4A4F16C3-7951-4DC0-97CB-E61D7F8CB60F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{AA07BE07-0358-402D-948F-CFFEF935C0C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{329C3380-2AE4-4B9F-8E5E-A8328EBF70BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,9 +44,9 @@ Global
 		{4A4F16C3-7951-4DC0-97CB-E61D7F8CB60F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A4F16C3-7951-4DC0-97CB-E61D7F8CB60F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A4F16C3-7951-4DC0-97CB-E61D7F8CB60F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA07BE07-0358-402D-948F-CFFEF935C0C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA07BE07-0358-402D-948F-CFFEF935C0C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA07BE07-0358-402D-948F-CFFEF935C0C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA07BE07-0358-402D-948F-CFFEF935C0C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{329C3380-2AE4-4B9F-8E5E-A8328EBF70BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{329C3380-2AE4-4B9F-8E5E-A8328EBF70BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{329C3380-2AE4-4B9F-8E5E-A8328EBF70BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{329C3380-2AE4-4B9F-8E5E-A8328EBF70BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

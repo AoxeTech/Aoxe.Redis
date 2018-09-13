@@ -13,7 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="StackExchange.Redis" Version="2.0.495" />
-    <PackageReference Include="Zaabee.Redis.Abstractions" Version="1.1.0" />
+    <PackageReference Include="Zaabee.Redis.Abstractions" Version="1.1.2" />
     <PackageReference Include="Zaabee.Redis.ISerialize" Version="1.0.1" />
   </ItemGroup>
 </Project>
