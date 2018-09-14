@@ -64,18 +64,13 @@ namespace Zaabee.Redis
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             expiry = expiry ?? _defaultExpiry;
-            return await _db.StringSetAsync(key, _serializer.Serialize(entity), expiry);
+            var bytes = await _serializer.SerializeAsync(entity);
+            return await _db.StringSetAsync(key, bytes, expiry);
         }
 
         public void AddRange<T>(IList<Tuple<string, T>> entities, TimeSpan? expiry = null)
         {
-            if (entities == null || !entities.Any()) return;
-            expiry = expiry ?? _defaultExpiry;
-            var batch = _db.CreateBatch();
-            Task.WhenAll(entities.Select(entity =>
-                batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
-
-            batch.Execute();
+            AddRangeAsync(entities, expiry).Wait();
         }
 
         public Task AddRangeAsync<T>(IList<Tuple<string, T>> entities, TimeSpan? expiry = null)
@@ -83,8 +78,8 @@ namespace Zaabee.Redis
             if (entities == null || !entities.Any()) return Task.FromResult(0);
             expiry = expiry ?? _defaultExpiry;
             var batch = _db.CreateBatch();
-            Task.WhenAll(entities.Select(entity =>
-                batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
+            Task.WhenAll(entities.Select(async entity =>
+                await batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
             batch.Execute();
             return Task.FromResult(0);
         }
@@ -96,10 +91,9 @@ namespace Zaabee.Redis
 
         public async Task<T> GetAsync<T>(string key)
         {
-            if (string.IsNullOrWhiteSpace(key)) return await Task.FromResult(default(T));
-            var value = _db.StringGetAsync(key);
-            var result = value.Result;
-            return await Task.FromResult(result.HasValue ? _serializer.Deserialize<T>(result) : default(T));
+            if (string.IsNullOrWhiteSpace(key)) return default(T);
+            var value = await _db.StringGetAsync(key);
+            return await Task.FromResult(value.HasValue ? await _serializer.DeserializeAsync<T>(value) : default(T));
         }
 
         public List<T> Get<T>(IList<string> keys)
@@ -109,10 +103,10 @@ namespace Zaabee.Redis
 
         public async Task<List<T>> GetAsync<T>(IList<string> keys)
         {
-            if (keys == null || !keys.Any()) return await Task.FromResult(new List<T>());
+            if (keys == null || !keys.Any()) return new List<T>();
             var values = await _db.StringGetAsync(keys.Select(p => (RedisKey) p).ToArray());
-            var result = values.Select(value => _serializer.Deserialize<T>(value)).ToList();
-            return await Task.FromResult(result);
+            var resultTasks = values.Select(async value => await _serializer.DeserializeAsync<T>(value));
+            return Task.WhenAll(resultTasks).Result.ToList();
         }
 
         #endregion
@@ -124,9 +118,22 @@ namespace Zaabee.Redis
             return _db.HashSet(key, entityKey, _serializer.Serialize(entity));
         }
 
-        public void HashAddRange<T>(string key, Dictionary<string, T> entities)
+        public async Task<bool> HashAddAsync<T>(string key, string entityKey, T entity)
         {
-            _db.HashSet(key, entities.Select(kv => new HashEntry(kv.Key, _serializer.Serialize(kv.Value))).ToArray());
+            var bytes = await _serializer.SerializeAsync(entity);
+            return await _db.HashSetAsync(key, entityKey,  bytes);
+        }
+
+        public void HashAddRange<T>(string key, IList<Tuple<string, T>> entities)
+        {
+            _db.HashSet(key, entities.Select(tuple => new HashEntry(tuple.Item1, _serializer.Serialize(tuple.Item2))).ToArray());
+        }
+
+        public async Task HashAddRangeAsync<T>(string key, IList<Tuple<string, T>> entities)
+        {
+            var bytes = entities.Select(async tuple =>
+                new HashEntry(tuple.Item1, await _serializer.SerializeAsync(tuple.Item2)));
+            await _db.HashSetAsync(key, Task.WhenAll(bytes).Result);
         }
 
         public bool HashDelete(string key, string entityKey)
@@ -134,9 +141,19 @@ namespace Zaabee.Redis
             return _db.HashDelete(key, entityKey);
         }
 
-        public long HashDeleteAll(string key, IList<string> entityKeys)
+        public async Task<bool> HashDeleteAsync(string key, string entityKey)
+        {
+            return await _db.HashDeleteAsync(key, entityKey);
+        }
+
+        public long HashDelete(string key, IList<string> entityKeys)
         {
             return _db.HashDelete(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
+        }
+
+        public async Task<long> HashDeleteAsync(string key, IList<string> entityKeys)
+        {
+            return await _db.HashDeleteAsync(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
         }
 
         public T HashGet<T>(string key, string entityKey)
@@ -145,12 +162,25 @@ namespace Zaabee.Redis
             return value.HasValue ? _serializer.Deserialize<T>(value) : default(T);
         }
 
-        public List<T> HashGetAll<T>(string key)
+        public async Task<T> HashGetAsync<T>(string key, string entityKey)
+        {
+            var value = await _db.HashGetAsync(key, entityKey);
+            return await Task.FromResult(value.HasValue ? await _serializer.DeserializeAsync<T>(value) : default(T));
+        }
+
+        public List<T> HashGet<T>(string key)
         {
             var kvs = _db.HashGetAll(key);
             return kvs == null
                 ? new List<T>()
                 : kvs.Select(kv => _serializer.Deserialize<T>(kv.Value)).ToList();
+        }
+
+        public async Task<List<T>> HashGetAsync<T>(string key)
+        {
+            var kvs = await _db.HashGetAllAsync(key);
+            var result = kvs.Select(async kv => await _serializer.DeserializeAsync<T>(kv.Value)).ToList();
+            return Task.WhenAll(result).Result.ToList();
         }
 
         public List<T> HashGet<T>(string key, IList<string> entityKeys)
@@ -161,22 +191,34 @@ namespace Zaabee.Redis
                 : values.Select(value => _serializer.Deserialize<T>(value)).ToList();
         }
 
+        public async Task<List<T>> HashGetAsync<T>(string key, IList<string> entityKeys)
+        {
+            var values = await _db.HashGetAsync(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
+            return values == null
+                ? new List<T>()
+                : Task.WhenAll(values.Select(async value => await _serializer.DeserializeAsync<T>(value))).Result
+                    .ToList();
+        }
+
         public List<string> HashGetAllEntityKeys(string key)
         {
             return _db.HashKeys(key).Select(entityKey => entityKey.ToString()).ToList();
         }
 
-        public List<T> HashGetAllEntities<T>(string key)
+        public async Task<List<string>> HashGetAllEntityKeysAsync(string key)
         {
-            var kvs = _db.HashGetAll(key);
-            return kvs == null
-                ? new List<T>()
-                : kvs.Select(kv => _serializer.Deserialize<T>(kv.Value)).ToList();
+            var keys = await _db.HashKeysAsync(key);
+            return keys.Select(entityKey => entityKey.ToString()).ToList();
         }
 
         public long HashCount(string key)
         {
             return _db.HashLength(key);
+        }
+
+        public async Task<long> HashCountAsync(string key)
+        {
+            return await _db.HashLengthAsync(key);
         }
 
         #endregion
