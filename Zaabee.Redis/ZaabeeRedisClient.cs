@@ -51,6 +51,26 @@ namespace Zaabee.Redis
             return await _db.KeyDeleteAsync(keys.Select(x => (RedisKey) x).ToArray());
         }
 
+        public bool Exists(string key)
+        {
+            return _db.KeyExists(key);
+        }
+
+        public Task<bool> ExistsAsync(string key)
+        {
+            return _db.KeyExistsAsync(key);
+        }
+
+        public bool Expire(string key,TimeSpan? timeSpan)
+        {
+            return _db.KeyExpire(key,timeSpan);
+        }
+
+        public Task<bool> ExpireAsync(string key, TimeSpan? timeSpan)
+        {
+            return _db.KeyExpireAsync(key, timeSpan);
+        }
+
         #endregion
 
         #region string

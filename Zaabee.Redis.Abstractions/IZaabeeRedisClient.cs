@@ -16,6 +16,14 @@ namespace Zaabee.Redis.Abstractions
 
         Task<long> DeleteAllAsync(IList<string> keys);
 
+        bool Exists(string key);
+
+        Task<bool> ExistsAsync(string key);
+
+        bool Expire(string key, TimeSpan? timeSpan);
+
+        Task<bool> ExpireAsync(string key, TimeSpan? timeSpan);
+
         #endregion
 
         #region string
