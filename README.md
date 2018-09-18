@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This redis client wrapper will use redis as a key/value system.
+This redis client wrapper base by string and hash.
 
 ## QuickStart
 
@@ -15,7 +15,7 @@ This redis client wrapper will use redis as a key/value system.
 
 ### Build Project
 
-Create an asp.net core project and import reference in startup.cs(Get [Zaabee.Redis](https://github.com/Mutuduxf/Zaabee.Redis) and [Zaabee.Redis.Protobuf](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.Redis.Protobuf) (the protobuf-net's attributes like DataContract/DataMember is not necessary) from Nuget,otherwise we have other serializers which named [Zaabee.Redis.Json](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.Redis.Json)) and [Zaabee.Redis.Jil](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.Redis.Jil).
+Create an asp.net core project and import reference in startup.cs.Get [Zaabee.Redis](https://github.com/Mutuduxf/Zaabee.Redis) and [Zaabee.Redis.Protobuf](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.Redis.Protobuf) (the protobuf-net's attributes like DataContract/DataMember is not necessary) from Nuget,otherwise we have other serializers which named [Zaabee.Redis.Json](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.Redis.Json) and [Zaabee.Redis.Jil](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.Redis.Jil).
 
 ```CSharp
 using Zaabee.Redis;
