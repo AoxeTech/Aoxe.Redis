@@ -3,16 +3,15 @@ using ProtoBuf;
 
 namespace UnitTest
 {
-    [ProtoContract]
     public class TestModel
     {
-        [ProtoMember(1)] public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-        [ProtoMember(2)] public string Name { get; set; }
+        public string Name { get; set; }
 
-        [ProtoMember(3)] public int Age { get; set; }
+        public int Age { get; set; }
 
-        [ProtoMember(4)] public DateTime CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -22,7 +21,8 @@ namespace UnitTest
 
         protected bool Equals(TestModel other)
         {
-            return Id.Equals(other.Id) && string.Equals(Name, other.Name) && Age == other.Age && CreateTime.Equals(other.CreateTime);
+            return Id.Equals(other.Id) && string.Equals(Name, other.Name) && Age == other.Age &&
+                   CreateTime.Equals(other.CreateTime);
         }
 
         public override int GetHashCode()
