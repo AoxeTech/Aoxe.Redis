@@ -77,7 +77,10 @@ namespace Zaabee.Redis
 
         public bool Add<T>(string key, T entity, TimeSpan? expiry = null)
         {
-            return AddAsync(key, entity, expiry).Result;
+            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            expiry = expiry ?? _defaultExpiry;
+            var bytes = _serializer.Serialize(entity);
+            return _db.StringSet(key, bytes, expiry);
         }
 
         public async Task<bool> AddAsync<T>(string key, T entity, TimeSpan? expiry = null)
@@ -90,7 +93,13 @@ namespace Zaabee.Redis
 
         public void AddRange<T>(IList<Tuple<string, T>> entities, TimeSpan? expiry = null)
         {
-            AddRangeAsync(entities, expiry).Wait();
+            if (entities == null || !entities.Any()) return;
+            expiry = expiry ?? _defaultExpiry;
+            var batch = _db.CreateBatch();
+            var taskAll = Task.WhenAll(entities.Select(async entity =>
+                await batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
+            taskAll.Wait();
+            batch.Execute();
         }
 
         public Task AddRangeAsync<T>(IList<Tuple<string, T>> entities, TimeSpan? expiry = null)
@@ -106,7 +115,9 @@ namespace Zaabee.Redis
 
         public T Get<T>(string key)
         {
-            return GetAsync<T>(key).Result;
+            if (string.IsNullOrWhiteSpace(key)) return default(T);
+            var value = _db.StringGet(key);
+            return value.HasValue ? _serializer.Deserialize<T>(value) : default(T);
         }
 
         public async Task<T> GetAsync<T>(string key)
@@ -118,7 +129,9 @@ namespace Zaabee.Redis
 
         public List<T> Get<T>(IList<string> keys)
         {
-            return GetAsync<T>(keys).Result;
+            if (keys == null || !keys.Any()) return new List<T>();
+            var values = _db.StringGet(keys.Select(p => (RedisKey) p).ToArray());
+            return values.Select(value => _serializer.Deserialize<T>(value)).ToList();
         }
 
         public async Task<List<T>> GetAsync<T>(IList<string> keys)
