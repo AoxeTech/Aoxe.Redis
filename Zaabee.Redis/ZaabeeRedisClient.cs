@@ -96,9 +96,8 @@ namespace Zaabee.Redis
             if (entities == null || !entities.Any()) return;
             expiry = expiry ?? _defaultExpiry;
             var batch = _db.CreateBatch();
-            var taskAll = Task.WhenAll(entities.Select(async entity =>
-                await batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
-            taskAll.Wait();
+            Task.WhenAll(entities.Select(entity =>
+                batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
             batch.Execute();
         }
 
