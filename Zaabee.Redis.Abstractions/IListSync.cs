@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Zaabee.Redis.Abstractions
 {
-    public interface IListOperate
+    public interface IListSync
     {
         T ListGetByIndex<T>(string key, long index);
         
@@ -14,11 +14,11 @@ namespace Zaabee.Redis.Abstractions
         
         long ListLeftPush<T>(string key, T value);
         
-        long ListLeftPush<T>(string key, List<T> values);
+        long ListLeftPushRange<T>(string key, IEnumerable<T> values);
         
         long ListLength(string key);
         
-        List<T> ListRange<T>(string key, long start = 0, long stop = -1);
+        IList<T> ListRange<T>(string key, long start = 0, long stop = -1);
         
         long ListRemove<T>(string key, T value, long count = 0);
         
@@ -28,7 +28,7 @@ namespace Zaabee.Redis.Abstractions
         
         long ListRightPush<T>(string key, T value);
         
-        long ListRightPush<T>(string key, List<T> values);
+        long ListRightPushRange<T>(string key, IEnumerable<T> values);
         
         void ListSetByIndex<T>(string key, long index, T value);
         

@@ -41,10 +41,10 @@ namespace UnitTest
                 testModels.Select(testModel => new Tuple<string, TestModel>(testModel.Id.ToString(), testModel))
                     .ToList());
             var results =
-                _client.HashGet<TestModel>("HashBatchTest", testModels.Select(model => model.Id.ToString()).ToList());
+                _client.HashGetRange<TestModel>("HashBatchTest", testModels.Select(model => model.Id.ToString()).ToList());
             Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
             Assert.Equal(results.Count,
-                _client.HashDelete("HashBatchTest", results.Select(testModel => testModel.Id.ToString()).ToList()));
+                _client.HashDeleteRange("HashBatchTest", results.Select(testModel => testModel.Id.ToString()).ToList()));
         }
 
         [Fact]
@@ -55,10 +55,10 @@ namespace UnitTest
                 testModels.Select(testModel => new Tuple<string, TestModel>(testModel.Id.ToString(), testModel))
                     .ToList()).Wait();
             var results =
-                _client.HashGetAsync<TestModel>("HashBatchAsyncTest", testModels.Select(model => model.Id.ToString()).ToList()).Result;
+                _client.HashGetRangeAsync<TestModel>("HashBatchAsyncTest", testModels.Select(model => model.Id.ToString()).ToList()).Result;
             Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
             Assert.Equal(results.Count,
-                _client.HashDeleteAsync("HashBatchAsyncTest", results.Select(testModel => testModel.Id.ToString()).ToList()).Result);
+                _client.HashDeleteRangeAsync("HashBatchAsyncTest", results.Select(testModel => testModel.Id.ToString()).ToList()).Result);
         }
 
         [Fact]

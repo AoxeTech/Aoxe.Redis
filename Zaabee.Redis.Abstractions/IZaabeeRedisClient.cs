@@ -1,7 +1,7 @@
 ﻿namespace Zaabee.Redis.Abstractions
 {
-    public interface IZaabeeRedisClient : IKeyOperate, IStringOperate, IListOperate, IHashOperate, ISetOperate,
-        ISortedSetOperate
+    public interface IZaabeeRedisClient : IKeySync, IStringSync, IListSync, IHashSync, ISetSync,
+        ISortedSetSync, IKeyAsync, IStringAsync, IListAsync, IHashAsync, ISetAsync, ISortedSetAsync
     {
 
     }
