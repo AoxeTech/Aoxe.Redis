@@ -1,5 +1,4 @@
 using System;
-using ProtoBuf;
 
 namespace UnitTest
 {
