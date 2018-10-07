@@ -48,7 +48,7 @@ public class TestModel
 
     public int Age { get; set; }
 
-    public DateTimeOffset CreateTime { get; set; }
+    public DateTime CreateTime { get; set; }
 }
 ```
 
@@ -75,7 +75,7 @@ public class RedisDemoController : ControllerBase
             Id = Guid.NewGuid(),
             Name = "apple",
             Age = 18,
-            CreateTime = DateTimeOffset.Now
+            CreateTime = DateTime.Now
         };
         _redisHandler.Add(testModel.Id.ToString(), testModel);
         return testModel.Id;
@@ -95,7 +95,7 @@ public class RedisDemoController : ControllerBase
                     Id = id,
                     Name = "apple",
                     Age = 18,
-                    CreateTime = DateTimeOffset.Now
+                    CreateTime = DateTime.Now
                 }));
         }
 
