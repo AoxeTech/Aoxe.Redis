@@ -125,13 +125,13 @@ namespace Zaabee.Redis
 
         public Task AddRangeAsync<T>(IEnumerable<Tuple<string, T>> entities, TimeSpan? expiry = null)
         {
-            if (entities == null || !entities.Any()) return Task.FromResult(0);
+            if (entities == null || !entities.Any()) return Task.CompletedTask;
             expiry = expiry ?? _defaultExpiry;
             var batch = _db.CreateBatch();
             Task.WhenAll(entities.Select(async entity =>
                 await batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
             batch.Execute();
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
 
         public async Task<T> GetAsync<T>(string key)
