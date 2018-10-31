@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>1.2.8</PackageVersion>
-    <Version>1.2.8</Version>
+    <PackageVersion>1.2.9</PackageVersion>
+    <Version>1.2.9</Version>
     <Authors>Mutuduxf</Authors>
     <Company>Mutuduxf</Company>
     <Description>Redis wrappers by StackExchange.Redis</Description>
@@ -14,6 +14,6 @@
   <ItemGroup>
     <PackageReference Include="StackExchange.Redis" Version="2.0.513" />
     <PackageReference Include="Zaabee.Redis.Abstractions" Version="1.3.9" />
-    <PackageReference Include="Zaabee.Redis.ISerialize" Version="1.1.1" />
+    <PackageReference Include="Zaabee.Redis.ISerialize" Version="1.1.2" />
   </ItemGroup>
 </Project>

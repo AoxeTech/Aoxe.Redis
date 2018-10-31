@@ -119,7 +119,7 @@ namespace Zaabee.Redis
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             expiry = expiry ?? _defaultExpiry;
-            var bytes = await _serializer.SerializeAsync(entity);
+            var bytes = _serializer.Serialize(entity);
             return await _db.StringSetAsync(key, bytes, expiry);
         }
 
@@ -138,15 +138,14 @@ namespace Zaabee.Redis
         {
             if (string.IsNullOrWhiteSpace(key)) return default(T);
             var value = await _db.StringGetAsync(key);
-            return await Task.FromResult(value.HasValue ? await _serializer.DeserializeAsync<T>(value) : default(T));
+            return value.HasValue ? _serializer.Deserialize<T>(value) : default(T);
         }
 
         public async Task<IList<T>> GetAsync<T>(IEnumerable<string> keys)
         {
             if (keys == null || !keys.Any()) return new List<T>();
             var values = await _db.StringGetAsync(keys.Select(p => (RedisKey) p).ToArray());
-            var resultTasks = values.Select(async value => await _serializer.DeserializeAsync<T>(value));
-            return Task.WhenAll(resultTasks).Result.ToList();
+            return values.Select(value => _serializer.Deserialize<T>(value)).ToList();
         }
 
         #endregion
@@ -532,7 +531,7 @@ namespace Zaabee.Redis
 
         public async Task<T> ListGetByIndexAsync<T>(string key, long index)
         {
-            return await _serializer.DeserializeAsync<T>(_db.ListGetByIndex(key, index));
+            return _serializer.Deserialize<T>(await _db.ListGetByIndexAsync(key, index));
         }
 
         public async Task<long> ListInsertAfterAsync<T>(string key, T pivot, T value)
@@ -671,15 +670,15 @@ namespace Zaabee.Redis
 
         public async Task<bool> HashAddAsync<T>(string key, string entityKey, T entity)
         {
-            var bytes = await _serializer.SerializeAsync(entity);
+            var bytes = _serializer.Serialize(entity);
             return await _db.HashSetAsync(key, entityKey, bytes);
         }
 
         public async Task HashAddRangeAsync<T>(string key, IEnumerable<Tuple<string, T>> entities)
         {
-            var bytes = entities.Select(async tuple =>
-                new HashEntry(tuple.Item1, await _serializer.SerializeAsync(tuple.Item2)));
-            await _db.HashSetAsync(key, Task.WhenAll(bytes).Result);
+            var bytes = entities.Select(tuple =>
+                new HashEntry(tuple.Item1, _serializer.Serialize(tuple.Item2))).ToArray();
+            await _db.HashSetAsync(key, bytes);
         }
 
         public async Task<bool> HashDeleteAsync(string key, string entityKey)
@@ -695,14 +694,13 @@ namespace Zaabee.Redis
         public async Task<T> HashGetAsync<T>(string key, string entityKey)
         {
             var value = await _db.HashGetAsync(key, entityKey);
-            return await Task.FromResult(value.HasValue ? await _serializer.DeserializeAsync<T>(value) : default(T));
+            return value.HasValue ? _serializer.Deserialize<T>(value) : default(T);
         }
 
         public async Task<IList<T>> HashGetAsync<T>(string key)
         {
             var kvs = await _db.HashGetAllAsync(key);
-            var result = kvs.Select(async kv => await _serializer.DeserializeAsync<T>(kv.Value)).ToList();
-            return Task.WhenAll(result).Result.ToList();
+            return kvs.Select(kv => _serializer.Deserialize<T>(kv.Value)).ToList();
         }
 
         public async Task<IList<T>> HashGetRangeAsync<T>(string key, IEnumerable<string> entityKeys)
@@ -710,8 +708,7 @@ namespace Zaabee.Redis
             var values = await _db.HashGetAsync(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
             return values == null
                 ? new List<T>()
-                : Task.WhenAll(values.Select(async value => await _serializer.DeserializeAsync<T>(value))).Result
-                    .ToList();
+                : values.Select(value => _serializer.Deserialize<T>(value)).ToList();
         }
 
         public async Task<IList<string>> HashGetAllEntityKeysAsync(string key)
