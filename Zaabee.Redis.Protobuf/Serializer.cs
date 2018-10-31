@@ -12,8 +12,7 @@ namespace Zaabee.Redis.Protobuf
 
         public T Deserialize<T>(byte[] bytes)
         {
-            if (bytes == null || bytes.Length == 0) return default(T);
-            return bytes.FromProtobuf<T>();
+            return bytes == null || bytes.Length == 0 ? default(T) : bytes.FromProtobuf<T>();
         }
     }
 }

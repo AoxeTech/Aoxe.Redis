@@ -12,8 +12,7 @@ namespace Zaabee.Redis.Jil
 
         public T Deserialize<T>(byte[] bytes)
         {
-            if (bytes == null || bytes.Length == 0) return default(T);
-            return bytes.DeserializeUtf8().FromJil<T>();
+            return bytes == null || bytes.Length == 0 ? default(T) : bytes.DeserializeUtf8().FromJil<T>();
         }
     }
 }
