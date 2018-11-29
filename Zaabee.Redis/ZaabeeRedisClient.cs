@@ -14,19 +14,23 @@ namespace Zaabee.Redis
         private readonly IDatabase _db;
         private readonly ISerializer _serializer;
         private readonly TimeSpan _defaultExpiry;
-        private static readonly object LockObj = new object();
 
         public ZaabeeRedisClient(RedisConfig config, ISerializer serializer)
         {
             if (_conn != null) return;
-            lock (LockObj)
-            {
-                if (_conn != null) return;
-                _defaultExpiry = config.DefaultExpiry;
-                _serializer = serializer;
-                _conn = ConnectionMultiplexer.Connect(config.ConnectionString);
-                _db = _conn.GetDatabase();
-            }
+            _defaultExpiry = config.DefaultExpiry;
+            _conn = ConnectionMultiplexer.Connect(config.ConnectionString);
+            _serializer = serializer;
+            _db = _conn.GetDatabase();
+        }
+
+        public ZaabeeRedisClient(string connectionString, TimeSpan defaultExpiry, ISerializer serializer)
+        {
+            if (_conn != null) return;
+            _defaultExpiry = defaultExpiry;
+            _conn = ConnectionMultiplexer.Connect(connectionString);
+            _serializer = serializer;
+            _db = _conn.GetDatabase();
         }
 
         #region Key
