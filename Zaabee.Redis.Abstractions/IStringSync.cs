@@ -12,6 +12,10 @@ namespace Zaabee.Redis.Abstractions
         T Get<T>(string key);
         
         IList<T> Get<T>(IEnumerable<string> keys);
+
+        bool Add(string key, long value, TimeSpan? expiry = null);
+        
+        bool Add(string key, double value, TimeSpan? expiry = null);
         
         double Increment(string key, double value);
         

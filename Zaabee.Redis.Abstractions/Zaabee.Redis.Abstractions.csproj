@@ -2,8 +2,8 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.4.0</PackageVersion>
-        <Version>1.4.0</Version>
+        <PackageVersion>1.4.2</PackageVersion>
+        <Version>1.4.2</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaaby Zaabee Cache Kev/Value Redis</PackageTags>

@@ -115,6 +115,20 @@ namespace Zaabee.Redis
             return values.Select(value => _serializer.Deserialize<T>(value)).ToList();
         }
 
+        public bool Add(string key, long value, TimeSpan? expiry = null)
+        {
+            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            expiry = expiry ?? _defaultExpiry;
+            return _db.StringSet(key, value,expiry);
+        }
+
+        public bool Add(string key, double value, TimeSpan? expiry = null)
+        {
+            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            expiry = expiry ?? _defaultExpiry;
+            return _db.StringSet(key, value,expiry);
+        }
+
         public double Increment(string key, double value)
         {
             return _db.StringIncrement(key,value);
@@ -160,6 +174,20 @@ namespace Zaabee.Redis
             if (keys == null || !keys.Any()) return new List<T>();
             var values = await _db.StringGetAsync(keys.Select(p => (RedisKey) p).ToArray());
             return values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+        }
+
+        public async Task<bool> AddAsync(string key, long value, TimeSpan? expiry = null)
+        {
+            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            expiry = expiry ?? _defaultExpiry;
+            return await _db.StringSetAsync(key, value,expiry);
+        }
+
+        public async Task<bool> AddAsync(string key, double value, TimeSpan? expiry = null)
+        {
+            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            expiry = expiry ?? _defaultExpiry;
+            return await _db.StringSetAsync(key, value,expiry);
         }
 
         public async Task<double> IncrementAsync(string key, double value)
