@@ -93,7 +93,7 @@ namespace Zaabee.Redis
 
         public void AddRange<T>(IEnumerable<Tuple<string, T>> entities, TimeSpan? expiry = null)
         {
-            if (entities?.Any() == null || !entities.Any()) return;
+            if (entities == null || !entities.Any()) return;
             expiry = expiry ?? _defaultExpiry;
             var batch = _db.CreateBatch();
             Task.WhenAll(entities.Select(entity =>
@@ -113,6 +113,16 @@ namespace Zaabee.Redis
             if (keys == null || !keys.Any()) return new List<T>();
             var values = _db.StringGet(keys.Select(p => (RedisKey) p).ToArray());
             return values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+        }
+
+        public double Increment(string key, double value)
+        {
+            return _db.StringIncrement(key,value);
+        }
+
+        public long Increment(string key, long value)
+        {
+            return _db.StringIncrement(key,value);
         }
 
         #endregion
@@ -150,6 +160,16 @@ namespace Zaabee.Redis
             if (keys == null || !keys.Any()) return new List<T>();
             var values = await _db.StringGetAsync(keys.Select(p => (RedisKey) p).ToArray());
             return values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+        }
+
+        public async Task<double> IncrementAsync(string key, double value)
+        {
+            return await _db.StringIncrementAsync(key, value);
+        }
+
+        public async Task<long> IncrementAsync(string key, long value)
+        {
+            return await _db.StringIncrementAsync(key, value);
         }
 
         #endregion

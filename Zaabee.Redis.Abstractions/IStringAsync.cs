@@ -13,5 +13,9 @@ namespace Zaabee.Redis.Abstractions
         Task<T> GetAsync<T>(string key);
 
         Task<IList<T>> GetAsync<T>(IEnumerable<string> keys);
+        
+        Task<double> IncrementAsync(string key, double value);
+        
+        Task<long> IncrementAsync(string key, long value);
     }
 }
