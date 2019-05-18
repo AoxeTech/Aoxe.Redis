@@ -1,19 +1,36 @@
 ﻿using System;
+using StackExchange.Redis;
 
 namespace Zaabee.Redis
 {
     public class RedisConfig
     {
-        public string ConnectionString { get; set; }
-        public TimeSpan DefaultExpiry { get; set; } = TimeSpan.FromMinutes(10);
+        private string _connectionString;
+        private ConfigurationOptions _options;
 
-        public RedisConfig()
+        public string ConnectionString
         {
+            get => _connectionString;
+            set => _options = ConfigurationOptions.Parse(_connectionString = value);
         }
+
+        public ConfigurationOptions Options
+        {
+            get => _options;
+            set => _connectionString = (_options = value).ToString();
+        }
+
+        public TimeSpan DefaultExpiry { get; set; } = TimeSpan.FromMinutes(10);
 
         public RedisConfig(string connectionString, TimeSpan? defaultExpiry = null)
         {
             ConnectionString = connectionString;
+            DefaultExpiry = defaultExpiry ?? TimeSpan.FromMinutes(10);
+        }
+
+        public RedisConfig(ConfigurationOptions options, TimeSpan? defaultExpiry = null)
+        {
+            Options = options;
             DefaultExpiry = defaultExpiry ?? TimeSpan.FromMinutes(10);
         }
     }

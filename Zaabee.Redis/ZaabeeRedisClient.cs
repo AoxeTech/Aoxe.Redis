@@ -10,25 +10,30 @@ namespace Zaabee.Redis
 {
     public class ZaabeeRedisClient : IZaabeeRedisClient, IDisposable
     {
-        private readonly ConnectionMultiplexer _conn;
-        private readonly IDatabase _db;
-        private readonly ISerializer _serializer;
-        private readonly TimeSpan _defaultExpiry;
+        private ConnectionMultiplexer _conn;
+        private IDatabase _db;
+        private ISerializer _serializer;
+        private TimeSpan _defaultExpiry;
 
         public ZaabeeRedisClient(RedisConfig config, ISerializer serializer)
         {
-            if (_conn != null) return;
-            _defaultExpiry = config.DefaultExpiry;
-            _conn = ConnectionMultiplexer.Connect(config.ConnectionString);
-            _serializer = serializer;
-            _db = _conn.GetDatabase();
+            Init(config.Options, config.DefaultExpiry, serializer);
         }
 
         public ZaabeeRedisClient(string connectionString, TimeSpan defaultExpiry, ISerializer serializer)
         {
-            if (_conn != null) return;
-            _defaultExpiry = defaultExpiry;
-            _conn = ConnectionMultiplexer.Connect(connectionString);
+            Init(ConfigurationOptions.Parse(connectionString), defaultExpiry, serializer);
+        }
+
+        public ZaabeeRedisClient(ConfigurationOptions options, TimeSpan defaultExpiry, ISerializer serializer)
+        {
+            Init(options, defaultExpiry, serializer);
+        }
+
+        private void Init(ConfigurationOptions options, TimeSpan defaultExpiry, ISerializer serializer)
+        {
+            _defaultExpiry = defaultExpiry ;
+            _conn = ConnectionMultiplexer.Connect(options);
             _serializer = serializer;
             _db = _conn.GetDatabase();
         }
@@ -119,24 +124,24 @@ namespace Zaabee.Redis
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             expiry = expiry ?? _defaultExpiry;
-            return _db.StringSet(key, value,expiry);
+            return _db.StringSet(key, value, expiry);
         }
 
         public bool Add(string key, double value, TimeSpan? expiry = null)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             expiry = expiry ?? _defaultExpiry;
-            return _db.StringSet(key, value,expiry);
+            return _db.StringSet(key, value, expiry);
         }
 
         public double Increment(string key, double value)
         {
-            return _db.StringIncrement(key,value);
+            return _db.StringIncrement(key, value);
         }
 
         public long Increment(string key, long value)
         {
-            return _db.StringIncrement(key,value);
+            return _db.StringIncrement(key, value);
         }
 
         #endregion
@@ -180,14 +185,14 @@ namespace Zaabee.Redis
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             expiry = expiry ?? _defaultExpiry;
-            return await _db.StringSetAsync(key, value,expiry);
+            return await _db.StringSetAsync(key, value, expiry);
         }
 
         public async Task<bool> AddAsync(string key, double value, TimeSpan? expiry = null)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             expiry = expiry ?? _defaultExpiry;
-            return await _db.StringSetAsync(key, value,expiry);
+            return await _db.StringSetAsync(key, value, expiry);
         }
 
         public async Task<double> IncrementAsync(string key, double value)
