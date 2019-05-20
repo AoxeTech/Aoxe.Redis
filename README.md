@@ -4,24 +4,24 @@
 
 ## Introduction
 
-This redis client wrapper base by string and hash.
+This redis client wrappers and serializers.
 
 ## QuickStart
 
 ### NuGet
 
-    Install-Package Zaabee.Redis
-    Install-Package Zaabee.Redis.Protobuf
+    Install-Package Zaabee.StackExchangeRedis
+    Install-Package Zaabee.StackExchangeRedis.NewtonsoftJson
 
 ### Build Project
 
-Create an asp.net core project and import reference in startup.cs.Get [Zaabee.Redis](https://github.com/Mutuduxf/Zaabee.Redis) and [Zaabee.Redis.Protobuf](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.Redis.Protobuf) (the protobuf-net's attributes like DataContract/DataMember is not necessary) from Nuget,otherwise we have other serializers which named [Zaabee.Redis.Json](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.Redis.Json) and [Zaabee.Redis.Jil](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.Redis.Jil).
+Create an asp.net core project and import references in startup.cs. Get [Zaabee.StackExchangeRedis](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis) and [Zaabee.StackExchangeRedis.NewtonsoftJson](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.NewtonsoftJson) from Nuget,otherwise we have other serializers which named [Zaabee.StackExchangeRedis.Protobuf](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Protobuf) and [Zaabee.StackExchangeRedis.Jil](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Jil).
 
 ```CSharp
-using Zaabee.Redis;
-using Zaabee.Redis.Abstractions;
-using Zaabee.Redis.ISerialize;
-using Zaabee.Redis.Protobuf;
+using Zaabee.StackExchangeRedis;
+using Zaabee.StackExchangeRedis.Abstractions;
+using Zaabee.StackExchangeRedis.ISerialize;
+using Zaabee.StackExchangeRedis.NewtonsoftJson;
 ```
 
 Register ZaabyRedisClient in Configuration like
