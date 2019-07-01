@@ -22,6 +22,10 @@ namespace Zaabee.StackExchangeRedis
 
         public TimeSpan DefaultExpiry { get; set; } = TimeSpan.FromMinutes(10);
 
+        public RedisConfig()
+        {
+        }
+
         public RedisConfig(string connectionString, TimeSpan? defaultExpiry = null)
         {
             ConnectionString = connectionString;
