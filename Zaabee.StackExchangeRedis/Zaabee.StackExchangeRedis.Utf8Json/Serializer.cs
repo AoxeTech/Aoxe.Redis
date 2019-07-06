@@ -7,12 +7,12 @@ namespace Zaabee.StackExchangeRedis.Utf8Json
     {
         public byte[] Serialize<T>(T o)
         {
-            return o.Utf8JsonToBytes();
+            return o == null ? new byte[0] : o.Utf8JsonToBytes();
         }
 
         public T Deserialize<T>(byte[] bytes)
         {
-            return bytes.FromUtf8Json<T>();
+            return bytes == null || bytes.Length == 0 ? default(T) : bytes.FromUtf8Json<T>();
         }
     }
 }

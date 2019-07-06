@@ -3,19 +3,19 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.0.1</PackageVersion>
-        <Version>1.0.1</Version>
+        <PackageVersion>1.0.0</PackageVersion>
+        <Version>1.0.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
-        <PackageTags>Zaabee Redis Utf8Json</PackageTags>
-        <Description>The json serializer for Zaabee.StackExchangeRedis base by Utf8Json</Description>
+        <PackageTags>Zaabee Redis binary</PackageTags>
+        <Description>The binary serializer for Zaabee.StackExchangeRedis</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseUrl>https://raw.githubusercontent.com/Mutuduxf/Zaabee.Redis/master/LICENSE</PackageLicenseUrl>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Zaabee.Binary" Version="1.0.0" />
       <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.0.0" />
-      <PackageReference Include="Zaabee.Utf8Json" Version="1.0.0" />
     </ItemGroup>
 
 </Project>
