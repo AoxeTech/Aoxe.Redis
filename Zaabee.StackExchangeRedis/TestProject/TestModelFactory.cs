@@ -11,7 +11,7 @@ namespace UnitTest
                 Id = Guid.NewGuid(),
                 Name = "Apple",
                 Age = new Random().Next(),
-                CreateTime = DateTime.Now
+                CreateTime = new DateTime(2000,1,1).ToUniversalTime()
             };
         }
     }

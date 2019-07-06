@@ -13,7 +13,13 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Zaabee.StackExchangeRedis.Binary\Zaabee.StackExchangeRedis.Binary.csproj" />
+      <ProjectReference Include="..\Zaabee.StackExchangeRedis.Jil\Zaabee.StackExchangeRedis.Jil.csproj" />
+      <ProjectReference Include="..\Zaabee.StackExchangeRedis.MsgPack\Zaabee.StackExchangeRedis.MsgPack.csproj" />
+      <ProjectReference Include="..\Zaabee.StackExchangeRedis.NewtonsoftJson\Zaabee.StackExchangeRedis.NewtonsoftJson.csproj" />
       <ProjectReference Include="..\Zaabee.StackExchangeRedis.Protobuf\Zaabee.StackExchangeRedis.Protobuf.csproj" />
+      <ProjectReference Include="..\Zaabee.StackExchangeRedis.Utf8Json\Zaabee.StackExchangeRedis.Utf8Json.csproj" />
+      <ProjectReference Include="..\Zaabee.StackExchangeRedis.ZeroFormatter\Zaabee.StackExchangeRedis.ZeroFormatter.csproj" />
       <ProjectReference Include="..\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.csproj" />
     </ItemGroup>
 
