@@ -15,7 +15,19 @@ This redis client wrappers and serializers.
 
 ### Build Project
 
-Create an asp.net core project and import references in startup.cs. Get [Zaabee.StackExchangeRedis](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis) and [Zaabee.StackExchangeRedis.NewtonsoftJson](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.NewtonsoftJson) from Nuget,otherwise we have other serializers which named [Zaabee.StackExchangeRedis.Protobuf](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Protobuf)/[Zaabee.StackExchangeRedis.Jil](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Jil)/[Zaabee.StackExchangeRedis.Utf8Json](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Utf8Json) and [Zaabee.StackExchangeRedis.Binary](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Binary).
+Create an asp.net core project and import references in startup.cs. Get [Zaabee.StackExchangeRedis](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis) and [Zaabee.StackExchangeRedis.NewtonsoftJson](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.NewtonsoftJson) from Nuget,otherwise we have other serializers:
+
+[Zaabee.StackExchangeRedis.Binary](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Binary)
+
+[Zaabee.StackExchangeRedis.Jil](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Jil)
+
+[Zaabee.StackExchangeRedis.MsgPack](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.MsgPack)
+
+[Zaabee.StackExchangeRedis.Protobuf](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Protobuf)
+
+[Zaabee.StackExchangeRedis.Utf8Json](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Utf8Json)
+
+[Zaabee.StackExchangeRedis.ZeroFormatter](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.ZeroFormatter)
 
 ```CSharp
 using Zaabee.StackExchangeRedis;

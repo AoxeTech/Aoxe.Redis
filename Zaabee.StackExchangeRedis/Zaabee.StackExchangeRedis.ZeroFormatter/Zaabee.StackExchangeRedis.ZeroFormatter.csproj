@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>1.0.0</PackageVersion>
+        <Version>1.0.0</Version>
+        <Authors>Mutuduxf</Authors>
+        <Company>Mutuduxf</Company>
+        <PackageTags>Zaabee Redis ZeroFormatter</PackageTags>
+        <Description>The ZeroFormatter serializer for Zaabee.StackExchangeRedis</Description>
+        <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
+        <PackageLicenseUrl>https://raw.githubusercontent.com/Mutuduxf/Zaabee.Redis/master/LICENSE</PackageLicenseUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.0.0" />
+      <PackageReference Include="Zaabee.ZeroFormatter" Version="1.0.0" />
+    </ItemGroup>
+
+</Project>
