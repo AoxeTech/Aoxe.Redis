@@ -11,6 +11,7 @@
         <Description>The protobuf serializer for Zaabee.StackExchangeRedis</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseUrl>https://raw.githubusercontent.com/Mutuduxf/Zaabee.Redis/master/LICENSE</PackageLicenseUrl>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

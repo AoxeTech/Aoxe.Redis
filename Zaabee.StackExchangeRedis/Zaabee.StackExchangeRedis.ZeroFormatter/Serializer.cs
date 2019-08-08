@@ -9,6 +9,6 @@ namespace Zaabee.StackExchangeRedis.ZeroFormatter
             o == null ? new byte[0] : o.ToZeroFormatter();
 
         public T Deserialize<T>(byte[] bytes) =>
-            bytes == null || bytes.Length == 0 ? default(T) : bytes.FromZeroFormatter<T>();
+            bytes == null || bytes.Length == 0 ? default : bytes.FromZeroFormatter<T>();
     }
 }

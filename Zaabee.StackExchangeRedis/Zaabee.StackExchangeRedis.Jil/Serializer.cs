@@ -10,6 +10,6 @@ namespace Zaabee.StackExchangeRedis.Jil
             o == null ? new byte[0] : Encoding.UTF8.GetBytes(o.ToJil());
 
         public T Deserialize<T>(byte[] bytes) =>
-            bytes == null || bytes.Length == 0 ? default(T) : Encoding.UTF8.GetString(bytes).FromJil<T>();
+            bytes == null || bytes.Length == 0 ? default : Encoding.UTF8.GetString(bytes).FromJil<T>();
     }
 }

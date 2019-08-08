@@ -9,6 +9,6 @@ namespace Zaabee.StackExchangeRedis.MsgPack
             o == null ? new byte[0] : o.ToMsgPack();
 
         public T Deserialize<T>(byte[] bytes) =>
-            bytes == null || bytes.Length == 0 ? default(T) : bytes.FromMsgPak<T>();
+            bytes == null || bytes.Length == 0 ? default : bytes.FromMsgPak<T>();
     }
 }
