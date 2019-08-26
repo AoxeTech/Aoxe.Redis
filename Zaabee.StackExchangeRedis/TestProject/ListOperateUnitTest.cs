@@ -9,7 +9,7 @@ namespace TestProject
     public class ListOperateUnitTest
     {
         private readonly IZaabeeRedisClient _client =
-            new ZaabeeRedisClient(new RedisConfig("192.168.5.10:7001,192.168.5.10:7002,192.168.5.10:7003,192.168.5.10:7004,192.168.5.10:7005,192.168.5.10:7006,abortConnect=false,syncTimeout=3000"),
+            new ZaabeeRedisClient(new RedisConfig("192.168.78.152:6379,abortConnect=false,syncTimeout=3000"),
                 new Serializer());
 
         [Fact]
