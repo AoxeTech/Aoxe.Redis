@@ -7,7 +7,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
     {
         bool Delete(string key);
 
-        long DeleteAll(IEnumerable<string> keys);
+        long DeleteAll(IEnumerable<string> keys, bool isBatch = false);
 
         bool Exists(string key);
 

@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace UnitTest
+namespace TestProject
 {
     public class SerializerTest
     {

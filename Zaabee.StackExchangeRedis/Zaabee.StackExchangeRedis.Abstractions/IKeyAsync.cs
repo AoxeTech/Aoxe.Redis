@@ -8,7 +8,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
     {
         Task<bool> DeleteAsync(string key);
 
-        Task<long> DeleteAllAsync(IEnumerable<string> keys);
+        Task<long> DeleteAllAsync(IEnumerable<string> keys, bool isBatch = false);
 
         Task<bool> ExistsAsync(string key);
 

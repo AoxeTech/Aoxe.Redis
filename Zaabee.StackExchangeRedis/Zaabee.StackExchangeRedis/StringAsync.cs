@@ -16,15 +16,22 @@ namespace Zaabee.StackExchangeRedis
             return await _db.StringSetAsync(key, bytes, expiry);
         }
 
-        public Task AddRangeAsync<T>(IEnumerable<Tuple<string, T>> entities, TimeSpan? expiry = null)
+        public async Task AddRangeAsync<T>(IEnumerable<Tuple<string, T>> entities, TimeSpan? expiry = null, bool isBatch = false)
         {
-            if (entities == null || !entities.Any()) return Task.CompletedTask;
+            if (entities == null || !entities.Any()) return;
             expiry = expiry ?? _defaultExpiry;
-            var batch = _db.CreateBatch();
-            Task.WhenAll(entities.Select(async entity =>
-                await batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
-            batch.Execute();
-            return Task.CompletedTask;
+            if (isBatch)
+            {
+                var batch = _db.CreateBatch();
+                foreach (var (key, entity) in entities)
+                    await batch.StringSetAsync(key, _serializer.Serialize(entity), expiry);
+                batch.Execute();
+            }
+            else
+            {
+                foreach (var (key, entity) in entities)
+                    await AddAsync(key, entity, expiry);
+            }
         }
 
         public async Task<T> GetAsync<T>(string key)
@@ -34,11 +41,22 @@ namespace Zaabee.StackExchangeRedis
             return value.HasValue ? _serializer.Deserialize<T>(value) : default(T);
         }
 
-        public async Task<IList<T>> GetAsync<T>(IEnumerable<string> keys)
+        public async Task<IList<T>> GetAsync<T>(IEnumerable<string> keys, bool isBatch = false)
         {
-            if (keys == null || !keys.Any()) return new List<T>();
-            var values = await _db.StringGetAsync(keys.Select(p => (RedisKey) p).ToArray());
-            return values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+            if (keys is null || !keys.Any()) return new List<T>();
+            List<T> result;
+            if (isBatch)
+            {
+                var values = await _db.StringGetAsync(keys.Select(p => (RedisKey) p).ToArray());
+                result = values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+            }
+            else
+            {
+                result = new List<T>();
+                foreach (var key in keys) result.Add(await GetAsync<T>(key));
+            }
+
+            return result;
         }
 
         public async Task<bool> AddAsync(string key, long value, TimeSpan? expiry = null)

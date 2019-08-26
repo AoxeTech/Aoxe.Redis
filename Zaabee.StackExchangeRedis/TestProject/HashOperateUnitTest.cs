@@ -5,12 +5,12 @@ using Zaabee.StackExchangeRedis;
 using Zaabee.StackExchangeRedis.Abstractions;
 using Zaabee.StackExchangeRedis.Protobuf;
 
-namespace UnitTest
+namespace TestProject
 {
     public class HashOperateUnitTest
     {
         private readonly IZaabeeRedisClient _client =
-            new ZaabeeRedisClient(new RedisConfig("192.168.78.152:6379,abortConnect=false,syncTimeout=3000"),
+            new ZaabeeRedisClient(new RedisConfig("192.168.5.10:7001,192.168.5.10:7002,192.168.5.10:7003,192.168.5.10:7004,192.168.5.10:7005,192.168.5.10:7006,abortConnect=false,syncTimeout=3000"),
                 new Serializer());
 
         [Fact]
@@ -24,11 +24,11 @@ namespace UnitTest
         }
 
         [Fact]
-        public void HashAsync()
+        public async void HashAsync()
         {
             var testModel = TestModelFactory.CreateTestModel();
-            Assert.True(_client.HashAddAsync("HashAsyncTest", testModel.Id.ToString(), testModel).Result);
-            var result = _client.HashGetAsync<TestModel>("HashAsyncTest", testModel.Id.ToString()).Result;
+            Assert.True(await _client.HashAddAsync("HashAsyncTest", testModel.Id.ToString(), testModel));
+            var result = await _client.HashGetAsync<TestModel>("HashAsyncTest", testModel.Id.ToString());
             Assert.Equal(testModel, result);
             Assert.True(_client.HashDelete("HashAsyncTest", result.Id.ToString()));
         }
@@ -41,24 +41,27 @@ namespace UnitTest
                 testModels.Select(testModel => new Tuple<string, TestModel>(testModel.Id.ToString(), testModel))
                     .ToList());
             var results =
-                _client.HashGetRange<TestModel>("HashBatchTest", testModels.Select(model => model.Id.ToString()).ToList());
+                _client.HashGetRange<TestModel>("HashBatchTest",
+                    testModels.Select(model => model.Id.ToString()).ToList());
             Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
             Assert.Equal(results.Count,
-                _client.HashDeleteRange("HashBatchTest", results.Select(testModel => testModel.Id.ToString()).ToList()));
+                _client.HashDeleteRange("HashBatchTest",
+                    results.Select(testModel => testModel.Id.ToString()).ToList()));
         }
 
         [Fact]
-        public void HashBatchAsync()
+        public async void HashBatchAsync()
         {
             var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
             _client.HashAddRangeAsync("HashBatchAsyncTest",
                 testModels.Select(testModel => new Tuple<string, TestModel>(testModel.Id.ToString(), testModel))
                     .ToList()).Wait();
-            var results =
-                _client.HashGetRangeAsync<TestModel>("HashBatchAsyncTest", testModels.Select(model => model.Id.ToString()).ToList()).Result;
+            var results = await _client.HashGetRangeAsync<TestModel>("HashBatchAsyncTest",
+                testModels.Select(model => model.Id.ToString()).ToList());
             Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
             Assert.Equal(results.Count,
-                _client.HashDeleteRangeAsync("HashBatchAsyncTest", results.Select(testModel => testModel.Id.ToString()).ToList()).Result);
+                await _client.HashDeleteRangeAsync("HashBatchAsyncTest",
+                    results.Select(testModel => testModel.Id.ToString()).ToList()));
         }
 
         [Fact]
@@ -72,23 +75,23 @@ namespace UnitTest
             Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
             var keys = _client.HashGetAllEntityKeys("HashAllTest");
             Assert.True(keys.All(key => testModels.Any(model => model.Id.ToString() == key)));
-            Assert.Equal(results.Count,_client.HashCount("HashAllTest"));
+            Assert.Equal(results.Count, _client.HashCount("HashAllTest"));
             Assert.True(_client.Delete("HashAllTest"));
         }
 
         [Fact]
-        public void HashAllAsync()
+        public async void HashAllAsync()
         {
             var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
             _client.HashAddRangeAsync("HashAllAsyncTest",
                 testModels.Select(testModel => new Tuple<string, TestModel>(testModel.Id.ToString(), testModel))
                     .ToList()).Wait();
-            var results = _client.HashGetAsync<TestModel>("HashAllAsyncTest").Result;
+            var results = await _client.HashGetAsync<TestModel>("HashAllAsyncTest");
             Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
-            var keys = _client.HashGetAllEntityKeysAsync("HashAllAsyncTest").Result;
+            var keys = await _client.HashGetAllEntityKeysAsync("HashAllAsyncTest");
             Assert.True(keys.All(key => testModels.Any(model => model.Id.ToString() == key)));
-            Assert.Equal(results.Count,_client.HashCountAsync("HashAllAsyncTest").Result);
-            Assert.True(_client.DeleteAsync("HashAllAsyncTest").Result);
+            Assert.Equal(results.Count, await _client.HashCountAsync("HashAllAsyncTest"));
+            Assert.True(await _client.DeleteAsync("HashAllAsyncTest"));
         }
     }
 }

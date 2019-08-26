@@ -16,14 +16,22 @@ namespace Zaabee.StackExchangeRedis
             return _db.StringSet(key, bytes, expiry);
         }
 
-        public void AddRange<T>(IEnumerable<Tuple<string, T>> entities, TimeSpan? expiry = null)
+        public void AddRange<T>(IEnumerable<Tuple<string, T>> entities, TimeSpan? expiry = null, bool isBatch = false)
         {
             if (entities == null || !entities.Any()) return;
             expiry = expiry ?? _defaultExpiry;
-            var batch = _db.CreateBatch();
-            Task.WhenAll(entities.Select(entity =>
-                batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
-            batch.Execute();
+            if (isBatch)
+            {
+                var batch = _db.CreateBatch();
+                Task.WhenAll(entities.Select(entity =>
+                    batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
+                batch.Execute();
+            }
+            else
+            {
+                foreach (var (key, entity) in entities)
+                    Add(key, entity, expiry);
+            }
         }
 
         public T Get<T>(string key)
@@ -33,11 +41,21 @@ namespace Zaabee.StackExchangeRedis
             return value.HasValue ? _serializer.Deserialize<T>(value) : default(T);
         }
 
-        public IList<T> Get<T>(IEnumerable<string> keys)
+        public IList<T> Get<T>(IEnumerable<string> keys, bool isBatch = false)
         {
-            if (keys == null || !keys.Any()) return new List<T>();
-            var values = _db.StringGet(keys.Select(p => (RedisKey) p).ToArray());
-            return values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+            if (keys is null || !keys.Any()) return new List<T>();
+            List<T> result;
+            if (isBatch)
+            {
+                var values = _db.StringGet(keys.Select(p => (RedisKey) p).ToArray());
+                result = values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+            }
+            else
+            {
+                result = keys.Select(Get<T>).ToList();
+            }
+
+            return result;
         }
 
         public bool Add(string key, long value, TimeSpan? expiry = null)

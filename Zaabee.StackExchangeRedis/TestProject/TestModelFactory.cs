@@ -1,6 +1,6 @@
 using System;
 
-namespace UnitTest
+namespace TestProject
 {
     public static class TestModelFactory
     {

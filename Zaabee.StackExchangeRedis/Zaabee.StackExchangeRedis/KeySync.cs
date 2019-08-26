@@ -12,9 +12,11 @@ namespace Zaabee.StackExchangeRedis
             return _db.KeyDelete(key);
         }
 
-        public long DeleteAll(IEnumerable<string> keys)
+        public long DeleteAll(IEnumerable<string> keys, bool isBatch = false)
         {
-            return _db.KeyDelete(keys.Select(x => (RedisKey) x).ToArray());
+            if (isBatch) return _db.KeyDelete(keys.Select(x => (RedisKey) x).ToArray());
+            foreach (var key in keys) Delete(key);
+            return keys.Count();
         }
 
         public bool Exists(string key)

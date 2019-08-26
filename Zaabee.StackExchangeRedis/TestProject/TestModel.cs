@@ -2,7 +2,7 @@ using System;
 using ProtoBuf;
 using ZeroFormatter;
 
-namespace UnitTest
+namespace TestProject
 {
     [ProtoContract]
     [Serializable]
