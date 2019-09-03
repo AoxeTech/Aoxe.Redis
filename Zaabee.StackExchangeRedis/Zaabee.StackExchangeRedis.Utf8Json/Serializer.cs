@@ -6,9 +6,9 @@ namespace Zaabee.StackExchangeRedis.Utf8Json
     public class Serializer : ISerializer
     {
         public byte[] Serialize<T>(T o) =>
-            o == null ? new byte[0] : o.Utf8JsonToBytes();
+            o == null ? new byte[0] : o.ToBytes();
 
         public T Deserialize<T>(byte[] bytes) =>
-            bytes == null || bytes.Length == 0 ? default : bytes.FromUtf8Json<T>();
+            bytes is null || bytes.Length == 0 ? default(T) : bytes.FromBytes<T>();
     }
 }

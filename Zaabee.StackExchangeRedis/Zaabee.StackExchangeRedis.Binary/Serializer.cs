@@ -9,6 +9,6 @@ namespace Zaabee.StackExchangeRedis.Binary
             o == null ? new byte[0] : o.ToBytes();
 
         public T Deserialize<T>(byte[] bytes) =>
-            bytes == null || bytes.Length == 0 ? default : bytes.FromBytes<T>();
+            bytes is null || bytes.Length == 0 ? default(T) : bytes.FromBytes<T>();
     }
 }

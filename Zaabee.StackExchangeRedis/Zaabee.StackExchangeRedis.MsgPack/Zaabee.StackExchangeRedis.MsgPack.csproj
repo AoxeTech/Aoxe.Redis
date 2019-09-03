@@ -3,19 +3,18 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.0.1</PackageVersion>
-        <Version>1.0.1</Version>
+        <PackageVersion>1.1.0</PackageVersion>
+        <Version>1.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Redis MsgPack</PackageTags>
         <Description>The MsgPack serializer for Zaabee.StackExchangeRedis</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseUrl>https://raw.githubusercontent.com/Mutuduxf/Zaabee.Redis/master/LICENSE</PackageLicenseUrl>
-        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zaabee.MsgPack" Version="1.0.1" />
+      <PackageReference Include="Zaabee.MsgPack" Version="2.0.2" />
       <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.0.0" />
     </ItemGroup>
 

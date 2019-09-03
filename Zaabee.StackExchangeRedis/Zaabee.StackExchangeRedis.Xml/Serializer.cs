@@ -1,7 +1,7 @@
-﻿using Zaabee.NewtonsoftJson;
-using Zaabee.StackExchangeRedis.ISerialize;
+﻿using Zaabee.StackExchangeRedis.ISerialize;
+using Zaabee.Xml;
 
-namespace Zaabee.StackExchangeRedis.NewtonsoftJson
+namespace Zaabee.StackExchangeRedis.Xml
 {
     public class Serializer : ISerializer
     {
