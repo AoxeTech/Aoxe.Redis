@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.1.0</PackageVersion>
-        <Version>1.1.0</Version>
+        <PackageVersion>1.2.0</PackageVersion>
+        <Version>1.2.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Cache Redis Jil</PackageTags>
@@ -14,8 +14,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zaabee.Jil" Version="2.0.2" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.0.0" />
+      <PackageReference Include="Zaabee.Jil" Version="2.1.0" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.1.0" />
     </ItemGroup>
 
 </Project>

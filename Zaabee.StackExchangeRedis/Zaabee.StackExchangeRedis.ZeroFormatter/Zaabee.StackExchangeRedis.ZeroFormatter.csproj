@@ -1,21 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.1.0</PackageVersion>
-        <Version>1.1.0</Version>
+        <PackageVersion>1.2.0</PackageVersion>
+        <Version>1.2.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Redis ZeroFormatter</PackageTags>
-        <Description>The ZeroFormatter serializer for Zaabee.StackExchangeRedis</Description>
+        <Description>Cause the ZeroFormatter has not updated for long time I thing it is abandoned.This package will not be maintenanced.(This version is not compatible for dotnet core 3.0)</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseUrl>https://raw.githubusercontent.com/Mutuduxf/Zaabee.Redis/master/LICENSE</PackageLicenseUrl>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.0.0" />
-      <PackageReference Include="Zaabee.ZeroFormatter" Version="2.0.0" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.1.0" />
+      <PackageReference Include="Zaabee.ZeroFormatter" Version="2.1.0" />
     </ItemGroup>
 
 </Project>

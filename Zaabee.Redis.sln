@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Z
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Xml", "Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Xml\Zaabee.StackExchangeRedis.Xml.csproj", "{C0F49723-FE5D-4B50-A3DD-5670F16FFADF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.SystemTextJson", "Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.SystemTextJson\Zaabee.StackExchangeRedis.SystemTextJson.csproj", "{A4411ADB-1C92-4B74-8C28-CB7D8FC80AA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{C0F49723-FE5D-4B50-A3DD-5670F16FFADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0F49723-FE5D-4B50-A3DD-5670F16FFADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0F49723-FE5D-4B50-A3DD-5670F16FFADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4411ADB-1C92-4B74-8C28-CB7D8FC80AA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4411ADB-1C92-4B74-8C28-CB7D8FC80AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4411ADB-1C92-4B74-8C28-CB7D8FC80AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4411ADB-1C92-4B74-8C28-CB7D8FC80AA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D946AAF0-911E-48E4-93EA-C50EEA66A9B5} = {6A5F8AE2-2A96-454F-93D8-87725FF1C562}
@@ -94,5 +100,6 @@ Global
 		{BFA1A4DE-ED70-4C40-ACF9-0267456EE6CB} = {6A5F8AE2-2A96-454F-93D8-87725FF1C562}
 		{F7F9629B-EB0A-48F0-BFE6-E1718EB4050D} = {6A5F8AE2-2A96-454F-93D8-87725FF1C562}
 		{C0F49723-FE5D-4B50-A3DD-5670F16FFADF} = {6A5F8AE2-2A96-454F-93D8-87725FF1C562}
+		{A4411ADB-1C92-4B74-8C28-CB7D8FC80AA6} = {6A5F8AE2-2A96-454F-93D8-87725FF1C562}
 	EndGlobalSection
 EndGlobal
