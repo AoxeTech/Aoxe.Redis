@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.2.0</PackageVersion>
-        <Version>1.2.0</Version>
+        <PackageVersion>1.2.1</PackageVersion>
+        <Version>1.2.1</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Redis ZeroFormatter</PackageTags>
@@ -15,7 +15,7 @@
 
     <ItemGroup>
       <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.1.0" />
-      <PackageReference Include="Zaabee.ZeroFormatter" Version="2.1.0" />
+      <PackageReference Include="Zaabee.ZeroFormatter" Version="2.1.1" />
     </ItemGroup>
 
 </Project>
