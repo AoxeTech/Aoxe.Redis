@@ -1,21 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.2.1</PackageVersion>
-        <Version>1.2.1</Version>
+        <PackageVersion>1.2.2</PackageVersion>
+        <Version>1.2.2</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Cache Redis Jil</PackageTags>
         <Description>The json serializer for Zaabee.StackExchangeRedis base by Jil</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
-        <PackageLicenseUrl>https://raw.githubusercontent.com/Mutuduxf/Zaabee.Redis/master/LICENSE</PackageLicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zaabee.Jil" Version="2.1.1" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.1.0" />
+      <PackageReference Include="Zaabee.Jil" Version="2.1.2" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.1.1" />
     </ItemGroup>
 
 </Project>
