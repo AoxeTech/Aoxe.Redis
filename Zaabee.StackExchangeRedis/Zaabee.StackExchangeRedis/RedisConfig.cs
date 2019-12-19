@@ -29,13 +29,13 @@ namespace Zaabee.StackExchangeRedis
         public RedisConfig(string connectionString, TimeSpan? defaultExpiry = null)
         {
             ConnectionString = connectionString;
-            DefaultExpiry = defaultExpiry ?? TimeSpan.FromMinutes(10);
+            DefaultExpiry = defaultExpiry ?? DefaultExpiry;
         }
 
         public RedisConfig(ConfigurationOptions options, TimeSpan? defaultExpiry = null)
         {
             Options = options;
-            DefaultExpiry = defaultExpiry ?? TimeSpan.FromMinutes(10);
+            DefaultExpiry = defaultExpiry ?? DefaultExpiry;
         }
     }
 }
