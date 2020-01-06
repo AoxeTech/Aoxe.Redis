@@ -10,8 +10,10 @@ This redis client wrappers and serializers.
 
 ### NuGet
 
+```CLI
 Install-Package Zaabee.StackExchangeRedis
 Install-Package Zaabee.StackExchangeRedis.NewtonsoftJson
+```
 
 ### Build Project
 
