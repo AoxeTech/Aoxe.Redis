@@ -7,7 +7,7 @@ namespace Zaabee.StackExchangeRedis
 {
     public partial class ZaabeeRedisClient : IZaabeeRedisClient, IDisposable
     {
-        private ConnectionMultiplexer _conn;
+        private IConnectionMultiplexer _conn;
         private IDatabase _db;
         private ISerializer _serializer;
         private TimeSpan _defaultExpiry;

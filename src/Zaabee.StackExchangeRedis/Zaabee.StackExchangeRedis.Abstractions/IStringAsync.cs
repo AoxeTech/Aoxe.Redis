@@ -8,7 +8,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
     {
         Task<bool> AddAsync<T>(string key, T entity, TimeSpan? expiry = null);
 
-        Task AddRangeAsync<T>(IEnumerable<Tuple<string, T>> entities, TimeSpan? expiry = null, bool isBatch = false);
+        Task AddRangeAsync<T>(Dictionary<string, T> entities, TimeSpan? expiry = null, bool isBatch = false);
 
         Task<T> GetAsync<T>(string key);
 

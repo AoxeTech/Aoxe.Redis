@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+        <PackageReference Include="coverlet.collector" Version="1.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Binary\Zaabee.StackExchangeRedis.Binary.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Jil\Zaabee.StackExchangeRedis.Jil.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.MsgPack\Zaabee.StackExchangeRedis.MsgPack.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.NewtonsoftJson\Zaabee.StackExchangeRedis.NewtonsoftJson.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Protobuf\Zaabee.StackExchangeRedis.Protobuf.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.SystemTextJson\Zaabee.StackExchangeRedis.SystemTextJson.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Utf8Json\Zaabee.StackExchangeRedis.Utf8Json.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Xml\Zaabee.StackExchangeRedis.Xml.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.ZeroFormatter\Zaabee.StackExchangeRedis.ZeroFormatter.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.csproj" />
+    </ItemGroup>
+
+</Project>

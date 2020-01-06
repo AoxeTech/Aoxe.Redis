@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Zaabee.StackExchangeRedis.Abstractions
@@ -7,7 +6,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
     {
         bool HashAdd<T>(string key, string entityKey, T entity);
 
-        void HashAddRange<T>(string key, IEnumerable<Tuple<string, T>> entities);
+        void HashAddRange<T>(string key, Dictionary<string, T> entities);
 
         bool HashDelete(string key, string entityKey);
 
