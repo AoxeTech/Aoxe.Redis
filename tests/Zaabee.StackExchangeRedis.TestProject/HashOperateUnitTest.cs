@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using StackExchange.Redis;
 using Xunit;
 using Zaabee.StackExchangeRedis.Abstractions;
 using Zaabee.StackExchangeRedis.Protobuf;
@@ -9,7 +10,8 @@ namespace Zaabee.StackExchangeRedis.TestProject
     public class HashOperateUnitTest
     {
         private readonly IZaabeeRedisClient _client =
-            new ZaabeeRedisClient(new RedisConfig("192.168.78.140:6379,abortConnect=false,syncTimeout=3000"),
+            new ZaabeeRedisClient(ConfigurationOptions.Parse("192.168.78.140:6379,abortConnect=false,syncTimeout=3000"),
+                TimeSpan.FromMinutes(10),
                 new Serializer());
 
         [Fact]
