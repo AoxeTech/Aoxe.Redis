@@ -16,7 +16,7 @@ namespace Zaabee.StackExchangeRedis
             return _db.StringSet(key, bytes, expiry);
         }
 
-        public void AddRange<T>(IEnumerable<Tuple<string, T>> entities, TimeSpan? expiry = null, bool isBatch = false)
+        public void AddRange<T>(IDictionary<string, T> entities, TimeSpan? expiry = null, bool isBatch = false)
         {
             if (entities == null || !entities.Any()) return;
             expiry = expiry ?? _defaultExpiry;
@@ -24,21 +24,21 @@ namespace Zaabee.StackExchangeRedis
             {
                 var batch = _db.CreateBatch();
                 Task.WhenAll(entities.Select(entity =>
-                    batch.StringSetAsync(entity.Item1, _serializer.Serialize(entity.Item2), expiry)));
+                    batch.StringSetAsync(entity.Key, _serializer.Serialize(entity.Value), expiry)));
                 batch.Execute();
             }
             else
             {
-                foreach (var (key, entity) in entities)
-                    Add(key, entity, expiry);
+                foreach (var kv in entities)
+                    Add(kv.Key, kv.Value, expiry);
             }
         }
 
         public T Get<T>(string key)
         {
-            if (string.IsNullOrWhiteSpace(key)) return default(T);
+            if (string.IsNullOrWhiteSpace(key)) return default;
             var value = _db.StringGet(key);
-            return value.HasValue ? _serializer.Deserialize<T>(value) : default(T);
+            return value.HasValue ? _serializer.Deserialize<T>(value) : default;
         }
 
         public IList<T> Get<T>(IEnumerable<string> keys, bool isBatch = false)
@@ -72,14 +72,8 @@ namespace Zaabee.StackExchangeRedis
             return _db.StringSet(key, value, expiry);
         }
 
-        public double Increment(string key, double value)
-        {
-            return _db.StringIncrement(key, value);
-        }
+        public double Increment(string key, double value) => _db.StringIncrement(key, value);
 
-        public long Increment(string key, long value)
-        {
-            return _db.StringIncrement(key, value);
-        }
+        public long Increment(string key, long value) => _db.StringIncrement(key, value);
     }
 }

@@ -38,9 +38,7 @@ namespace Zaabee.StackExchangeRedis.TestProject
         public void HashBatchSync()
         {
             var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
-            _client.HashAddRange("HashBatchTest",
-                testModels.Select(testModel => new Tuple<string, TestModel>(testModel.Id.ToString(), testModel))
-                    .ToList());
+            _client.HashAddRange("HashBatchTest", testModels.ToDictionary(k => k.Id.ToString(), v => v));
             var results =
                 _client.HashGetRange<TestModel>("HashBatchTest",
                     testModels.Select(model => model.Id.ToString()).ToList());
@@ -54,9 +52,8 @@ namespace Zaabee.StackExchangeRedis.TestProject
         public async void HashBatchAsync()
         {
             var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
-            _client.HashAddRangeAsync("HashBatchAsyncTest",
-                testModels.Select(testModel => new Tuple<string, TestModel>(testModel.Id.ToString(), testModel))
-                    .ToList()).Wait();
+            _client.HashAddRangeAsync("HashBatchAsyncTest", testModels.ToDictionary(k => k.Id.ToString(), v => v))
+                .Wait();
             var results = await _client.HashGetRangeAsync<TestModel>("HashBatchAsyncTest",
                 testModels.Select(model => model.Id.ToString()).ToList());
             Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
@@ -69,9 +66,7 @@ namespace Zaabee.StackExchangeRedis.TestProject
         public void HashAllSync()
         {
             var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
-            _client.HashAddRange("HashAllTest",
-                testModels.Select(testModel => new Tuple<string, TestModel>(testModel.Id.ToString(), testModel))
-                    .ToList());
+            _client.HashAddRange("HashAllTest", testModels.ToDictionary(k => k.Id.ToString(), v => v));
             var results = _client.HashGet<TestModel>("HashAllTest");
             Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
             var keys = _client.HashGetAllEntityKeys("HashAllTest");
@@ -84,9 +79,7 @@ namespace Zaabee.StackExchangeRedis.TestProject
         public async void HashAllAsync()
         {
             var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
-            _client.HashAddRangeAsync("HashAllAsyncTest",
-                testModels.Select(testModel => new Tuple<string, TestModel>(testModel.Id.ToString(), testModel))
-                    .ToList()).Wait();
+            _client.HashAddRangeAsync("HashAllAsyncTest", testModels.ToDictionary(k => k.Id.ToString(), v => v)).Wait();
             var results = await _client.HashGetAsync<TestModel>("HashAllAsyncTest");
             Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
             var keys = await _client.HashGetAllEntityKeysAsync("HashAllAsyncTest");

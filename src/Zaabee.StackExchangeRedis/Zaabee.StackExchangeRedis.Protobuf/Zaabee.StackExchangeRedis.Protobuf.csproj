@@ -3,13 +3,14 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.2.3</PackageVersion>
-        <Version>1.2.3</Version>
+        <PackageVersion>1.2.4</PackageVersion>
+        <Version>1.2.4</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Redis Protobuf</PackageTags>
         <Description>The protobuf serializer for Zaabee.StackExchangeRedis</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
+        <LangVersion>8.0</LangVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 

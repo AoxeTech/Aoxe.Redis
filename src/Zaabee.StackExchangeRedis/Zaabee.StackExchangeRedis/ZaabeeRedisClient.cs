@@ -27,6 +27,14 @@ namespace Zaabee.StackExchangeRedis
             _conn = ConnectionMultiplexer.Connect(options);
             _serializer = serializer;
             _db = _conn.GetDatabase();
+
+            // var endPoints = _conn.GetEndPoints();
+            // var ii = _conn.GetServer(endPoints[0]);
+            // var i0 = _conn.GetCounters();
+            // var i2 = _conn.GetSubscriber();
+            // var i1 = _conn.GetStatus();
+            // var i3 = _conn.GetHashSlot();
+            // var i4 = _conn.GetStormLog();
         }
 
         public void Dispose() => _conn.Dispose();

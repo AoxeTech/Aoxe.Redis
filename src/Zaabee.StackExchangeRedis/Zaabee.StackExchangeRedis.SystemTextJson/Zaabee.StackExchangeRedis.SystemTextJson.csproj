@@ -3,13 +3,14 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.0.3</PackageVersion>
-        <Version>1.0.3</Version>
+        <PackageVersion>1.0.4</PackageVersion>
+        <Version>1.0.4</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Redis System.Text.Json</PackageTags>
         <Description>The json serializer for Zaabee.StackExchangeRedis base by System.Text.Json</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
+        <LangVersion>8.0</LangVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 

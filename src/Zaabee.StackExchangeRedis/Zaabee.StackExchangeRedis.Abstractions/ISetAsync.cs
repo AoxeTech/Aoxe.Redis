@@ -53,7 +53,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
 
         Task<long> SetRemoveRangeAsync<T>(string key, IEnumerable<T> values);
 
-        Task<IList<T>> SetScanAsync<T>(string key, T pattern = default(T), int pageSize = 10,
+        Task<IList<T>> SetScanAsync<T>(string key, T pattern = default, int pageSize = 10,
             long cursor = 0, int pageOffset = 0);
     }
 }

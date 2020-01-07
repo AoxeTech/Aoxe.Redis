@@ -8,7 +8,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
     {
         Task<bool> SortedSetAddAsync<T>(string key, T member, long score);
 
-        Task<long> SortedSetAddAsync<T>(string key, IEnumerable<Tuple<T, long>> values);
+        Task<long> SortedSetAddAsync<T>(string key, IDictionary<T,double> values);
 
         Task<double> SortedSetDecrementAsync<T>(string key, T member, long value);
 
@@ -22,19 +22,19 @@ namespace Zaabee.StackExchangeRedis.Abstractions
 
         Task<IList<T>> SortedSetRangeByScoreDescendingAsync<T>(string key, long start = 0, long stop = -1);
 
-        Task<IList<Tuple<T, double>>> SortedSetRangeByScoreWithScoresAscendingAsync<T>(string key, long start = 0,
+        Task<IDictionary<T,double>> SortedSetRangeByScoreWithScoresAscendingAsync<T>(string key, long start = 0,
             long stop = -1);
 
-        Task<IList<Tuple<T, double>>> SortedSetRangeByScoreWithScoresDescendingAsync<T>(string key, long start = 0,
+        Task<IDictionary<T,double>> SortedSetRangeByScoreWithScoresDescendingAsync<T>(string key, long start = 0,
             long stop = -1);
 
         Task<IList<T>> SortedSetRangeByValueAsync<T>(string key, T min, T max, long skip, long take = -1);
 
-        Task<IList<T>> SortedSetRangeByValueAscendingAsync<T>(string key, T min = default(T), T max = default(T),
+        Task<IList<T>> SortedSetRangeByValueAscendingAsync<T>(string key, T min = default, T max = default,
             long skip = 0,
             long take = -1);
 
-        Task<IList<T>> SortedSetRangeByValueDescendingAsync<T>(string key, T min = default(T), T max = default(T),
+        Task<IList<T>> SortedSetRangeByValueDescendingAsync<T>(string key, T min = default, T max = default,
             long skip = 0,
             long take = -1);
 
@@ -46,7 +46,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
 
         Task<long> SortedSetRemoveRangeByValueAsync<T>(string key, T min, T max);
 
-        Task<IList<Tuple<T, double>>> SortedSetScanAsync<T>(string key, T pattern = default(T), int pageSize = 10,
+        Task<IDictionary<T,double>> SortedSetScanAsync<T>(string key, T pattern = default, int pageSize = 10,
             long cursor = 0, int pageOffset = 0);
 
         Task<double?> SortedSetScoreAsync<T>(string key, T member);

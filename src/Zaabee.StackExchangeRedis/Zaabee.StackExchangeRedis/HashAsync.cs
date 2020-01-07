@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,27 +13,23 @@ namespace Zaabee.StackExchangeRedis
             return await _db.HashSetAsync(key, entityKey, bytes);
         }
 
-        public async Task HashAddRangeAsync<T>(string key, IEnumerable<Tuple<string, T>> entities)
+        public async Task HashAddRangeAsync<T>(string key, IDictionary<string, T> entities)
         {
-            var bytes = entities.Select(tuple =>
-                new HashEntry(tuple.Item1, _serializer.Serialize(tuple.Item2))).ToArray();
+            var bytes = entities.Select(kv =>
+                new HashEntry(kv.Key, _serializer.Serialize(kv.Value))).ToArray();
             await _db.HashSetAsync(key, bytes);
         }
 
-        public async Task<bool> HashDeleteAsync(string key, string entityKey)
-        {
-            return await _db.HashDeleteAsync(key, entityKey);
-        }
+        public async Task<bool> HashDeleteAsync(string key, string entityKey) =>
+            await _db.HashDeleteAsync(key, entityKey);
 
-        public async Task<long> HashDeleteRangeAsync(string key, IEnumerable<string> entityKeys)
-        {
-            return await _db.HashDeleteAsync(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
-        }
+        public async Task<long> HashDeleteRangeAsync(string key, IEnumerable<string> entityKeys) =>
+            await _db.HashDeleteAsync(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
 
         public async Task<T> HashGetAsync<T>(string key, string entityKey)
         {
             var value = await _db.HashGetAsync(key, entityKey);
-            return value.HasValue ? _serializer.Deserialize<T>(value) : default(T);
+            return value.HasValue ? _serializer.Deserialize<T>(value) : default;
         }
 
         public async Task<IList<T>> HashGetAsync<T>(string key)
@@ -57,9 +52,6 @@ namespace Zaabee.StackExchangeRedis
             return keys.Select(entityKey => entityKey.ToString()).ToList();
         }
 
-        public async Task<long> HashCountAsync(string key)
-        {
-            return await _db.HashLengthAsync(key);
-        }
+        public async Task<long> HashCountAsync(string key) => await _db.HashLengthAsync(key);
     }
 }

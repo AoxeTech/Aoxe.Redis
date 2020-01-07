@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using StackExchange.Redis;
@@ -7,31 +6,25 @@ namespace Zaabee.StackExchangeRedis
 {
     public partial class ZaabeeRedisClient
     {
-        public bool HashAdd<T>(string key, string entityKey, T entity)
+        public bool HashAdd<T>(string key, string entityKey, T entity) =>
+            _db.HashSet(key, entityKey, _serializer.Serialize(entity));
+
+        public void HashAddRange<T>(string key, IDictionary<string, T> entities)
         {
-            return _db.HashSet(key, entityKey, _serializer.Serialize(entity));
+            var bytes = entities.Select(kv =>
+                new HashEntry(kv.Key, _serializer.Serialize(kv.Value))).ToArray();
+            _db.HashSet(key, bytes);
         }
 
-        public void HashAddRange<T>(string key, IEnumerable<Tuple<string, T>> entities)
-        {
-            _db.HashSet(key,
-                entities.Select(tuple => new HashEntry(tuple.Item1, _serializer.Serialize(tuple.Item2))).ToArray());
-        }
+        public bool HashDelete(string key, string entityKey) => _db.HashDelete(key, entityKey);
 
-        public bool HashDelete(string key, string entityKey)
-        {
-            return _db.HashDelete(key, entityKey);
-        }
-
-        public long HashDeleteRange(string key, IEnumerable<string> entityKeys)
-        {
-            return _db.HashDelete(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
-        }
+        public long HashDeleteRange(string key, IEnumerable<string> entityKeys) =>
+            _db.HashDelete(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
 
         public T HashGet<T>(string key, string entityKey)
         {
             var value = _db.HashGet(key, entityKey);
-            return value.HasValue ? _serializer.Deserialize<T>(value) : default(T);
+            return value.HasValue ? _serializer.Deserialize<T>(value) : default;
         }
 
         public IList<T> HashGet<T>(string key)
@@ -50,14 +43,9 @@ namespace Zaabee.StackExchangeRedis
                 : values.Select(value => _serializer.Deserialize<T>(value)).ToList();
         }
 
-        public IList<string> HashGetAllEntityKeys(string key)
-        {
-            return _db.HashKeys(key).Select(entityKey => entityKey.ToString()).ToList();
-        }
+        public IList<string> HashGetAllEntityKeys(string key) =>
+            _db.HashKeys(key).Select(entityKey => entityKey.ToString()).ToList();
 
-        public long HashCount(string key)
-        {
-            return _db.HashLength(key);
-        }
+        public long HashCount(string key) => _db.HashLength(key);
     }
 }

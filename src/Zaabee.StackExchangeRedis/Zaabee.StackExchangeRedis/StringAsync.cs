@@ -16,29 +16,30 @@ namespace Zaabee.StackExchangeRedis
             return await _db.StringSetAsync(key, bytes, expiry);
         }
 
-        public async Task AddRangeAsync<T>(IEnumerable<Tuple<string, T>> entities, TimeSpan? expiry = null, bool isBatch = false)
+        public async Task AddRangeAsync<T>(IDictionary<string, T> entities, TimeSpan? expiry = null,
+            bool isBatch = false)
         {
             if (entities == null || !entities.Any()) return;
             expiry = expiry ?? _defaultExpiry;
             if (isBatch)
             {
                 var batch = _db.CreateBatch();
-                foreach (var (key, entity) in entities)
-                    await batch.StringSetAsync(key, _serializer.Serialize(entity), expiry);
+                foreach (var kv in entities)
+                    await batch.StringSetAsync(kv.Key, _serializer.Serialize(kv.Value), expiry);
                 batch.Execute();
             }
             else
             {
-                foreach (var (key, entity) in entities)
-                    await AddAsync(key, entity, expiry);
+                foreach (var kv in entities)
+                    await AddAsync(kv.Key, kv.Value, expiry);
             }
         }
 
         public async Task<T> GetAsync<T>(string key)
         {
-            if (string.IsNullOrWhiteSpace(key)) return default(T);
+            if (string.IsNullOrWhiteSpace(key)) return default;
             var value = await _db.StringGetAsync(key);
-            return value.HasValue ? _serializer.Deserialize<T>(value) : default(T);
+            return value.HasValue ? _serializer.Deserialize<T>(value) : default;
         }
 
         public async Task<IList<T>> GetAsync<T>(IEnumerable<string> keys, bool isBatch = false)
@@ -73,14 +74,9 @@ namespace Zaabee.StackExchangeRedis
             return await _db.StringSetAsync(key, value, expiry);
         }
 
-        public async Task<double> IncrementAsync(string key, double value)
-        {
-            return await _db.StringIncrementAsync(key, value);
-        }
+        public async Task<double> IncrementAsync(string key, double value) =>
+            await _db.StringIncrementAsync(key, value);
 
-        public async Task<long> IncrementAsync(string key, long value)
-        {
-            return await _db.StringIncrementAsync(key, value);
-        }
+        public async Task<long> IncrementAsync(string key, long value) => await _db.StringIncrementAsync(key, value);
     }
 }

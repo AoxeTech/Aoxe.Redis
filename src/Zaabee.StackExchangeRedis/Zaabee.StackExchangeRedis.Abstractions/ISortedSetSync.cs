@@ -7,7 +7,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
     {
         bool SortedSetAdd<T>(string key, T member, long score);
 
-        long SortedSetAdd<T>(string key, IEnumerable<Tuple<T, long>> values);
+        long SortedSetAdd<T>(string key, IDictionary<T,double> values);
 
         double SortedSetDecrement<T>(string key, T member, long value);
 
@@ -21,16 +21,16 @@ namespace Zaabee.StackExchangeRedis.Abstractions
 
         IList<T> SortedSetRangeByScoreDescending<T>(string key, long start = 0, long stop = -1);
 
-        IList<Tuple<T, double>> SortedSetRangeByScoreWithScoresAscending<T>(string key, long start = 0, long stop = -1);
+        IDictionary<T,double> SortedSetRangeByScoreWithScoresAscending<T>(string key, long start = 0, long stop = -1);
 
-        IList<Tuple<T, double>> SortedSetRangeByScoreWithScoresDescending<T>(string key, long start = 0, long stop = -1);
+        IDictionary<T,double> SortedSetRangeByScoreWithScoresDescending<T>(string key, long start = 0, long stop = -1);
 
         IList<T> SortedSetRangeByValue<T>(string key, T min, T max, long skip, long take = -1);
 
-        IList<T> SortedSetRangeByValueAscending<T>(string key, T min = default(T), T max = default(T), long skip = 0,
+        IList<T> SortedSetRangeByValueAscending<T>(string key, T min = default, T max = default, long skip = 0,
             long take = -1);
 
-        IList<T> SortedSetRangeByValueDescending<T>(string key, T min = default(T), T max = default(T), long skip = 0,
+        IList<T> SortedSetRangeByValueDescending<T>(string key, T min = default, T max = default, long skip = 0,
             long take = -1);
 
         bool SortedSetRemove<T>(string key, T member);
@@ -41,7 +41,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
 
         long SortedSetRemoveRangeByValue<T>(string key, T min, T max);
 
-        IList<Tuple<T, double>> SortedSetScan<T>(string key, T pattern = default(T), int pageSize = 10,
+        IDictionary<T,double> SortedSetScan<T>(string key, T pattern = default, int pageSize = 10,
             long cursor = 0, int pageOffset = 0);
 
         double? SortedSetScore<T>(string key, T member);

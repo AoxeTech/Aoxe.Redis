@@ -7,7 +7,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
     {
         bool Add<T>(string key, T entity, TimeSpan? expiry = null);
 
-        void AddRange<T>(Dictionary<string, T> entities, TimeSpan? expiry = null, bool isBatch = false);
+        void AddRange<T>(IDictionary<string, T> entities, TimeSpan? expiry = null, bool isBatch = false);
 
         T Get<T>(string key);
 

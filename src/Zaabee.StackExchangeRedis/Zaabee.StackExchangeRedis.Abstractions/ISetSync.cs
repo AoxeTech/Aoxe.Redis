@@ -52,7 +52,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
 
         long SetRemoveRange<T>(string key, IEnumerable<T> values);
 
-        IList<T> SetScan<T>(string key, T pattern = default(T), int pageSize = 10,
+        IList<T> SetScan<T>(string key, T pattern = default, int pageSize = 10,
             long cursor = 0, int pageOffset = 0);
 
     }

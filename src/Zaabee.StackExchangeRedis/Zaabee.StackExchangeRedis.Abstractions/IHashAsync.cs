@@ -7,7 +7,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
     {
         Task<bool> HashAddAsync<T>(string key, string entityKey, T entity);
 
-        Task HashAddRangeAsync<T>(string key, Dictionary<string, T> entities);
+        Task HashAddRangeAsync<T>(string key, IDictionary<string, T> entities);
 
         Task<bool> HashDeleteAsync(string key, string entityKey);
 
