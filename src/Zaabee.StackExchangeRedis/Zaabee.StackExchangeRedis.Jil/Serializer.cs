@@ -5,10 +5,8 @@ namespace Zaabee.StackExchangeRedis.Jil
 {
     public class Serializer : ISerializer
     {
-        public byte[] Serialize<T>(T o) =>
-            o == null ? new byte[0] : o.ToBytes();
+        public byte[] Serialize<T>(T o) => o is null ? new byte[0] : o.ToBytes();
 
-        public T Deserialize<T>(byte[] bytes) =>
-            bytes is null || bytes.Length == 0 ? default(T) : bytes.FromBytes<T>();
+        public T Deserialize<T>(byte[] bytes) => bytes is null || bytes.Length is 0 ? default : bytes.FromBytes<T>();
     }
 }
