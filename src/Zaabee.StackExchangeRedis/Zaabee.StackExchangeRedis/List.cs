@@ -4,7 +4,7 @@ using StackExchange.Redis;
 
 namespace Zaabee.StackExchangeRedis
 {
-    public partial class ZaabeeRedisClient
+    public partial class ZaabeeRedisDatabase
     {
         public T ListGetByIndex<T>(string key, long index) =>
             _serializer.Deserialize<T>(_db.ListGetByIndex(key, index));

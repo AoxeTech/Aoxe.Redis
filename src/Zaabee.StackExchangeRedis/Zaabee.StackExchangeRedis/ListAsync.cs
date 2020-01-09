@@ -5,7 +5,7 @@ using StackExchange.Redis;
 
 namespace Zaabee.StackExchangeRedis
 {
-    public partial class ZaabeeRedisClient
+    public partial class ZaabeeRedisDatabase
     {
         public async Task<T> ListGetByIndexAsync<T>(string key, long index) =>
             _serializer.Deserialize<T>(await _db.ListGetByIndexAsync(key, index));

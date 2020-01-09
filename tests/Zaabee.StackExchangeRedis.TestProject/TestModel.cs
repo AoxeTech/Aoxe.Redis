@@ -19,7 +19,7 @@ namespace Zaabee.StackExchangeRedis.TestProject
 
         public override bool Equals(object obj)
         {
-            if (!(obj is TestModel o)) return false;
+            if (obj is null || !(obj is TestModel o)) return false;
             return Id == o.Id && Name == o.Name && Age == o.Age && CreateTime == o.CreateTime;
         }
 

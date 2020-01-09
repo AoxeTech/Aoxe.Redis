@@ -6,7 +6,7 @@ using StackExchange.Redis;
 
 namespace Zaabee.StackExchangeRedis
 {
-    public partial class ZaabeeRedisClient
+    public partial class ZaabeeRedisDatabase
     {
         public async Task<bool> AddAsync<T>(string key, T entity, TimeSpan? expiry = null)
         {

@@ -4,7 +4,7 @@ using StackExchange.Redis;
 
 namespace Zaabee.StackExchangeRedis
 {
-    public partial class ZaabeeRedisClient
+    public partial class ZaabeeRedisDatabase
     {
         public bool SetAdd<T>(string key, T value) => _db.SetAdd(key, (RedisValue) _serializer.Serialize(value));
 

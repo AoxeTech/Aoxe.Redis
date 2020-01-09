@@ -1,29 +1,28 @@
-using System;
 using System.Collections.Generic;
 
 namespace Zaabee.StackExchangeRedis.Abstractions
 {
     public interface ISortedSetSync
     {
-        bool SortedSetAdd<T>(string key, T member, long score);
+        bool SortedSetAdd<T>(string key, T member, double score);
 
         long SortedSetAdd<T>(string key, IDictionary<T,double> values);
 
-        double SortedSetDecrement<T>(string key, T member, long value);
+        double SortedSetDecrement<T>(string key, T member, double value);
 
-        double SortedSetIncrement<T>(string key, T member, long value);
+        double SortedSetIncrement<T>(string key, T member, double value);
 
         long SortedSetLength<T>(string key);
 
         long SortedSetLengthByValue<T>(string key, T min, T max);
 
-        IList<T> SortedSetRangeByScoreAscending<T>(string key, long start = 0, long stop = -1);
+        IList<T> SortedSetRangeByScoreAscending<T>(string key, double start = 0, double stop = -1);
 
-        IList<T> SortedSetRangeByScoreDescending<T>(string key, long start = 0, long stop = -1);
+        IList<T> SortedSetRangeByScoreDescending<T>(string key, double start = 0, double stop = -1);
 
-        IDictionary<T,double> SortedSetRangeByScoreWithScoresAscending<T>(string key, long start = 0, long stop = -1);
+        IDictionary<T,double> SortedSetRangeByScoreWithScoresAscending<T>(string key, double start = 0, double stop = -1);
 
-        IDictionary<T,double> SortedSetRangeByScoreWithScoresDescending<T>(string key, long start = 0, long stop = -1);
+        IDictionary<T,double> SortedSetRangeByScoreWithScoresDescending<T>(string key, double start = 0, double stop = -1);
 
         IList<T> SortedSetRangeByValue<T>(string key, T min, T max, long skip, long take = -1);
 
@@ -37,7 +36,7 @@ namespace Zaabee.StackExchangeRedis.Abstractions
 
         long SortedSetRemoveRange<T>(string key, IEnumerable<T> members);
 
-        long SortedSetRemoveRangeByScore<T>(string key, long start, long stop);
+        long SortedSetRemoveRangeByScore<T>(string key, double start, double stop);
 
         long SortedSetRemoveRangeByValue<T>(string key, T min, T max);
 
