@@ -55,9 +55,29 @@ namespace Zaabee.StackExchangeRedis.TestProject
         }
 
         [Fact]
+        public void SystemTextJsonTest()
+        {
+            var serializer = new SystemTextJson.Serializer();
+            var model = TestModelFactory.CreateTestModel();
+            var bytes = serializer.Serialize(model);
+            var result = serializer.Deserialize<TestModel>(bytes);
+            Assert.Equal(model, result);
+        }
+
+        [Fact]
         public void Utf8JsonTest()
         {
             var serializer = new Utf8Json.Serializer();
+            var model = TestModelFactory.CreateTestModel();
+            var bytes = serializer.Serialize(model);
+            var result = serializer.Deserialize<TestModel>(bytes);
+            Assert.Equal(model, result);
+        }
+
+        [Fact]
+        public void XmlJsonTest()
+        {
+            var serializer = new Xml.Serializer();
             var model = TestModelFactory.CreateTestModel();
             var bytes = serializer.Serialize(model);
             var result = serializer.Deserialize<TestModel>(bytes);
