@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Jil;
+using Zaabee.Jil;
 using Zaabee.StackExchangeRedis.ISerialize;
 
 namespace Zaabee.StackExchangeRedis.Jil
@@ -15,14 +16,8 @@ namespace Zaabee.StackExchangeRedis.Jil
             _options = options;
         }
 
-        public byte[] Serialize<T>(T o) =>
-            o is null
-                ? new byte[0]
-                : _encoding.GetBytes(JSON.Serialize(o, _options));
+        public byte[] Serialize<T>(T o) => JilSerializer.Serialize(o, _options, _encoding);
 
-        public T Deserialize<T>(byte[] bytes) =>
-            bytes is null || bytes.Length is 0
-                ? default
-                : JSON.Deserialize<T>(_encoding.GetString(bytes), _options);
+        public T Deserialize<T>(byte[] bytes) => JilSerializer.Deserialize<T>(bytes, _options, _encoding);
     }
 }
