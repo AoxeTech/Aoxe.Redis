@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
+using Zaabee.NewtonsoftJson;
 using Zaabee.StackExchangeRedis.ISerialize;
 
 namespace Zaabee.StackExchangeRedis.NewtonsoftJson
@@ -15,14 +16,8 @@ namespace Zaabee.StackExchangeRedis.NewtonsoftJson
             _settings = settings;
         }
 
-        public byte[] Serialize<T>(T o) =>
-            o is null
-                ? new byte[0]
-                : _encoding.GetBytes(JsonConvert.SerializeObject(o, _settings));
+        public byte[] Serialize<T>(T o) => NewtonsoftJsonSerializer.Serialize(o, _settings, _encoding);
 
-        public T Deserialize<T>(byte[] bytes) =>
-            bytes is null || bytes.Length is 0
-                ? default
-                : (T) JsonConvert.DeserializeObject(_encoding.GetString(bytes), typeof(T), _settings);
+        public T Deserialize<T>(byte[] bytes) => NewtonsoftJsonSerializer.Deserialize<T>(bytes, _settings, _encoding);
     }
 }
