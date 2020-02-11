@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Zaabee.StackExchangeRedis.ISerialize;
+using Zaabee.SystemTextJson;
 
 namespace Zaabee.StackExchangeRedis.SystemTextJson
 {
@@ -12,14 +13,8 @@ namespace Zaabee.StackExchangeRedis.SystemTextJson
             _jsonSerializerOptions = jsonSerializerOptions;
         }
 
-        public byte[] Serialize<T>(T o) =>
-            o is null
-                ? new byte[0]
-                : JsonSerializer.SerializeToUtf8Bytes(o, _jsonSerializerOptions);
+        public byte[] Serialize<T>(T o) => SystemTextJsonSerializer.Serialize(o, _jsonSerializerOptions);
 
-        public T Deserialize<T>(byte[] bytes) =>
-            bytes is null || bytes.Length is 0
-                ? default
-                : JsonSerializer.Deserialize<T>(bytes, _jsonSerializerOptions);
+        public T Deserialize<T>(byte[] bytes) => SystemTextJsonSerializer.Deserialize<T>(bytes, _jsonSerializerOptions);
     }
 }
