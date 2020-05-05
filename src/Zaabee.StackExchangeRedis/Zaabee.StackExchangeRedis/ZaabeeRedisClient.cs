@@ -44,7 +44,7 @@ namespace Zaabee.StackExchangeRedis
 
         public IZaabeeRedisDatabase GetDatabase(int db = -1, object asyncState = null) =>
             new ZaabeeRedisDatabase(_conn.GetDatabase(db, asyncState), _serializer, _defaultExpiry);
-        
+
         public IZaabeeRedisServer GetServer(string host, int port, object asyncState = null) =>
             new ZaabeeRedisServer(_conn.GetServer(host, port, asyncState));
 
@@ -58,7 +58,7 @@ namespace Zaabee.StackExchangeRedis
             new ZaabeeRedisServer(_conn.GetServer(endpoint, asyncState));
 
         public void Dispose() => _conn.Dispose();
-        
+
         public bool Delete(string key) => _database.Delete(key);
 
         public long DeleteAll(IEnumerable<string> keys, bool isBatch = false) => _database.DeleteAll(keys, isBatch);
@@ -212,7 +212,19 @@ namespace Zaabee.StackExchangeRedis
 
         public long SortedSetLength<T>(string key) => _database.SortedSetLength<T>(key);
 
-        public long SortedSetLengthByValue<T>(string key, T min, T max) =>
+        public long SortedSetLengthByValue(string key, int min, int max) =>
+            _database.SortedSetLengthByValue(key, min, max);
+
+        public long SortedSetLengthByValue(string key, long min, long max) =>
+            _database.SortedSetLengthByValue(key, min, max);
+
+        public long SortedSetLengthByValue(string key, float min, float max) =>
+            _database.SortedSetLengthByValue(key, min, max);
+
+        public long SortedSetLengthByValue(string key, double min, double max) =>
+            _database.SortedSetLengthByValue(key, min, max);
+
+        public long SortedSetLengthByValue(string key, string min, string max) =>
             _database.SortedSetLengthByValue(key, min, max);
 
         public IList<T> SortedSetRangeByScoreAscending<T>(string key, double start = 0, double stop = -1) =>
@@ -229,15 +241,59 @@ namespace Zaabee.StackExchangeRedis
             double stop = -1) =>
             _database.SortedSetRangeByScoreWithScoresDescending<T>(key, start, stop);
 
-        public IList<T> SortedSetRangeByValue<T>(string key, T min, T max, long skip, long take = -1) =>
+        public IList<int> SortedSetRangeByValue(string key, int min, int max, long skip, long take = -1) =>
             _database.SortedSetRangeByValue(key, min, max, skip, take);
 
-        public IList<T> SortedSetRangeByValueAscending<T>(string key, T min = default, T max = default, long skip = 0,
-            long take = -1) =>
+        public IList<long> SortedSetRangeByValue(string key, long min, long max, long skip, long take = -1) =>
+            _database.SortedSetRangeByValue(key, min, max, skip, take);
+
+        public IList<float> SortedSetRangeByValue(string key, float min, float max, long skip, long take = -1) =>
+            _database.SortedSetRangeByValue(key, min, max, skip, take);
+
+        public IList<double> SortedSetRangeByValue(string key, double min, double max, long skip, long take = -1) =>
+            _database.SortedSetRangeByValue(key, min, max, skip, take);
+
+        public IList<string> SortedSetRangeByValue(string key, string min, string max, long skip, long take = -1) =>
+            _database.SortedSetRangeByValue(key, min, max, skip, take);
+
+        public IList<int> SortedSetRangeByValueAscending(string key, int min = default, int max = default,
+            long skip = 0, long take = -1) =>
             _database.SortedSetRangeByValueAscending(key, min, max, skip, take);
 
-        public IList<T> SortedSetRangeByValueDescending<T>(string key, T min = default, T max = default, long skip = 0,
-            long take = -1) =>
+        public IList<long> SortedSetRangeByValueAscending(string key, long min = default, long max = default,
+            long skip = 0, long take = -1) =>
+            _database.SortedSetRangeByValueAscending(key, min, max, skip, take);
+
+        public IList<float> SortedSetRangeByValueAscending(string key, float min = default, float max = default,
+            long skip = 0, long take = -1) =>
+            _database.SortedSetRangeByValueAscending(key, min, max, skip, take);
+
+        public IList<double> SortedSetRangeByValueAscending(string key, double min = default, double max = default,
+            long skip = 0, long take = -1) =>
+            _database.SortedSetRangeByValueAscending(key, min, max, skip, take);
+
+        public IList<string> SortedSetRangeByValueAscending(string key, string min = default, string max = default,
+            long skip = 0, long take = -1) =>
+            _database.SortedSetRangeByValueAscending(key, min, max, skip, take);
+
+        public IList<int> SortedSetRangeByValueDescending(string key, int min = default, int max = default,
+            long skip = 0, long take = -1) =>
+            _database.SortedSetRangeByValueDescending(key, min, max, skip, take);
+
+        public IList<long> SortedSetRangeByValueDescending(string key, long min = default, long max = default,
+            long skip = 0, long take = -1) =>
+            _database.SortedSetRangeByValueDescending(key, min, max, skip, take);
+
+        public IList<float> SortedSetRangeByValueDescending(string key, float min = default, float max = default,
+            long skip = 0, long take = -1) =>
+            _database.SortedSetRangeByValueDescending(key, min, max, skip, take);
+
+        public IList<double> SortedSetRangeByValueDescending(string key, double min = default, double max = default,
+            long skip = 0, long take = -1) =>
+            _database.SortedSetRangeByValueDescending(key, min, max, skip, take);
+
+        public IList<string> SortedSetRangeByValueDescending(string key, string min = default, string max = default,
+            long skip = 0, long take = -1) =>
             _database.SortedSetRangeByValueDescending(key, min, max, skip, take);
 
         public bool SortedSetRemove<T>(string key, T member) => _database.SortedSetRemove(key, member);
@@ -248,7 +304,19 @@ namespace Zaabee.StackExchangeRedis
         public long SortedSetRemoveRangeByScore<T>(string key, double start, double stop) =>
             _database.SortedSetRemoveRangeByScore<T>(key, start, stop);
 
-        public long SortedSetRemoveRangeByValue<T>(string key, T min, T max) =>
+        public long SortedSetRemoveRangeByValue(string key, int min, int max) =>
+            _database.SortedSetRemoveRangeByValue(key, min, max);
+
+        public long SortedSetRemoveRangeByValue(string key, long min, long max) =>
+            _database.SortedSetRemoveRangeByValue(key, min, max);
+
+        public long SortedSetRemoveRangeByValue(string key, float min, float max) =>
+            _database.SortedSetRemoveRangeByValue(key, min, max);
+
+        public long SortedSetRemoveRangeByValue(string key, double min, double max) =>
+            _database.SortedSetRemoveRangeByValue(key, min, max);
+
+        public long SortedSetRemoveRangeByValue(string key, string min, string max) =>
             _database.SortedSetRemoveRangeByValue(key, min, max);
 
         public IDictionary<T, double> SortedSetScan<T>(string key, T pattern = default, int pageSize = 10,
@@ -380,7 +448,8 @@ namespace Zaabee.StackExchangeRedis
         public async Task<IList<T>> SetCombineDifferenceAsync<T>(IEnumerable<string> keys) =>
             await _database.SetCombineDifferenceAsync<T>(keys);
 
-        public async Task<long> SetCombineAndStoreUnionAsync<T>(string destination, string firstKey, string secondKey) =>
+        public async Task<long>
+            SetCombineAndStoreUnionAsync<T>(string destination, string firstKey, string secondKey) =>
             await _database.SetCombineAndStoreUnionAsync<T>(destination, firstKey, secondKey);
 
         public async Task<long> SetCombineAndStoreUnionAsync<T>(string destination, IEnumerable<string> keys) =>
@@ -444,7 +513,19 @@ namespace Zaabee.StackExchangeRedis
 
         public async Task<long> SortedSetLengthAsync<T>(string key) => await _database.SortedSetLengthAsync<T>(key);
 
-        public async Task<long> SortedSetLengthByValueAsync<T>(string key, T min, T max) =>
+        public async Task<long> SortedSetLengthByValueAsync(string key, int min, int max) =>
+            await _database.SortedSetLengthByValueAsync(key, min, max);
+
+        public async Task<long> SortedSetLengthByValueAsync(string key, long min, long max) =>
+            await _database.SortedSetLengthByValueAsync(key, min, max);
+
+        public async Task<long> SortedSetLengthByValueAsync(string key, float min, float max) =>
+            await _database.SortedSetLengthByValueAsync(key, min, max);
+
+        public async Task<long> SortedSetLengthByValueAsync(string key, double min, double max) =>
+            await _database.SortedSetLengthByValueAsync(key, min, max);
+
+        public async Task<long> SortedSetLengthByValueAsync(string key, string min, string max) =>
             await _database.SortedSetLengthByValueAsync(key, min, max);
 
         public async Task<IList<T>>
@@ -463,16 +544,59 @@ namespace Zaabee.StackExchangeRedis
             double start = 0, double stop = -1) =>
             await _database.SortedSetRangeByScoreWithScoresDescendingAsync<T>(key, start, stop);
 
-        public async Task<IList<T>>
-            SortedSetRangeByValueAsync<T>(string key, T min, T max, long skip, long take = -1) =>
-            await _database.SortedSetRangeByValueAsync(key, min, max, skip, take);
+        public async Task<IList<int>> SortedSetRangeByValueAsync(string key, int min, int max, long skip,
+            long take = -1) => await _database.SortedSetRangeByValueAsync(key, min, max, skip, take);
 
-        public async Task<IList<T>> SortedSetRangeByValueAscendingAsync<T>(string key, T min = default, T max = default,
-            long skip = 0, long take = -1) =>
+        public async Task<IList<long>> SortedSetRangeByValueAsync(string key, long min, long max, long skip,
+            long take = -1) => await _database.SortedSetRangeByValueAsync(key, min, max, skip, take);
+
+        public async Task<IList<float>> SortedSetRangeByValueAsync(string key, float min, float max, long skip,
+            long take = -1) => await _database.SortedSetRangeByValueAsync(key, min, max, skip, take);
+
+        public async Task<IList<double>> SortedSetRangeByValueAsync(string key, double min, double max, long skip,
+            long take = -1) => await _database.SortedSetRangeByValueAsync(key, min, max, skip, take);
+
+        public async Task<IList<string>> SortedSetRangeByValueAsync(string key, string min, string max, long skip,
+            long take = -1) => await _database.SortedSetRangeByValueAsync(key, min, max, skip, take);
+
+        public async Task<IList<int>> SortedSetRangeByValueAscendingAsync(string key, int min = default,
+            int max = default, long skip = 0, long take = -1) =>
             await _database.SortedSetRangeByValueAscendingAsync(key, min, max, skip, take);
 
-        public async Task<IList<T>> SortedSetRangeByValueDescendingAsync<T>(string key, T min = default,
-            T max = default, long skip = 0, long take = -1) =>
+        public async Task<IList<long>> SortedSetRangeByValueAscendingAsync(string key, long min = default,
+            long max = default, long skip = 0, long take = -1) =>
+            await _database.SortedSetRangeByValueAscendingAsync(key, min, max, skip, take);
+
+        public async Task<IList<float>> SortedSetRangeByValueAscendingAsync(string key, float min = default,
+            float max = default, long skip = 0, long take = -1) =>
+            await _database.SortedSetRangeByValueAscendingAsync(key, min, max, skip, take);
+
+        public async Task<IList<double>> SortedSetRangeByValueAscendingAsync(string key, double min = default,
+            double max = default, long skip = 0, long take = -1) =>
+            await _database.SortedSetRangeByValueAscendingAsync(key, min, max, skip, take);
+
+        public async Task<IList<string>> SortedSetRangeByValueAscendingAsync(string key, string min = default,
+            string max = default, long skip = 0, long take = -1) =>
+            await _database.SortedSetRangeByValueAscendingAsync(key, min, max, skip, take);
+
+        public async Task<IList<int>> SortedSetRangeByValueDescendingAsync(string key, int min = default,
+            int max = default, long skip = 0, long take = -1) =>
+            await _database.SortedSetRangeByValueDescendingAsync(key, min, max, skip, take);
+
+        public async Task<IList<long>> SortedSetRangeByValueDescendingAsync(string key, long min = default,
+            long max = default, long skip = 0, long take = -1) =>
+            await _database.SortedSetRangeByValueDescendingAsync(key, min, max, skip, take);
+
+        public async Task<IList<float>> SortedSetRangeByValueDescendingAsync(string key, float min = default,
+            float max = default, long skip = 0, long take = -1) =>
+            await _database.SortedSetRangeByValueDescendingAsync(key, min, max, skip, take);
+
+        public async Task<IList<double>> SortedSetRangeByValueDescendingAsync(string key, double min = default,
+            double max = default, long skip = 0, long take = -1) =>
+            await _database.SortedSetRangeByValueDescendingAsync(key, min, max, skip, take);
+
+        public async Task<IList<string>> SortedSetRangeByValueDescendingAsync(string key, string min = default,
+            string max = default, long skip = 0, long take = -1) =>
             await _database.SortedSetRangeByValueDescendingAsync(key, min, max, skip, take);
 
         public async Task<bool> SortedSetRemoveAsync<T>(string key, T member) =>
@@ -484,7 +608,19 @@ namespace Zaabee.StackExchangeRedis
         public async Task<long> SortedSetRemoveRangeByScoreAsync<T>(string key, double start, double stop) =>
             await _database.SortedSetRemoveRangeByScoreAsync<T>(key, start, stop);
 
-        public async Task<long> SortedSetRemoveRangeByValueAsync<T>(string key, T min, T max) =>
+        public async Task<long> SortedSetRemoveRangeByValueAsync(string key, int min, int max) =>
+            await _database.SortedSetRemoveRangeByValueAsync(key, min, max);
+
+        public async Task<long> SortedSetRemoveRangeByValueAsync(string key, long min, long max) =>
+            await _database.SortedSetRemoveRangeByValueAsync(key, min, max);
+
+        public async Task<long> SortedSetRemoveRangeByValueAsync(string key, float min, float max) =>
+            await _database.SortedSetRemoveRangeByValueAsync(key, min, max);
+
+        public async Task<long> SortedSetRemoveRangeByValueAsync(string key, double min, double max) =>
+            await _database.SortedSetRemoveRangeByValueAsync(key, min, max);
+
+        public async Task<long> SortedSetRemoveRangeByValueAsync(string key, string min, string max) =>
             await _database.SortedSetRemoveRangeByValueAsync(key, min, max);
 
         public async Task<IDictionary<T, double>> SortedSetScanAsync<T>(string key, T pattern = default,
