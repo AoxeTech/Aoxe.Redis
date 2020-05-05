@@ -54,12 +54,10 @@ namespace Zaabee.StackExchangeRedis.Abstractions
             long take = -1);
 
         IList<double> SortedSetRangeByValueAscending(string key, double min = default, double max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         IList<string> SortedSetRangeByValueAscending(string key, string min = default, string max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         IList<int> SortedSetRangeByValueDescending(string key, int min = default, int max = default, long skip = 0,
             long take = -1);
@@ -68,16 +66,13 @@ namespace Zaabee.StackExchangeRedis.Abstractions
             long take = -1);
 
         IList<float> SortedSetRangeByValueDescending(string key, float min = default, float max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         IList<double> SortedSetRangeByValueDescending(string key, double min = default, double max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         IList<string> SortedSetRangeByValueDescending(string key, string min = default, string max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         bool SortedSetRemove<T>(string key, T member);
 

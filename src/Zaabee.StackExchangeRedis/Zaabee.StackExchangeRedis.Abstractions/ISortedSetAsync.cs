@@ -46,44 +46,34 @@ namespace Zaabee.StackExchangeRedis.Abstractions
         Task<IList<string>> SortedSetRangeByValueAsync(string key, string min, string max, long skip, long take = -1);
 
         Task<IList<int>> SortedSetRangeByValueAscendingAsync(string key, int min = default, int max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         Task<IList<long>> SortedSetRangeByValueAscendingAsync(string key, long min = default, long max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         Task<IList<float>> SortedSetRangeByValueAscendingAsync(string key, float min = default, float max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         Task<IList<double>> SortedSetRangeByValueAscendingAsync(string key, double min = default, double max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         Task<IList<string>> SortedSetRangeByValueAscendingAsync(string key, string min = default, string max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         Task<IList<int>> SortedSetRangeByValueDescendingAsync(string key, int min = default, int max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         Task<IList<long>> SortedSetRangeByValueDescendingAsync(string key, long min = default, long max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         Task<IList<float>> SortedSetRangeByValueDescendingAsync(string key, float min = default, float max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         Task<IList<double>> SortedSetRangeByValueDescendingAsync(string key, double min = default, double max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         Task<IList<string>> SortedSetRangeByValueDescendingAsync(string key, string min = default, string max = default,
-            long skip = 0,
-            long take = -1);
+            long skip = 0, long take = -1);
 
         Task<bool> SortedSetRemoveAsync<T>(string key, T member);
 
