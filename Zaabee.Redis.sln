@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Binary", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Binary\Zaabee.StackExchangeRedis.Binary.csproj", "{ED58F303-9D39-4A03-AC41-5E3008AD8989}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.ISerialize", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.ISerialize\Zaabee.StackExchangeRedis.ISerialize.csproj", "{886FC5AB-A042-4923-A312-C93ADC2CC417}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Serializer.Abstractions", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Serializer.Abstractions\Zaabee.StackExchangeRedis.Serializer.Abstractions.csproj", "{886FC5AB-A042-4923-A312-C93ADC2CC417}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Jil", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Jil\Zaabee.StackExchangeRedis.Jil.csproj", "{C1069964-5A5C-44B3-9E8D-0B52675E71EA}"
 EndProject

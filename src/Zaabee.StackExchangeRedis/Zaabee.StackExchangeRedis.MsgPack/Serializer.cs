@@ -1,5 +1,5 @@
 ﻿using Zaabee.MsgPack;
-using Zaabee.StackExchangeRedis.ISerialize;
+using Zaabee.StackExchangeRedis.Serializer.Abstractions;
 
 namespace Zaabee.StackExchangeRedis.MsgPack
 {

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
 using Zaabee.NewtonsoftJson;
-using Zaabee.StackExchangeRedis.ISerialize;
+using Zaabee.StackExchangeRedis.Serializer.Abstractions;
 
 namespace Zaabee.StackExchangeRedis.NewtonsoftJson
 {

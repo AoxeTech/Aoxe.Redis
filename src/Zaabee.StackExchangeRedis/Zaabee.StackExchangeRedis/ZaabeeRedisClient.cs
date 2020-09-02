@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 using Zaabee.StackExchangeRedis.Abstractions;
-using Zaabee.StackExchangeRedis.ISerialize;
+using Zaabee.StackExchangeRedis.Serializer.Abstractions;
 
 namespace Zaabee.StackExchangeRedis
 {
@@ -14,6 +15,9 @@ namespace Zaabee.StackExchangeRedis
         private IZaabeeRedisDatabase _database;
         private TimeSpan _defaultExpiry;
         private ISerializer _serializer;
+
+        private readonly ConcurrentDictionary<int, IZaabeeRedisDatabase> _databases =
+            new ConcurrentDictionary<int, IZaabeeRedisDatabase>();
 
         public ZaabeeRedisClient(RedisConfig config, ISerializer serializer) =>
             Init(config.Options, config.DefaultExpiry, serializer);
@@ -43,7 +47,8 @@ namespace Zaabee.StackExchangeRedis
         public void ResetStormLog() => _conn.ResetStormLog();
 
         public IZaabeeRedisDatabase GetDatabase(int db = -1, object asyncState = null) =>
-            new ZaabeeRedisDatabase(_conn.GetDatabase(db, asyncState), _serializer, _defaultExpiry);
+            _databases.GetOrAdd(db,
+                key => new ZaabeeRedisDatabase(_conn.GetDatabase(key, asyncState), _serializer, _defaultExpiry));
 
         public IZaabeeRedisServer GetServer(string host, int port, object asyncState = null) =>
             new ZaabeeRedisServer(_conn.GetServer(host, port, asyncState));

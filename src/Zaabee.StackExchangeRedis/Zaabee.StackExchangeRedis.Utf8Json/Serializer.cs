@@ -1,5 +1,5 @@
 ﻿using Utf8Json;
-using Zaabee.StackExchangeRedis.ISerialize;
+using Zaabee.StackExchangeRedis.Serializer.Abstractions;
 using Zaabee.Utf8Json;
 
 namespace Zaabee.StackExchangeRedis.Utf8Json

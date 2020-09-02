@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using Zaabee.StackExchangeRedis.ISerialize;
+using Zaabee.StackExchangeRedis.Serializer.Abstractions;
 using Zaabee.SystemTextJson;
 
 namespace Zaabee.StackExchangeRedis.SystemTextJson

@@ -3,20 +3,20 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>3.0.3</PackageVersion>
-        <Version>3.0.3</Version>
+        <PackageVersion>2020.1.0</PackageVersion>
+        <Version>2020.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Redis Protobuf</PackageTags>
         <Description>The protobuf serializer for Zaabee.StackExchangeRedis</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
-        <LangVersion>8.0</LangVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <LangVersion>Latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zaabee.Protobuf" Version="3.2.0" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.1.1" />
+      <PackageReference Include="Zaabee.Protobuf" Version="2020.1.1" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.Serializer.Abstractions" Version="2020.1.0" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Jil;
 using Zaabee.Jil;
-using Zaabee.StackExchangeRedis.ISerialize;
+using Zaabee.StackExchangeRedis.Serializer.Abstractions;
 
 namespace Zaabee.StackExchangeRedis.Jil
 {

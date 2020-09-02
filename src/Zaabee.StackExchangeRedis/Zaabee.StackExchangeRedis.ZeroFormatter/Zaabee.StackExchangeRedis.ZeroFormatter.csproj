@@ -3,20 +3,20 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>3.0.1</PackageVersion>
-        <Version>3.0.1</Version>
+        <PackageVersion>2020.1.0</PackageVersion>
+        <Version>2020.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Redis ZeroFormatter</PackageTags>
         <Description>Cause the ZeroFormatter has not updated for long time I thing it is abandoned.This package will not be maintenanced.(This version is not compatible for dotnet core 3.0)</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
-        <LangVersion>8.0</LangVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <LangVersion>Latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.1.1" />
-      <PackageReference Include="Zaabee.ZeroFormatter" Version="3.1.0" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.Serializer.Abstractions" Version="2020.1.0" />
+      <PackageReference Include="Zaabee.ZeroFormatter" Version="2020.2.0" />
     </ItemGroup>
 
 </Project>

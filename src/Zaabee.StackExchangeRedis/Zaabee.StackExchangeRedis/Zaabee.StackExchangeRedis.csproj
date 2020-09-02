@@ -3,20 +3,21 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2.1.0</PackageVersion>
-        <Version>2.1.0</Version>
+        <PackageVersion>2020.1.0</PackageVersion>
+        <Version>2020.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
-        <Description>Redis wrappers by StackExchange.Redis</Description>
         <PackageTags>Zaabee Redis Stackexchange.Redis</PackageTags>
+        <Description>Redis wrappers by StackExchange.Redis</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <LangVersion>Latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="StackExchange.Redis" Version="2.1.30" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2.1.0" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.ISerialize" Version="1.1.1" />
+      <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2020.1.0" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.Serializer.Abstractions" Version="2020.1.0" />
     </ItemGroup>
 
 </Project>

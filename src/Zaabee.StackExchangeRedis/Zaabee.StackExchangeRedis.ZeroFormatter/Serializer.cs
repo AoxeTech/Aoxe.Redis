@@ -1,4 +1,4 @@
-﻿using Zaabee.StackExchangeRedis.ISerialize;
+﻿using Zaabee.StackExchangeRedis.Serializer.Abstractions;
 using Zaabee.ZeroFormatter;
 
 namespace Zaabee.StackExchangeRedis.ZeroFormatter

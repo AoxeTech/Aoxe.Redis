@@ -17,10 +17,10 @@ namespace Zaabee.StackExchangeRedis.Abstractions
         /// <summary>
         /// Gets whether the connected server is a replica / slave
         /// </summary>
-        bool IsSlave { get; }
+        bool IsReplica { get; }
 
         /// <summary>Explicitly opt in for slave writes on writable slaves</summary>
-        bool AllowSlaveWrites { get; }
+        bool AllowReplicaWrites { get; }
 
         /// <summary>Gets the version of the connected server</summary>
         Version Version { get; }

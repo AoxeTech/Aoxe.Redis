@@ -1,5 +1,5 @@
 ﻿using Zaabee.Protobuf;
-using Zaabee.StackExchangeRedis.ISerialize;
+using Zaabee.StackExchangeRedis.Serializer.Abstractions;
 
 namespace Zaabee.StackExchangeRedis.Protobuf
 {

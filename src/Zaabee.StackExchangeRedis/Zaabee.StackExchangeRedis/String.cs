@@ -11,15 +11,15 @@ namespace Zaabee.StackExchangeRedis
         public bool Add<T>(string key, T entity, TimeSpan? expiry = null)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
-            expiry = expiry ?? _defaultExpiry;
+            expiry ??= _defaultExpiry;
             var bytes = _serializer.Serialize(entity);
             return _db.StringSet(key, bytes, expiry);
         }
 
         public void AddRange<T>(IDictionary<string, T> entities, TimeSpan? expiry = null, bool isBatch = false)
         {
-            if (entities == null || !entities.Any()) return;
-            expiry = expiry ?? _defaultExpiry;
+            if (entities is null || !entities.Any()) return;
+            expiry ??= _defaultExpiry;
             if (isBatch)
             {
                 var batch = _db.CreateBatch();
@@ -61,14 +61,14 @@ namespace Zaabee.StackExchangeRedis
         public bool Add(string key, long value, TimeSpan? expiry = null)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
-            expiry = expiry ?? _defaultExpiry;
+            expiry ??= _defaultExpiry;
             return _db.StringSet(key, value, expiry);
         }
 
         public bool Add(string key, double value, TimeSpan? expiry = null)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
-            expiry = expiry ?? _defaultExpiry;
+            expiry ??= _defaultExpiry;
             return _db.StringSet(key, value, expiry);
         }
 

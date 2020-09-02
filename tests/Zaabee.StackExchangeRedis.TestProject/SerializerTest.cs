@@ -1,99 +1,45 @@
 using Xunit;
+using Zaabee.StackExchangeRedis.Serializer.Abstractions;
 
 namespace Zaabee.StackExchangeRedis.TestProject
 {
     public class SerializerTest
     {
         [Fact]
-        public void BinaryTest()
-        {
-            var serializer = new Binary.Serializer();
-            var model = TestModelFactory.CreateTestModel();
-            var bytes = serializer.Serialize(model);
-            var result = serializer.Deserialize<TestModel>(bytes);
-            Assert.Equal(model, result);
-        }
+        public void BinaryTest() => SerializerUnitTest(new Binary.Serializer());
 
         [Fact]
-        public void JilTest()
-        {
-            var serializer = new Jil.Serializer();
-            var model = TestModelFactory.CreateTestModel();
-            var bytes = serializer.Serialize(model);
-            var result = serializer.Deserialize<TestModel>(bytes);
-            Assert.Equal(model, result);
-        }
+        public void JilTest() => SerializerUnitTest(new Jil.Serializer());
 
         [Fact]
-        public void MsgPackTest()
-        {
-            var serializer = new MsgPack.Serializer();
-            var model = TestModelFactory.CreateTestModel();
-            var bytes = serializer.Serialize(model);
-            var result = serializer.Deserialize<TestModel>(bytes);
-            Assert.Equal(model, result);
-        }
+        public void MsgPackTest() => SerializerUnitTest(new MsgPack.Serializer());
 
         [Fact]
-        public void NewtonsoftJsonTest()
-        {
-            var serializer = new NewtonsoftJson.Serializer();
-            var model = TestModelFactory.CreateTestModel();
-            var bytes = serializer.Serialize(model);
-            var result = serializer.Deserialize<TestModel>(bytes);
-            Assert.Equal(model, result);
-        }
+        public void NewtonsoftJsonTest() => SerializerUnitTest(new NewtonsoftJson.Serializer());
 
         [Fact]
-        public void ProtobufTest()
-        {
-            var serializer = new Protobuf.Serializer();
-            var model = TestModelFactory.CreateTestModel();
-            var bytes = serializer.Serialize(model);
-            var result = serializer.Deserialize<TestModel>(bytes);
-            Assert.Equal(model, result);
-        }
+        public void ProtobufTest() => SerializerUnitTest(new Protobuf.Serializer());
 
         [Fact]
-        public void SystemTextJsonTest()
-        {
-            var serializer = new SystemTextJson.Serializer();
-            var model = TestModelFactory.CreateTestModel();
-            var bytes = serializer.Serialize(model);
-            var result = serializer.Deserialize<TestModel>(bytes);
-            Assert.Equal(model, result);
-        }
+        public void SystemTextJsonTest() => SerializerUnitTest(new SystemTextJson.Serializer());
 
         [Fact]
-        public void Utf8JsonTest()
-        {
-            var serializer = new Utf8Json.Serializer();
-            var model = TestModelFactory.CreateTestModel();
-            var bytes = serializer.Serialize(model);
-            var result = serializer.Deserialize<TestModel>(bytes);
-            Assert.Equal(model, result);
-        }
+        public void Utf8JsonTest() => SerializerUnitTest(new Utf8Json.Serializer());
 
         [Fact]
-        public void XmlJsonTest()
-        {
-            var serializer = new Xml.Serializer();
-            var model = TestModelFactory.CreateTestModel();
-            var bytes = serializer.Serialize(model);
-            var result = serializer.Deserialize<TestModel>(bytes);
-            Assert.Equal(model, result);
-        }
+        public void XmlJsonTest() => SerializerUnitTest(new Xml.Serializer());
 
 #if NETCOREAPP2_1
         [Fact]
-        public void ZeroFormatterTest()
+        public void ZeroFormatterTest()=>SerializerUnitTest(new ZeroFormatter.Serializer());
+#endif
+        
+        private static void SerializerUnitTest(ISerializer serializer)
         {
-            var serializer = new ZeroFormatter.Serializer();
             var model = TestModelFactory.CreateTestModel();
             var bytes = serializer.Serialize(model);
             var result = serializer.Deserialize<TestModel>(bytes);
             Assert.Equal(model, result);
         }
-#endif
     }
 }

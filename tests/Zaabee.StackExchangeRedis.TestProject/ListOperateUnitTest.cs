@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Xunit;
 using Zaabee.StackExchangeRedis.Abstractions;
-using Zaabee.StackExchangeRedis.Protobuf;
 
 namespace Zaabee.StackExchangeRedis.TestProject
 {
@@ -10,7 +9,7 @@ namespace Zaabee.StackExchangeRedis.TestProject
     {
         private readonly IZaabeeRedisClient _client =
             new ZaabeeRedisClient("192.168.78.140:6379,abortConnect=false,syncTimeout=3000", TimeSpan.FromMinutes(10),
-                new Serializer());
+                new Protobuf.Serializer());
 
         [Fact]
         public void ListSync()

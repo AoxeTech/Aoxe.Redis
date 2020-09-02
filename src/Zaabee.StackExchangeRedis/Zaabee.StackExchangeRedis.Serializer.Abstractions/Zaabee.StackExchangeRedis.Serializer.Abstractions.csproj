@@ -3,12 +3,12 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.1.1</PackageVersion>
-        <Version>1.1.1</Version>
+        <PackageVersion>2020.1.0</PackageVersion>
+        <Version>2020.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Cache Redis</PackageTags>
-        <Description>The ISerializer for Zaaby.StackExchangeRedis</Description>
+        <Description>The Abstractions for Zaabee.StackExchangeRedis serializer.</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>

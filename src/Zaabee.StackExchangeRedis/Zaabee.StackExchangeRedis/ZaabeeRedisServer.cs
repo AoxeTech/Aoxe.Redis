@@ -11,8 +11,8 @@ namespace Zaabee.StackExchangeRedis
         private readonly IServer _server;
         public EndPoint EndPoint => _server.EndPoint;
         public bool IsConnected => _server.IsConnected;
-        public bool IsSlave => _server.IsSlave;
-        public bool AllowSlaveWrites => _server.AllowSlaveWrites;
+        public bool IsReplica => _server.IsReplica;
+        public bool AllowReplicaWrites => _server.AllowReplicaWrites;
         public Version Version => _server.Version;
         public int DatabaseCount => _server.DatabaseCount;
 

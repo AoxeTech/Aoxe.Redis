@@ -1,4 +1,4 @@
-﻿namespace Zaabee.StackExchangeRedis.ISerialize
+﻿namespace Zaabee.StackExchangeRedis.Serializer.Abstractions
 {
     public interface ISerializer
     {
