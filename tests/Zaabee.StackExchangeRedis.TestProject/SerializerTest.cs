@@ -29,11 +29,9 @@ namespace Zaabee.StackExchangeRedis.TestProject
         [Fact]
         public void XmlJsonTest() => SerializerUnitTest(new Xml.Serializer());
 
-#if NETCOREAPP2_1
         [Fact]
-        public void ZeroFormatterTest()=>SerializerUnitTest(new ZeroFormatter.Serializer());
-#endif
-        
+        public void ZeroFormatterTest() => SerializerUnitTest(new ZeroFormatter.Serializer());
+
         private static void SerializerUnitTest(ISerializer serializer)
         {
             var model = TestModelFactory.CreateTestModel();
