@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2020.1.2</PackageVersion>
+        <PackageVersion>2020.1.3</PackageVersion>
         <Version>2020.1.2</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
@@ -15,7 +15,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zaabee.Binary" Version="2020.4.2" />
+      <PackageReference Include="Zaabee.Binary" Version="2020.5.0" />
       <PackageReference Include="Zaabee.StackExchangeRedis.Serializer.Abstractions" Version="2020.1.0" />
     </ItemGroup>
 
