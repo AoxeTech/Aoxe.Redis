@@ -11,7 +11,7 @@ namespace Zaabee.StackExchangeRedis
         public async Task<bool> AddAsync<T>(string key, T entity, TimeSpan? expiry = null)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
-            expiry = expiry ?? _defaultExpiry;
+            expiry ??= _defaultExpiry;
             var bytes = _serializer.Serialize(entity);
             return await _db.StringSetAsync(key, bytes, expiry);
         }
@@ -20,7 +20,7 @@ namespace Zaabee.StackExchangeRedis
             bool isBatch = false)
         {
             if (entities == null || !entities.Any()) return;
-            expiry = expiry ?? _defaultExpiry;
+            expiry ??= _defaultExpiry;
             if (isBatch)
             {
                 var batch = _db.CreateBatch();
@@ -63,14 +63,14 @@ namespace Zaabee.StackExchangeRedis
         public async Task<bool> AddAsync(string key, long value, TimeSpan? expiry = null)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
-            expiry = expiry ?? _defaultExpiry;
+            expiry ??= _defaultExpiry;
             return await _db.StringSetAsync(key, value, expiry);
         }
 
         public async Task<bool> AddAsync(string key, double value, TimeSpan? expiry = null)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
-            expiry = expiry ?? _defaultExpiry;
+            expiry ??= _defaultExpiry;
             return await _db.StringSetAsync(key, value, expiry);
         }
 
