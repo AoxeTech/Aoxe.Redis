@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Z
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.TestProject", "tests\Zaabee.StackExchangeRedis.TestProject\Zaabee.StackExchangeRedis.TestProject.csproj", "{BC3A1E47-25AC-46B0-8908-06E432FE601C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Zaabee.FreeRedis", "Zaabee.FreeRedis", "{9326778C-4FB2-4403-BA4F-6C1E6F5992D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,5 +108,6 @@ Global
 		{C1DDA8C2-55E7-40F8-B802-0D947EEB9941} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
 		{25689183-BD87-41BE-92C2-82139C81FBEE} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
 		{BC3A1E47-25AC-46B0-8908-06E432FE601C} = {15E61F8C-8435-4678-BBE4-E7CC3F0C817A}
+		{9326778C-4FB2-4403-BA4F-6C1E6F5992D2} = {D0C068FE-35CD-4F7E-BBF3-6FEABFDAFEA3}
 	EndGlobalSection
 EndGlobal
