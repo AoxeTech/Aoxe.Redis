@@ -3,8 +3,8 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2020.6.2</PackageVersion>
-        <Version>2020.6.2</Version>
+        <PackageVersion>2020.7.0</PackageVersion>
+        <Version>2020.7.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Cache Redis Json.Net</PackageTags>
@@ -16,7 +16,7 @@
 
     <ItemGroup>
         <PackageReference Include="Zaabee.StackExchangeRedis.Serializer.Abstractions" Version="2020.1.0" />
-        <PackageReference Include="Zaabee.NewtonsoftJson" Version="2020.6.2" />
+        <PackageReference Include="Zaabee.NewtonsoftJson" Version="2020.7.0" />
     </ItemGroup>
 
 </Project>
