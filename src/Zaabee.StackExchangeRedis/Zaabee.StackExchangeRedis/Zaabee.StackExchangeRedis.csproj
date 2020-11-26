@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2020.1.1</PackageVersion>
-        <Version>2020.1.1</Version>
+        <PackageVersion>2020.2.0</PackageVersion>
+        <Version>2020.2.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Redis Stackexchange.Redis</PackageTags>
@@ -15,7 +15,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
+      <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
       <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2020.1.0" />
       <PackageReference Include="Zaabee.StackExchangeRedis.Serializer.Abstractions" Version="2020.1.0" />
     </ItemGroup>

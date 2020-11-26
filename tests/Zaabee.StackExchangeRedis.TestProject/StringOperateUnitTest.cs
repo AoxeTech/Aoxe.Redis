@@ -6,9 +6,7 @@ namespace Zaabee.StackExchangeRedis.TestProject
 {
     public class StringOperateUnitTest
     {
-        private readonly IZaabeeRedisClient _client =
-            new ZaabeeRedisClient(new RedisConfig("192.168.78.140:6379,abortConnect=false,syncTimeout=3000"),
-                new Protobuf.Serializer());
+        private readonly IZaabeeRedisClient _client = ZaabeeRedisClientFactory.GetClient();
 
         [Fact]
         public void StringSync()
