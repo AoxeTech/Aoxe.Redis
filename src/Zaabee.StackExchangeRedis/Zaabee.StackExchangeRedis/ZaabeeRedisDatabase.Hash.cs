@@ -30,17 +30,13 @@ namespace Zaabee.StackExchangeRedis
         public IList<T> HashGet<T>(string key)
         {
             var kvs = _db.HashGetAll(key);
-            return kvs == null
-                ? new List<T>()
-                : kvs.Select(kv => _serializer.Deserialize<T>(kv.Value)).ToList();
+            return kvs?.Select(kv => _serializer.Deserialize<T>(kv.Value)).ToList() ?? new List<T>();
         }
 
         public IList<T> HashGetRange<T>(string key, IEnumerable<string> entityKeys)
         {
             var values = _db.HashGet(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
-            return values == null
-                ? new List<T>()
-                : values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+            return values?.Select(value => _serializer.Deserialize<T>(value)).ToList() ?? new List<T>();
         }
 
         public IList<string> HashGetAllEntityKeys(string key) =>

@@ -41,9 +41,7 @@ namespace Zaabee.StackExchangeRedis
         public async Task<IList<T>> HashGetRangeAsync<T>(string key, IEnumerable<string> entityKeys)
         {
             var values = await _db.HashGetAsync(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
-            return values == null
-                ? new List<T>()
-                : values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+            return values?.Select(value => _serializer.Deserialize<T>(value)).ToList() ?? new List<T>();
         }
 
         public async Task<IList<string>> HashGetAllEntityKeysAsync(string key)
