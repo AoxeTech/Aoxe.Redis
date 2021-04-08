@@ -19,7 +19,7 @@ namespace Zaabee.StackExchangeRedis.TestProject
 
         public override bool Equals(object obj)
         {
-            if (obj is null || !(obj is TestModel o)) return false;
+            if (obj is not TestModel o) return false;
             return Id == o.Id && Name == o.Name && Age == o.Age && CreateTime == o.CreateTime;
         }
 
@@ -28,7 +28,7 @@ namespace Zaabee.StackExchangeRedis.TestProject
             unchecked
             {
                 var hashCode = Id.GetHashCode();
-                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Name is not null ? Name.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ Age;
                 hashCode = (hashCode * 397) ^ CreateTime.GetHashCode();
                 return hashCode;

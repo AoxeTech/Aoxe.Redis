@@ -28,7 +28,7 @@ namespace TestProject
             unchecked
             {
                 var hashCode = Id.GetHashCode();
-                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Name is not null ? Name.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ Age;
                 hashCode = (hashCode * 397) ^ CreateTime.GetHashCode();
                 return hashCode;
