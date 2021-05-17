@@ -5,8 +5,10 @@ namespace Zaabee.StackExchangeRedis.ZeroFormatter
 {
     public class Serializer : ISerializer
     {
-        public byte[] Serialize<T>(T o) => o.ToBytes();
+        public byte[] Serialize<T>(T o) =>
+            ZeroSerializer.Serialize(o);
 
-        public T Deserialize<T>(byte[] bytes) => bytes.FromBytes<T>();
+        public T Deserialize<T>(byte[] bytes) =>
+            ZeroSerializer.Deserialize<T>(bytes);
     }
 }

@@ -13,8 +13,10 @@ namespace Zaabee.StackExchangeRedis.SystemTextJson
             _jsonSerializerOptions = jsonSerializerOptions;
         }
 
-        public byte[] Serialize<T>(T o) => o.ToBytes(_jsonSerializerOptions);
+        public byte[] Serialize<T>(T o) =>
+            SystemTextJsonSerializer.Serialize(o, _jsonSerializerOptions);
 
-        public T Deserialize<T>(byte[] bytes) => bytes.FromBytes<T>(_jsonSerializerOptions);
+        public T Deserialize<T>(byte[] bytes) =>
+            SystemTextJsonSerializer.Deserialize<T>(bytes, _jsonSerializerOptions);
     }
 }

@@ -13,8 +13,10 @@ namespace Zaabee.StackExchangeRedis.Utf8Json
             _jsonFormatterResolver = jsonFormatterResolver;
         }
 
-        public byte[] Serialize<T>(T o) => o.ToBytes(_jsonFormatterResolver);
+        public byte[] Serialize<T>(T o) =>
+            Utf8JsonSerializer.Serialize(o, _jsonFormatterResolver);
 
-        public T Deserialize<T>(byte[] bytes) => bytes.FromBytes<T>(_jsonFormatterResolver);
+        public T Deserialize<T>(byte[] bytes) =>
+            Utf8JsonSerializer.Deserialize<T>(bytes, _jsonFormatterResolver);
     }
 }

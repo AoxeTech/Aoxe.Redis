@@ -16,8 +16,10 @@ namespace Zaabee.StackExchangeRedis.NewtonsoftJson
             _settings = settings;
         }
 
-        public byte[] Serialize<T>(T o) => o.ToBytes(_settings, _encoding);
+        public byte[] Serialize<T>(T o) =>
+            NewtonsoftJsonSerializer.Serialize(o, _settings, _encoding);
 
-        public T Deserialize<T>(byte[] bytes) => bytes.FromBytes<T>(_settings, _encoding);
+        public T Deserialize<T>(byte[] bytes) =>
+            NewtonsoftJsonSerializer.Deserialize<T>(bytes, _settings, _encoding);
     }
 }

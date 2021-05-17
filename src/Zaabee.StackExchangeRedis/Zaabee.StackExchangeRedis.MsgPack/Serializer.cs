@@ -5,8 +5,10 @@ namespace Zaabee.StackExchangeRedis.MsgPack
 {
     public class Serializer : ISerializer
     {
-        public byte[] Serialize<T>(T o) => o.ToBytes();
+        public byte[] Serialize<T>(T o) =>
+            MsgPackSerializer.Serialize(o);
 
-        public T Deserialize<T>(byte[] bytes) => bytes.FromBytes<T>();
+        public T Deserialize<T>(byte[] bytes) =>
+            MsgPackSerializer.Deserialize<T>(bytes);
     }
 }
