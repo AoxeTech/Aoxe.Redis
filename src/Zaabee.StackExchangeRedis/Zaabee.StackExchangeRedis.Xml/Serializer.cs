@@ -1,11 +1,12 @@
 ﻿using Zaabee.StackExchangeRedis.Serializer.Abstractions;
+using Zaabee.Xml;
 
 namespace Zaabee.StackExchangeRedis.Xml
 {
     public class Serializer : ISerializer
     {
-        public byte[] Serialize<T>(T o) => Zaabee.Xml.XmlSerializer.Serialize(o);
+        public byte[] Serialize<T>(T o) => o.ToBytes();
 
-        public T Deserialize<T>(byte[] bytes) => Zaabee.Xml.XmlSerializer.Deserialize<T>(bytes);
+        public T Deserialize<T>(byte[] bytes) => bytes.FromBytes<T>();
     }
 }

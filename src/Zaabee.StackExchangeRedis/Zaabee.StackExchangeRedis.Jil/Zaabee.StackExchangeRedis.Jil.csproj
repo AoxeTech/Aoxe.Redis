@@ -3,20 +3,20 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2021.1.2</PackageVersion>
-        <Version>2021.1.2</Version>
+        <PackageVersion>2021.1.4</PackageVersion>
+        <Version>2021.1.4</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Cache Redis Jil</PackageTags>
         <Description>The json serializer for Zaabee.StackExchangeRedis base by Jil</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <LangVersion>Latest</LangVersion>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Zaabee.StackExchangeRedis.Serializer.Abstractions" Version="2021.1.0" />
-        <PackageReference Include="Zaabee.Jil" Version="2021.1.3" />
+        <PackageReference Include="Zaabee.Jil" Version="2021.1.5" />
     </ItemGroup>
 
 </Project>

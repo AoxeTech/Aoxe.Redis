@@ -16,7 +16,7 @@ namespace Zaabee.StackExchangeRedis.Jil
             _options = options;
         }
 
-        public byte[] Serialize<T>(T o) => JilSerializer.Serialize(o, _options, _encoding);
+        public byte[] Serialize<T>(T o) => o.ToBytes(_options, _encoding);
 
         public T Deserialize<T>(byte[] bytes) => JilSerializer.Deserialize<T>(bytes, _options, _encoding);
     }
