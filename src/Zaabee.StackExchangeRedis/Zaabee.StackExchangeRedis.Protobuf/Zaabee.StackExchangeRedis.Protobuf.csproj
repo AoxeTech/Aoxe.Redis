@@ -15,7 +15,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Zaabee.StackExchangeRedis.Serializer.Abstractions" Version="2021.1.0" />
+        <PackageReference Include="Zaabee.StackExchangeRedis.Serializer.Abstractions" Version="2021.1.0" />
         <PackageReference Include="Zaabee.Protobuf" Version="2021.1.4" />
     </ItemGroup>
 
