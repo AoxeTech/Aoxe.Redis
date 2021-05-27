@@ -1,6 +1,6 @@
 # Zaabee.Redis
 
-[Redis](https://github.com/antirez/redis) is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. <http://redis.io>
+[Redis](https://github.com/antirez/redis) is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. [http://redis.io](http://redis.io)
 
 ## Introduction
 
@@ -17,25 +17,28 @@ Install-Package Zaabee.StackExchangeRedis.NewtonsoftJson
 
 ### Build Project
 
-Create an asp.net core project and import references in startup.cs. Get [Zaabee.StackExchangeRedis](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis) and [Zaabee.StackExchangeRedis.NewtonsoftJson](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.NewtonsoftJson) from Nuget,otherwise we have other serializers:
+Create an asp.net core project and import references in startup.cs. Get [Zaabee.StackExchangeRedis](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis) and [Zaabee.NewtonsoftJson](https://github.com/Mutuduxf/Zaabee.Serializers/tree/master/src/Zaabee.NewtonsoftJson) from Nuget,otherwise we have other serializers:
 
-[Zaabee.StackExchangeRedis.Binary](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Binary)
+[Zaabee.Binary](https://github.com/Mutuduxf/Zaabee.Serializers/tree/master/src/Zaabee.Binary)
 
-[Zaabee.StackExchangeRedis.Jil](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Jil)
+[Zaabee.Jil](https://github.com/Mutuduxf/Zaabee.Serializers/tree/master/src/Zaabee.Jil)
 
-[Zaabee.StackExchangeRedis.MsgPack](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.MsgPack)
+[Zaabee.MsgPack](https://github.com/Mutuduxf/Zaabee.Serializers/tree/master/src/Zaabee.MsgPack)
 
-[Zaabee.StackExchangeRedis.Protobuf](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Protobuf)
+[Zaabee.Protobuf](https://github.com/Mutuduxf/Zaabee.Serializers/tree/master/src/Zaabee.Protobuf)
 
-[Zaabee.StackExchangeRedis.Utf8Json](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.Utf8Json)
+[Zaabee.SystemTextJson](https://github.com/Mutuduxf/Zaabee.Serializers/tree/master/src/Zaabee.SystemTextJson)
 
-[Zaabee.StackExchangeRedis.ZeroFormatter](https://github.com/Mutuduxf/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis.ZeroFormatter)
+[Zaabee.Utf8Json](https://github.com/Mutuduxf/Zaabee.Serializers/tree/master/src/Zaabee.Utf8Json)
+
+[Zaabee.Xml](https://github.com/Mutuduxf/Zaabee.Serializers/tree/master/src/Zaabee.Xml)
+
+[Zaabee.ZeroFormatter](https://github.com/Mutuduxf/Zaabee.Serializers/tree/master/src/Zaabee.ZeroFormatter)
 
 ```CSharp
 using Zaabee.StackExchangeRedis;
 using Zaabee.StackExchangeRedis.Abstractions;
-using Zaabee.StackExchangeRedis.ISerialize;
-using Zaabee.StackExchangeRedis.NewtonsoftJson;
+using Zaabee.NewtonsoftJson;
 ```
 
 Register ZaabyRedisClient in Configuration like
