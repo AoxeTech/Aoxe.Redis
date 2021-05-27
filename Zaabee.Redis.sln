@@ -10,26 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Abstractions", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Abstractions\Zaabee.StackExchangeRedis.Abstractions.csproj", "{979CCB33-A3A6-4A0E-9620-CFDD7280E96B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Binary", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Binary\Zaabee.StackExchangeRedis.Binary.csproj", "{ED58F303-9D39-4A03-AC41-5E3008AD8989}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Serializer.Abstractions", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Serializer.Abstractions\Zaabee.StackExchangeRedis.Serializer.Abstractions.csproj", "{886FC5AB-A042-4923-A312-C93ADC2CC417}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Jil", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Jil\Zaabee.StackExchangeRedis.Jil.csproj", "{C1069964-5A5C-44B3-9E8D-0B52675E71EA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.MsgPack", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.MsgPack\Zaabee.StackExchangeRedis.MsgPack.csproj", "{06CAB843-0D46-4378-B01C-D609C57E7EF1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.NewtonsoftJson", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.NewtonsoftJson\Zaabee.StackExchangeRedis.NewtonsoftJson.csproj", "{B3E5152E-A82F-4AFC-9359-C9CD9321BD2F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Protobuf", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Protobuf\Zaabee.StackExchangeRedis.Protobuf.csproj", "{237D8174-2F38-4BC4-ACA7-AC9FEE6A8FA4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.SystemTextJson", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.SystemTextJson\Zaabee.StackExchangeRedis.SystemTextJson.csproj", "{C73E7062-0BAC-4012-B782-F41F3DC5FFF1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Utf8Json", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Utf8Json\Zaabee.StackExchangeRedis.Utf8Json.csproj", "{7CF771AA-A6AD-44BA-8AEE-79C80170DC8B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.Xml", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.Xml\Zaabee.StackExchangeRedis.Xml.csproj", "{C1DDA8C2-55E7-40F8-B802-0D947EEB9941}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.ZeroFormatter", "src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.ZeroFormatter\Zaabee.StackExchangeRedis.ZeroFormatter.csproj", "{25689183-BD87-41BE-92C2-82139C81FBEE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.StackExchangeRedis.TestProject", "tests\Zaabee.StackExchangeRedis.TestProject\Zaabee.StackExchangeRedis.TestProject.csproj", "{BC3A1E47-25AC-46B0-8908-06E432FE601C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Zaabee.FreeRedis", "Zaabee.FreeRedis", "{9326778C-4FB2-4403-BA4F-6C1E6F5992D2}"
@@ -48,46 +28,6 @@ Global
 		{979CCB33-A3A6-4A0E-9620-CFDD7280E96B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{979CCB33-A3A6-4A0E-9620-CFDD7280E96B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{979CCB33-A3A6-4A0E-9620-CFDD7280E96B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED58F303-9D39-4A03-AC41-5E3008AD8989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED58F303-9D39-4A03-AC41-5E3008AD8989}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED58F303-9D39-4A03-AC41-5E3008AD8989}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED58F303-9D39-4A03-AC41-5E3008AD8989}.Release|Any CPU.Build.0 = Release|Any CPU
-		{886FC5AB-A042-4923-A312-C93ADC2CC417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{886FC5AB-A042-4923-A312-C93ADC2CC417}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{886FC5AB-A042-4923-A312-C93ADC2CC417}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{886FC5AB-A042-4923-A312-C93ADC2CC417}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1069964-5A5C-44B3-9E8D-0B52675E71EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1069964-5A5C-44B3-9E8D-0B52675E71EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1069964-5A5C-44B3-9E8D-0B52675E71EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1069964-5A5C-44B3-9E8D-0B52675E71EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06CAB843-0D46-4378-B01C-D609C57E7EF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06CAB843-0D46-4378-B01C-D609C57E7EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06CAB843-0D46-4378-B01C-D609C57E7EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06CAB843-0D46-4378-B01C-D609C57E7EF1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3E5152E-A82F-4AFC-9359-C9CD9321BD2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3E5152E-A82F-4AFC-9359-C9CD9321BD2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3E5152E-A82F-4AFC-9359-C9CD9321BD2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3E5152E-A82F-4AFC-9359-C9CD9321BD2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{237D8174-2F38-4BC4-ACA7-AC9FEE6A8FA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{237D8174-2F38-4BC4-ACA7-AC9FEE6A8FA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{237D8174-2F38-4BC4-ACA7-AC9FEE6A8FA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{237D8174-2F38-4BC4-ACA7-AC9FEE6A8FA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C73E7062-0BAC-4012-B782-F41F3DC5FFF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C73E7062-0BAC-4012-B782-F41F3DC5FFF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C73E7062-0BAC-4012-B782-F41F3DC5FFF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C73E7062-0BAC-4012-B782-F41F3DC5FFF1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CF771AA-A6AD-44BA-8AEE-79C80170DC8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CF771AA-A6AD-44BA-8AEE-79C80170DC8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CF771AA-A6AD-44BA-8AEE-79C80170DC8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CF771AA-A6AD-44BA-8AEE-79C80170DC8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1DDA8C2-55E7-40F8-B802-0D947EEB9941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1DDA8C2-55E7-40F8-B802-0D947EEB9941}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1DDA8C2-55E7-40F8-B802-0D947EEB9941}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1DDA8C2-55E7-40F8-B802-0D947EEB9941}.Release|Any CPU.Build.0 = Release|Any CPU
-		{25689183-BD87-41BE-92C2-82139C81FBEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{25689183-BD87-41BE-92C2-82139C81FBEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{25689183-BD87-41BE-92C2-82139C81FBEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{25689183-BD87-41BE-92C2-82139C81FBEE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC3A1E47-25AC-46B0-8908-06E432FE601C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BC3A1E47-25AC-46B0-8908-06E432FE601C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC3A1E47-25AC-46B0-8908-06E432FE601C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -97,16 +37,6 @@ Global
 		{16C58FFB-DC32-4ACC-B120-E87C1ADF9F27} = {D0C068FE-35CD-4F7E-BBF3-6FEABFDAFEA3}
 		{0B2FCE9D-66D7-4585-8E05-9ED3B5FA9A5D} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
 		{979CCB33-A3A6-4A0E-9620-CFDD7280E96B} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
-		{ED58F303-9D39-4A03-AC41-5E3008AD8989} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
-		{886FC5AB-A042-4923-A312-C93ADC2CC417} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
-		{C1069964-5A5C-44B3-9E8D-0B52675E71EA} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
-		{06CAB843-0D46-4378-B01C-D609C57E7EF1} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
-		{B3E5152E-A82F-4AFC-9359-C9CD9321BD2F} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
-		{237D8174-2F38-4BC4-ACA7-AC9FEE6A8FA4} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
-		{C73E7062-0BAC-4012-B782-F41F3DC5FFF1} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
-		{7CF771AA-A6AD-44BA-8AEE-79C80170DC8B} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
-		{C1DDA8C2-55E7-40F8-B802-0D947EEB9941} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
-		{25689183-BD87-41BE-92C2-82139C81FBEE} = {16C58FFB-DC32-4ACC-B120-E87C1ADF9F27}
 		{BC3A1E47-25AC-46B0-8908-06E432FE601C} = {15E61F8C-8435-4678-BBE4-E7CC3F0C817A}
 		{9326778C-4FB2-4403-BA4F-6C1E6F5992D2} = {D0C068FE-35CD-4F7E-BBF3-6FEABFDAFEA3}
 	EndGlobalSection

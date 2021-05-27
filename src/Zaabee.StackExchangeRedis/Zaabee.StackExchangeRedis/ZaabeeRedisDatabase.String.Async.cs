@@ -12,7 +12,7 @@ namespace Zaabee.StackExchangeRedis
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             expiry ??= _defaultExpiry;
-            var bytes = _serializer.Serialize(entity);
+            var bytes = _serializer.SerializeToBytes(entity);
             return await _db.StringSetAsync(key, bytes, expiry);
         }
 
@@ -25,7 +25,7 @@ namespace Zaabee.StackExchangeRedis
             {
                 var batch = _db.CreateBatch();
                 foreach (var kv in entities)
-                    await batch.StringSetAsync(kv.Key, _serializer.Serialize(kv.Value), expiry);
+                    await batch.StringSetAsync(kv.Key, _serializer.SerializeToBytes(kv.Value), expiry);
                 batch.Execute();
             }
             else
@@ -39,7 +39,7 @@ namespace Zaabee.StackExchangeRedis
         {
             if (string.IsNullOrWhiteSpace(key)) return default;
             var value = await _db.StringGetAsync(key);
-            return value.HasValue ? _serializer.Deserialize<T>(value) : default;
+            return value.HasValue ? _serializer.DeserializeFromBytes<T>(value) : default;
         }
 
         public async Task<IList<T>> GetAsync<T>(IEnumerable<string> keys, bool isBatch = false)
@@ -49,7 +49,7 @@ namespace Zaabee.StackExchangeRedis
             if (isBatch)
             {
                 var values = await _db.StringGetAsync(keys.Select(p => (RedisKey) p).ToArray());
-                result = values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+                result = values.Select(value => _serializer.DeserializeFromBytes<T>(value)).ToList();
             }
             else
             {

@@ -9,14 +9,14 @@ namespace Zaabee.StackExchangeRedis
     {
         public async Task<bool> HashAddAsync<T>(string key, string entityKey, T entity)
         {
-            var bytes = _serializer.Serialize(entity);
+            var bytes = _serializer.SerializeToBytes(entity);
             return await _db.HashSetAsync(key, entityKey, bytes);
         }
 
         public async Task HashAddRangeAsync<T>(string key, IDictionary<string, T> entities)
         {
             var bytes = entities.Select(kv =>
-                new HashEntry(kv.Key, _serializer.Serialize(kv.Value))).ToArray();
+                new HashEntry(kv.Key, _serializer.SerializeToBytes(kv.Value))).ToArray();
             await _db.HashSetAsync(key, bytes);
         }
 
@@ -29,19 +29,19 @@ namespace Zaabee.StackExchangeRedis
         public async Task<T> HashGetAsync<T>(string key, string entityKey)
         {
             var value = await _db.HashGetAsync(key, entityKey);
-            return value.HasValue ? _serializer.Deserialize<T>(value) : default;
+            return value.HasValue ? _serializer.DeserializeFromBytes<T>(value) : default;
         }
 
         public async Task<IList<T>> HashGetAsync<T>(string key)
         {
             var kvs = await _db.HashGetAllAsync(key);
-            return kvs.Select(kv => _serializer.Deserialize<T>(kv.Value)).ToList();
+            return kvs.Select(kv => _serializer.DeserializeFromBytes<T>(kv.Value)).ToList();
         }
 
         public async Task<IList<T>> HashGetRangeAsync<T>(string key, IEnumerable<string> entityKeys)
         {
             var values = await _db.HashGetAsync(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
-            return values?.Select(value => _serializer.Deserialize<T>(value)).ToList() ?? new List<T>();
+            return values?.Select(value => _serializer.DeserializeFromBytes<T>(value)).ToList() ?? new List<T>();
         }
 
         public async Task<IList<string>> HashGetAllEntityKeysAsync(string key)

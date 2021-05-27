@@ -7,16 +7,16 @@ namespace Zaabee.StackExchangeRedis
     public partial class ZaabeeRedisDatabase
     {
         public bool SortedSetAdd<T>(string key, T member, double score) =>
-            _db.SortedSetAdd(key, _serializer.Serialize(member), score);
+            _db.SortedSetAdd(key, _serializer.SerializeToBytes(member), score);
 
         public long SortedSetAdd<T>(string key, IDictionary<T, double> values) => _db.SortedSetAdd(key,
-            values.Select(value => new SortedSetEntry(_serializer.Serialize(value.Key), value.Value)).ToArray());
+            values.Select(value => new SortedSetEntry(_serializer.SerializeToBytes(value.Key), value.Value)).ToArray());
 
         public double SortedSetDecrement<T>(string key, T member, double value) =>
-            _db.SortedSetDecrement(key, _serializer.Serialize(member), value);
+            _db.SortedSetDecrement(key, _serializer.SerializeToBytes(member), value);
 
         public double SortedSetIncrement<T>(string key, T member, double value) =>
-            _db.SortedSetIncrement(key, _serializer.Serialize(member), value);
+            _db.SortedSetIncrement(key, _serializer.SerializeToBytes(member), value);
 
         public long SortedSetLength<T>(string key) => _db.SortedSetLength(key);
         public long SortedSetLengthByValue(string key, int min, int max) => _db.SortedSetLengthByValue(key, min, max);
@@ -33,32 +33,32 @@ namespace Zaabee.StackExchangeRedis
             _db.SortedSetLengthByValue(key, min, max);
 
         public long SortedSetLengthByValue<T>(string key, T min, T max) =>
-            _db.SortedSetLengthByValue(key, _serializer.Serialize(min), _serializer.Serialize(max));
+            _db.SortedSetLengthByValue(key, _serializer.SerializeToBytes(min), _serializer.SerializeToBytes(max));
 
         public IList<T> SortedSetRangeByScoreAscending<T>(string key, double start = 0, double stop = -1)
         {
             var values = _db.SortedSetRangeByScore(key, start, stop);
-            return values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+            return values.Select(value => _serializer.DeserializeFromBytes<T>(value)).ToList();
         }
 
         public IList<T> SortedSetRangeByScoreDescending<T>(string key, double start = 0, double stop = -1)
         {
             var values = _db.SortedSetRangeByScore(key, start, stop, order: Order.Descending);
-            return values.Select(value => _serializer.Deserialize<T>(value)).ToList();
+            return values.Select(value => _serializer.DeserializeFromBytes<T>(value)).ToList();
         }
 
         public IDictionary<T, double> SortedSetRangeByScoreWithScoresAscending<T>(string key, double start = 0,
             double stop = -1)
         {
             var values = _db.SortedSetRangeByScoreWithScores(key, start, stop);
-            return values.ToDictionary(k => _serializer.Deserialize<T>(k.Element), v => v.Score);
+            return values.ToDictionary(k => _serializer.DeserializeFromBytes<T>(k.Element), v => v.Score);
         }
 
         public IDictionary<T, double> SortedSetRangeByScoreWithScoresDescending<T>(string key, double start = 0,
             double stop = -1)
         {
             var values = _db.SortedSetRangeByScoreWithScores(key, start, stop, order: Order.Descending);
-            return values.ToDictionary(k => _serializer.Deserialize<T>(k.Element), v => v.Score);
+            return values.ToDictionary(k => _serializer.DeserializeFromBytes<T>(k.Element), v => v.Score);
         }
 
         public IList<int> SortedSetRangeByValue(string key, int min, int max, long skip, long take = -1)
@@ -168,10 +168,10 @@ namespace Zaabee.StackExchangeRedis
             return values.Select(value => (string) value).ToList();
         }
 
-        public bool SortedSetRemove<T>(string key, T member) => _db.SortedSetRemove(key, _serializer.Serialize(member));
+        public bool SortedSetRemove<T>(string key, T member) => _db.SortedSetRemove(key, _serializer.SerializeToBytes(member));
 
         public long SortedSetRemoveRange<T>(string key, IEnumerable<T> members) => _db.SortedSetRemove(key,
-            members.Select(member => (RedisValue) _serializer.Serialize(member)).ToArray());
+            members.Select(member => (RedisValue) _serializer.SerializeToBytes(member)).ToArray());
 
         public long SortedSetRemoveRangeByScore<T>(string key, double start, double stop) =>
             _db.SortedSetRemoveRangeByScore(key, start, stop);
@@ -194,11 +194,11 @@ namespace Zaabee.StackExchangeRedis
         public IDictionary<T, double> SortedSetScan<T>(string key, T pattern = default, int pageSize = 10,
             long cursor = 0, int pageOffset = 0)
         {
-            var values = _db.SortedSetScan(key, _serializer.Serialize(pattern), pageSize, cursor, pageOffset);
-            return values.ToDictionary(k => _serializer.Deserialize<T>(k.Element), v => v.Score);
+            var values = _db.SortedSetScan(key, _serializer.SerializeToBytes(pattern), pageSize, cursor, pageOffset);
+            return values.ToDictionary(k => _serializer.DeserializeFromBytes<T>(k.Element), v => v.Score);
         }
 
         public double? SortedSetScore<T>(string key, T member) =>
-            _db.SortedSetScore(key, _serializer.Serialize(member));
+            _db.SortedSetScore(key, _serializer.SerializeToBytes(member));
     }
 }

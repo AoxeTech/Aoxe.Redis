@@ -3,8 +3,8 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2021.2.0</PackageVersion>
-        <Version>2021.2.0</Version>
+        <PackageVersion>2021.3.0</PackageVersion>
+        <Version>2021.3.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee Redis Stackexchange.Redis</PackageTags>
@@ -16,8 +16,8 @@
 
     <ItemGroup>
       <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
+      <PackageReference Include="Zaabee.Serializer.Abstraction" Version="2021.5.0" />
       <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2021.1.0" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.Serializer.Abstractions" Version="2021.1.0" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 using System;
 using StackExchange.Redis;
+using Zaabee.Serializer.Abstraction;
 using Zaabee.StackExchangeRedis.Abstractions;
-using Zaabee.StackExchangeRedis.Serializer.Abstractions;
 
 namespace Zaabee.StackExchangeRedis
 {
