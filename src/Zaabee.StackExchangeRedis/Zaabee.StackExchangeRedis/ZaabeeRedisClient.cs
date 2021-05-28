@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using StackExchange.Redis;
-using Zaabee.Serializer.Abstraction;
+using Zaabee.Serializer.Abstractions;
 using Zaabee.StackExchangeRedis.Abstractions;
 
 namespace Zaabee.StackExchangeRedis

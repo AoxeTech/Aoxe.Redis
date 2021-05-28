@@ -1,6 +1,6 @@
 using System;
 using StackExchange.Redis;
-using Zaabee.Serializer.Abstraction;
+using Zaabee.Serializer.Abstractions;
 using Zaabee.StackExchangeRedis.Abstractions;
 
 namespace Zaabee.StackExchangeRedis
