@@ -13,18 +13,18 @@ namespace Zaabee.StackExchangeRedis
         private IConnectionMultiplexer _conn;
         private IZaabeeRedisDatabase _database;
         private TimeSpan _defaultExpiry;
-        private ISerializer _serializer;
+        private IBytesSerializer _serializer;
 
-        public ZaabeeRedisClient(RedisConfig config, ISerializer serializer) =>
+        public ZaabeeRedisClient(RedisConfig config, IBytesSerializer serializer) =>
             Init(config.Options, config.DefaultExpiry, serializer);
 
-        public ZaabeeRedisClient(string connectionString, TimeSpan defaultExpiry, ISerializer serializer) =>
+        public ZaabeeRedisClient(string connectionString, TimeSpan defaultExpiry, IBytesSerializer serializer) =>
             Init(ConfigurationOptions.Parse(connectionString), defaultExpiry, serializer);
 
-        public ZaabeeRedisClient(ConfigurationOptions options, TimeSpan defaultExpiry, ISerializer serializer) =>
+        public ZaabeeRedisClient(ConfigurationOptions options, TimeSpan defaultExpiry, IBytesSerializer serializer) =>
             Init(options, defaultExpiry, serializer);
 
-        private void Init(ConfigurationOptions options, TimeSpan defaultExpiry, ISerializer serializer)
+        private void Init(ConfigurationOptions options, TimeSpan defaultExpiry, IBytesSerializer serializer)
         {
             _conn = ConnectionMultiplexer.Connect(options);
             _database = new ZaabeeRedisDatabase(_conn.GetDatabase(), serializer, defaultExpiry);

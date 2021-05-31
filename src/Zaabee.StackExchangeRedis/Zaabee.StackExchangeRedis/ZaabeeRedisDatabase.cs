@@ -8,10 +8,10 @@ namespace Zaabee.StackExchangeRedis
     public partial class ZaabeeRedisDatabase : IZaabeeRedisDatabase
     {
         private readonly IDatabase _db;
-        private readonly ISerializer _serializer;
+        private readonly IBytesSerializer _serializer;
         private readonly TimeSpan _defaultExpiry;
 
-        public ZaabeeRedisDatabase(IDatabase db, ISerializer serializer, TimeSpan defaultExpiry)
+        public ZaabeeRedisDatabase(IDatabase db, IBytesSerializer serializer, TimeSpan defaultExpiry)
         {
             _db = db;
             _serializer = serializer;
