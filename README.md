@@ -12,7 +12,7 @@ This redis client wrappers and serializers.
 
 ```CLI
 Install-Package Zaabee.StackExchangeRedis
-Install-Package Zaabee.StackExchangeRedis.NewtonsoftJson
+Install-Package Zaabee.NewtonsoftJson
 ```
 
 ### Build Project
