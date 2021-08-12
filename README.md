@@ -46,29 +46,28 @@ Register ZaabyRedisClient in Configuration like
 ```CSharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+    services.AddMvc();
     services.AddSingleton<IZaabeeRedisClient>(p =>
-        new ZaabeeRedisClient(new RedisConfig("192.168.78.152:6379,abortConnect=false,syncTimeout=3000"),
-            new Serializer()));
+        new ZaabeeRedisClient(new ZaabeeStackExchangeRedisOptions
+                {
+                    ConnectionString = "192.168.78.140:6379,abortConnect=false,syncTimeout=3000"),
+                    DefaultExpiry = TimeSpan.FromMinutes(10),
+                    Serializer = new Serializer()
+                });
 }
 ```
 
 Add a TestClass for the demo
 
 ```CSharp
-[ProtoContract]
 public class TestModel
 {
-    [ProtoMember(1)]
     public Guid Id { get; set; }
 
-    [ProtoMember(2)]
     public string Name { get; set; }
 
-    [ProtoMember(3)]
     public int Age { get; set; }
 
-    [ProtoMember(4)]
     public DateTime CreateTime { get; set; }
 }
 ```

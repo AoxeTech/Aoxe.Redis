@@ -1,12 +1,14 @@
 ﻿using System;
 using StackExchange.Redis;
+using Zaabee.Serializer.Abstractions;
 
 namespace Zaabee.StackExchangeRedis
 {
-    public class RedisConfig
+    public class ZaabeeStackExchangeRedisOptions
     {
         private string _connectionString;
         private ConfigurationOptions _options;
+        public IBytesSerializer Serializer { get; set; }
 
         public string ConnectionString
         {
@@ -22,19 +24,23 @@ namespace Zaabee.StackExchangeRedis
 
         public TimeSpan DefaultExpiry { get; set; } = TimeSpan.FromMinutes(10);
 
-        public RedisConfig()
+        public ZaabeeStackExchangeRedisOptions()
         {
         }
 
-        public RedisConfig(string connectionString, TimeSpan? defaultExpiry = null)
+        public ZaabeeStackExchangeRedisOptions(string connectionString, IBytesSerializer serializer,
+            TimeSpan? defaultExpiry = null)
         {
             ConnectionString = connectionString;
+            Serializer = serializer;
             DefaultExpiry = defaultExpiry ?? DefaultExpiry;
         }
 
-        public RedisConfig(ConfigurationOptions options, TimeSpan? defaultExpiry = null)
+        public ZaabeeStackExchangeRedisOptions(ConfigurationOptions options, IBytesSerializer serializer,
+            TimeSpan? defaultExpiry = null)
         {
             Options = options;
+            Serializer = serializer;
             DefaultExpiry = defaultExpiry ?? DefaultExpiry;
         }
     }

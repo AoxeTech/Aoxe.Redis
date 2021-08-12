@@ -15,14 +15,8 @@ namespace Zaabee.StackExchangeRedis
         private TimeSpan _defaultExpiry;
         private IBytesSerializer _serializer;
 
-        public ZaabeeRedisClient(RedisConfig config, IBytesSerializer serializer) =>
-            Init(config.Options, config.DefaultExpiry, serializer);
-
-        public ZaabeeRedisClient(string connectionString, TimeSpan defaultExpiry, IBytesSerializer serializer) =>
-            Init(ConfigurationOptions.Parse(connectionString), defaultExpiry, serializer);
-
-        public ZaabeeRedisClient(ConfigurationOptions options, TimeSpan defaultExpiry, IBytesSerializer serializer) =>
-            Init(options, defaultExpiry, serializer);
+        public ZaabeeRedisClient(ZaabeeStackExchangeRedisOptions options) =>
+            Init(options.Options, options.DefaultExpiry, options.Serializer);
 
         private void Init(ConfigurationOptions options, TimeSpan defaultExpiry, IBytesSerializer serializer)
         {
