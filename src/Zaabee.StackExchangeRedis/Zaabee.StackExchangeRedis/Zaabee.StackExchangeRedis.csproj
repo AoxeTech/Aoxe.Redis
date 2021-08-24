@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2021.7.0</PackageVersion>
-        <Version>2021.7.0</Version>
+        <PackageVersion>2021.7.1</PackageVersion>
+        <Version>2021.7.1</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
-        <PackageTags>Zaabee Redis Stackexchange.Redis</PackageTags>
+        <PackageTags>Zaabee;Redis;Stackexchange.Redis</PackageTags>
         <Description>Redis wrappers by StackExchange.Redis</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -16,7 +16,7 @@
 
     <ItemGroup>
       <PackageReference Include="StackExchange.Redis" Version="2.2.62" />
-      <PackageReference Include="Zaabee.Serializer.Abstractions" Version="2021.8.0" />
+      <PackageReference Include="Zaabee.Serializer.Abstractions" Version="2021.8.2" />
       <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2021.1.0" />
     </ItemGroup>
 

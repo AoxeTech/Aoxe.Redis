@@ -7,7 +7,7 @@
         <Version>2021.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
-        <PackageTags>Zaabee Cache Redis</PackageTags>
+        <PackageTags>Zaabee;StackExchangeRedis;Redis;Abstraction</PackageTags>
         <Description>Core abstractions library of Zaabee.StackExchangeRedis</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
