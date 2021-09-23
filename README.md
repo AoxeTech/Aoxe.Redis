@@ -52,7 +52,7 @@ public void ConfigureServices(IServiceCollection services)
                 {
                     ConnectionString = "192.168.78.140:6379,abortConnect=false,syncTimeout=3000"),
                     DefaultExpiry = TimeSpan.FromMinutes(10),
-                    Serializer = new Serializer()
+                    Serializer = new ZaabeeSerializer()
                 });
 }
 ```
