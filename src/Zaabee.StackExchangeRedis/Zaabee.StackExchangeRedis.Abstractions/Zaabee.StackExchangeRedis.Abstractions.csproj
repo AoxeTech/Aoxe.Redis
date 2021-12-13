@@ -3,14 +3,16 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2021.1.0</PackageVersion>
-        <Version>2021.1.0</Version>
+        <PackageVersion>2022.1.0</PackageVersion>
+        <Version>2022.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee;Redis;StackExchange.Redis;Abstraction</PackageTags>
         <Description>Core abstractions library of Zaabee.StackExchangeRedis</Description>
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
 </Project>
