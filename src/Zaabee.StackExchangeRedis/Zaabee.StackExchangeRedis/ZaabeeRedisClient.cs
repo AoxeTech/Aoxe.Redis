@@ -401,7 +401,7 @@ public class ZaabeeRedisClient : IZaabeeRedisClient
     public async Task<T?> HashGetAsync<T>(string key, string entityKey) =>
         await _database.HashGetAsync<T>(key, entityKey);
 
-    public async Task<IList<T>> HashGetAsync<T>(string key) => await _database.HashGetAsync<T>(key);
+    public async Task<IList<T?>> HashGetAsync<T>(string key) => await _database.HashGetAsync<T>(key);
 
     public async Task<IList<T>> HashGetRangeAsync<T>(string key, IEnumerable<string> entityKeys) =>
         await _database.HashGetRangeAsync<T>(key, entityKeys);

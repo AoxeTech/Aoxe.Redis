@@ -127,8 +127,8 @@ public partial class ZaabeeRedisDatabase
         return values.Select(value => (double) value).ToList();
     }
 
-    public async Task<IList<string>> SortedSetRangeByValueAscendingAsync(string key, string min = default,
-        string max = default, long skip = 0,
+    public async Task<IList<string>> SortedSetRangeByValueAscendingAsync(string key, string? min = default,
+        string? max = default, long skip = 0,
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Ascending, skip, take);
@@ -171,8 +171,8 @@ public partial class ZaabeeRedisDatabase
         return values.Select(value => (double) value).ToList();
     }
 
-    public async Task<IList<string>> SortedSetRangeByValueDescendingAsync(string key, string min = default,
-        string max = default, long skip = 0,
+    public async Task<IList<string>> SortedSetRangeByValueDescendingAsync(string key, string? min = default,
+        string? max = default, long skip = 0,
         long take = -1)
     {
         var values =

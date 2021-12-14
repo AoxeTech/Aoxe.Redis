@@ -117,7 +117,7 @@ public partial class ZaabeeRedisDatabase
         return values.Select(value => (double) value).ToList();
     }
 
-    public IList<string> SortedSetRangeByValueAscending(string key, string min = default, string max = default,
+    public IList<string> SortedSetRangeByValueAscending(string key, string? min = default, string? max = default,
         long skip = 0,
         long take = -1)
     {
@@ -156,7 +156,7 @@ public partial class ZaabeeRedisDatabase
         return values.Select(value => (double) value).ToList();
     }
 
-    public IList<string> SortedSetRangeByValueDescending(string key, string min = default, string max = default,
+    public IList<string> SortedSetRangeByValueDescending(string key, string? min = default, string? max = default,
         long skip = 0,
         long take = -1)
     {

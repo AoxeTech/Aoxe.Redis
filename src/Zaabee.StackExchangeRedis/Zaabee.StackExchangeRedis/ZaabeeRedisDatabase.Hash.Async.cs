@@ -27,7 +27,7 @@ public partial class ZaabeeRedisDatabase
         return value.HasValue ? _serializer.FromBytes<T>(value) : default;
     }
 
-    public async Task<IList<T>> HashGetAsync<T>(string key)
+    public async Task<IList<T?>> HashGetAsync<T>(string key)
     {
         var kvs = await _db.HashGetAllAsync(key);
         return kvs.Select(kv => _serializer.FromBytes<T>(kv.Value)).ToList();
