@@ -12,12 +12,13 @@
         <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Redis</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="StackExchange.Redis" Version="2.2.62" />
-      <PackageReference Include="Zaabee.Serializer.Abstractions" Version="2021.10.0" />
-      <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2021.1.0" />
+      <PackageReference Include="StackExchange.Redis" Version="2.2.88" />
+      <PackageReference Include="Zaabee.Serializer.Abstractions" Version="2022.1.0" />
+      <PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2022.1.0" />
     </ItemGroup>
 
 </Project>
