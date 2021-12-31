@@ -6,7 +6,7 @@ public partial class ZaabeeRedisDatabase
 
     public async Task<long> DeleteAllAsync(IEnumerable<string> keys, bool isBatch = false)
     {
-        if (isBatch) await _db.KeyDeleteAsync(keys.Select(x => (RedisKey) x).ToArray());
+        if (isBatch) await _db.KeyDeleteAsync(keys.Select(x => (RedisKey)x).ToArray());
         var result = 0;
         foreach (var key in keys)
             if (await DeleteAsync(key))

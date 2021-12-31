@@ -11,7 +11,7 @@ namespace Zaabee.StackExchangeRedis.TestProject
                 Id = Guid.NewGuid(),
                 Name = "Apple",
                 Age = new Random().Next(),
-                CreateTime = new DateTime(2000,1,1).ToUniversalTime()
+                CreateTime = new DateTime(2000, 1, 1).ToUniversalTime()
             };
         }
     }

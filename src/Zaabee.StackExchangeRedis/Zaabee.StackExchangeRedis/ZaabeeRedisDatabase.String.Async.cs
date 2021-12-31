@@ -42,7 +42,7 @@ public partial class ZaabeeRedisDatabase
         List<T> result;
         if (isBatch)
         {
-            var values = await _db.StringGetAsync(keys.Select(p => (RedisKey) p).ToArray());
+            var values = await _db.StringGetAsync(keys.Select(p => (RedisKey)p).ToArray());
             result = values.Select(value => _serializer.FromBytes<T>(value)).ToList();
         }
         else

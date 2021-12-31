@@ -60,45 +60,45 @@ public partial class ZaabeeRedisDatabase
     public IList<int> SortedSetRangeByValue(string key, int min, int max, long skip, long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (int) value).ToList();
+        return values.Select(value => (int)value).ToList();
     }
 
     public IList<long> SortedSetRangeByValue(string key, long min, long max, long skip, long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (long) value).ToList();
+        return values.Select(value => (long)value).ToList();
     }
 
     public IList<float> SortedSetRangeByValue(string key, float min, float max, long skip, long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (float) value).ToList();
+        return values.Select(value => (float)value).ToList();
     }
 
     public IList<double> SortedSetRangeByValue(string key, double min, double max, long skip, long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (double) value).ToList();
+        return values.Select(value => (double)value).ToList();
     }
 
     public IList<string> SortedSetRangeByValue(string key, string min, string max, long skip, long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (string) value).ToList();
+        return values.Select(value => (string)value).ToList();
     }
 
     public IList<int> SortedSetRangeByValueAscending(string key, int min = default, int max = default,
         long skip = 0, long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Ascending, skip, take);
-        return values.Select(value => (int) value).ToList();
+        return values.Select(value => (int)value).ToList();
     }
 
     public IList<long> SortedSetRangeByValueAscending(string key, long min = default, long max = default,
         long skip = 0, long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Ascending, skip, take);
-        return values.Select(value => (long) value).ToList();
+        return values.Select(value => (long)value).ToList();
     }
 
     public IList<float> SortedSetRangeByValueAscending(string key, float min = default, float max = default,
@@ -106,7 +106,7 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Ascending, skip, take);
-        return values.Select(value => (float) value).ToList();
+        return values.Select(value => (float)value).ToList();
     }
 
     public IList<double> SortedSetRangeByValueAscending(string key, double min = default, double max = default,
@@ -114,7 +114,7 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Ascending, skip, take);
-        return values.Select(value => (double) value).ToList();
+        return values.Select(value => (double)value).ToList();
     }
 
     public IList<string> SortedSetRangeByValueAscending(string key, string? min = default, string? max = default,
@@ -122,14 +122,14 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Ascending, skip, take);
-        return values.Select(value => (string) value).ToList();
+        return values.Select(value => (string)value).ToList();
     }
 
     public IList<int> SortedSetRangeByValueDescending(string key, int min = default, int max = default,
         long skip = 0, long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Descending, skip, take);
-        return values.Select(value => (int) value).ToList();
+        return values.Select(value => (int)value).ToList();
     }
 
     public IList<long> SortedSetRangeByValueDescending(string key, long min = default, long max = default,
@@ -137,7 +137,7 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Descending, skip, take);
-        return values.Select(value => (long) value).ToList();
+        return values.Select(value => (long)value).ToList();
     }
 
     public IList<float> SortedSetRangeByValueDescending(string key, float min = default, float max = default,
@@ -145,7 +145,7 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Descending, skip, take);
-        return values.Select(value => (float) value).ToList();
+        return values.Select(value => (float)value).ToList();
     }
 
     public IList<double> SortedSetRangeByValueDescending(string key, double min = default, double max = default,
@@ -153,7 +153,7 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Descending, skip, take);
-        return values.Select(value => (double) value).ToList();
+        return values.Select(value => (double)value).ToList();
     }
 
     public IList<string> SortedSetRangeByValueDescending(string key, string? min = default, string? max = default,
@@ -161,13 +161,13 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = _db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Descending, skip, take);
-        return values.Select(value => (string) value).ToList();
+        return values.Select(value => (string)value).ToList();
     }
 
     public bool SortedSetRemove<T>(string key, T? member) => _db.SortedSetRemove(key, _serializer.ToBytes(member));
 
     public long SortedSetRemoveRange<T>(string key, IEnumerable<T> members) => _db.SortedSetRemove(key,
-        members.Select(member => (RedisValue) _serializer.ToBytes(member)).ToArray());
+        members.Select(member => (RedisValue)_serializer.ToBytes(member)).ToArray());
 
     public long SortedSetRemoveRangeByScore<T>(string key, double start, double stop) =>
         _db.SortedSetRemoveRangeByScore(key, start, stop);

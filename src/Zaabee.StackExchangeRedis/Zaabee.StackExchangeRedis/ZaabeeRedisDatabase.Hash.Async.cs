@@ -19,7 +19,7 @@ public partial class ZaabeeRedisDatabase
         await _db.HashDeleteAsync(key, entityKey);
 
     public async Task<long> HashDeleteRangeAsync(string key, IEnumerable<string> entityKeys) =>
-        await _db.HashDeleteAsync(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
+        await _db.HashDeleteAsync(key, entityKeys.Select(entityKey => (RedisValue)entityKey).ToArray());
 
     public async Task<T?> HashGetAsync<T>(string key, string entityKey)
     {
@@ -35,7 +35,7 @@ public partial class ZaabeeRedisDatabase
 
     public async Task<IList<T>> HashGetRangeAsync<T>(string key, IEnumerable<string> entityKeys)
     {
-        var values = await _db.HashGetAsync(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
+        var values = await _db.HashGetAsync(key, entityKeys.Select(entityKey => (RedisValue)entityKey).ToArray());
         return values?.Select(value => _serializer.FromBytes<T>(value)).ToList() ?? new List<T>();
     }
 

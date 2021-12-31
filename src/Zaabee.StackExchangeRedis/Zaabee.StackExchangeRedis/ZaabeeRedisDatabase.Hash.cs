@@ -15,7 +15,7 @@ public partial class ZaabeeRedisDatabase
     public bool HashDelete(string key, string entityKey) => _db.HashDelete(key, entityKey);
 
     public long HashDeleteRange(string key, IEnumerable<string> entityKeys) =>
-        _db.HashDelete(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
+        _db.HashDelete(key, entityKeys.Select(entityKey => (RedisValue)entityKey).ToArray());
 
     public T? HashGet<T>(string key, string entityKey)
     {
@@ -31,7 +31,7 @@ public partial class ZaabeeRedisDatabase
 
     public IList<T> HashGetRange<T>(string key, IEnumerable<string> entityKeys)
     {
-        var values = _db.HashGet(key, entityKeys.Select(entityKey => (RedisValue) entityKey).ToArray());
+        var values = _db.HashGet(key, entityKeys.Select(entityKey => (RedisValue)entityKey).ToArray());
         return values?.Select(value => _serializer.FromBytes<T>(value)).ToList() ?? new List<T>();
     }
 

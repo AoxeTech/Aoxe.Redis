@@ -14,10 +14,10 @@ public partial class ZaabeeRedisDatabase
     public T? ListLeftPop<T>(string key) => _serializer.FromBytes<T>(_db.ListLeftPop(key));
 
     public long ListLeftPush<T>(string key, T? value) =>
-        _db.ListLeftPush(key, (RedisValue) _serializer.ToBytes(value));
+        _db.ListLeftPush(key, (RedisValue)_serializer.ToBytes(value));
 
     public long ListLeftPushRange<T>(string key, IEnumerable<T> values) => _db.ListLeftPush(key,
-        values.Select(value => (RedisValue) _serializer.ToBytes(value)).ToArray());
+        values.Select(value => (RedisValue)_serializer.ToBytes(value)).ToArray());
 
     public long ListLength(string key) => _db.ListLength(key);
 
@@ -35,7 +35,7 @@ public partial class ZaabeeRedisDatabase
     public long ListRightPush<T>(string key, T? value) => _db.ListRightPush(key, _serializer.ToBytes(value));
 
     public long ListRightPushRange<T>(string key, IEnumerable<T> values) => _db.ListRightPush(key,
-        values.Select(value => (RedisValue) _serializer.ToBytes(value)).ToArray());
+        values.Select(value => (RedisValue)_serializer.ToBytes(value)).ToArray());
 
     public void ListSetByIndex<T>(string key, long index, T? value) =>
         _db.ListSetByIndex(key, index, _serializer.ToBytes(value));

@@ -19,7 +19,7 @@ public partial class ZaabeeRedisDatabase
 
     public async Task<long> ListLeftPushRangeAsync<T>(string key, IEnumerable<T> values) =>
         await _db.ListLeftPushAsync(key,
-            values.Select(value => (RedisValue) _serializer.ToBytes(value)).ToArray());
+            values.Select(value => (RedisValue)_serializer.ToBytes(value)).ToArray());
 
     public async Task<long> ListLengthAsync(string key) => await _db.ListLengthAsync(key);
 
@@ -43,7 +43,7 @@ public partial class ZaabeeRedisDatabase
 
     public async Task<long> ListRightPushRangeAsync<T>(string key, IEnumerable<T> values) =>
         await _db.ListRightPushAsync(key,
-            values.Select(value => (RedisValue) _serializer.ToBytes(value)).ToArray());
+            values.Select(value => (RedisValue)_serializer.ToBytes(value)).ToArray());
 
     public async Task ListSetByIndexAsync<T>(string key, long index, T? value) =>
         await _db.ListSetByIndexAsync(key, index, _serializer.ToBytes(value));

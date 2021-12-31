@@ -59,7 +59,7 @@ namespace Zaabee.StackExchangeRedis.TestProject
         {
             var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
             for (var i = 0; i < 10; i++)
-                _client.ListLeftPush("ListOprByIndexSync", (TestModel) null);
+                _client.ListLeftPush("ListOprByIndexSync", (TestModel)null);
             for (var i = 0; i < testModels.Count; i++)
                 _client.ListSetByIndex("ListOprByIndexSync", i, testModels[i]);
             for (var i = 0; i < testModels.Count; i++)

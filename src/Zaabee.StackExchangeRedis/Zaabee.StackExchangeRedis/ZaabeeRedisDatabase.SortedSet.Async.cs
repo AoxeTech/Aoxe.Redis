@@ -64,35 +64,35 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (int) value).ToList();
+        return values.Select(value => (int)value).ToList();
     }
 
     public async Task<IList<long>> SortedSetRangeByValueAsync(string key, long min, long max, long skip,
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (long) value).ToList();
+        return values.Select(value => (long)value).ToList();
     }
 
     public async Task<IList<float>> SortedSetRangeByValueAsync(string key, float min, float max, long skip,
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (float) value).ToList();
+        return values.Select(value => (float)value).ToList();
     }
 
     public async Task<IList<double>> SortedSetRangeByValueAsync(string key, double min, double max, long skip,
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (double) value).ToList();
+        return values.Select(value => (double)value).ToList();
     }
 
     public async Task<IList<string>> SortedSetRangeByValueAsync(string key, string min, string max, long skip,
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (string) value).ToList();
+        return values.Select(value => (string)value).ToList();
     }
 
     public async Task<IList<int>> SortedSetRangeByValueAscendingAsync(string key, int min = default,
@@ -100,7 +100,7 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Ascending, skip, take);
-        return values.Select(value => (int) value).ToList();
+        return values.Select(value => (int)value).ToList();
     }
 
     public async Task<IList<long>> SortedSetRangeByValueAscendingAsync(string key, long min = default,
@@ -108,7 +108,7 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Ascending, skip, take);
-        return values.Select(value => (long) value).ToList();
+        return values.Select(value => (long)value).ToList();
     }
 
     public async Task<IList<float>> SortedSetRangeByValueAscendingAsync(string key, float min = default,
@@ -116,7 +116,7 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Ascending, skip, take);
-        return values.Select(value => (float) value).ToList();
+        return values.Select(value => (float)value).ToList();
     }
 
     public async Task<IList<double>> SortedSetRangeByValueAscendingAsync(string key, double min = default,
@@ -124,7 +124,7 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Ascending, skip, take);
-        return values.Select(value => (double) value).ToList();
+        return values.Select(value => (double)value).ToList();
     }
 
     public async Task<IList<string>> SortedSetRangeByValueAscendingAsync(string key, string? min = default,
@@ -132,7 +132,7 @@ public partial class ZaabeeRedisDatabase
         long take = -1)
     {
         var values = await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Ascending, skip, take);
-        return values.Select(value => (string) value).ToList();
+        return values.Select(value => (string)value).ToList();
     }
 
     public async Task<IList<int>> SortedSetRangeByValueDescendingAsync(string key, int min = default,
@@ -141,7 +141,7 @@ public partial class ZaabeeRedisDatabase
     {
         var values =
             await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Descending, skip, take);
-        return values.Select(value => (int) value).ToList();
+        return values.Select(value => (int)value).ToList();
     }
 
     public async Task<IList<long>> SortedSetRangeByValueDescendingAsync(string key, long min = default,
@@ -150,7 +150,7 @@ public partial class ZaabeeRedisDatabase
     {
         var values =
             await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Descending, skip, take);
-        return values.Select(value => (long) value).ToList();
+        return values.Select(value => (long)value).ToList();
     }
 
     public async Task<IList<float>> SortedSetRangeByValueDescendingAsync(string key, float min = default,
@@ -159,7 +159,7 @@ public partial class ZaabeeRedisDatabase
     {
         var values =
             await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Descending, skip, take);
-        return values.Select(value => (float) value).ToList();
+        return values.Select(value => (float)value).ToList();
     }
 
     public async Task<IList<double>> SortedSetRangeByValueDescendingAsync(string key, double min = default,
@@ -168,7 +168,7 @@ public partial class ZaabeeRedisDatabase
     {
         var values =
             await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Descending, skip, take);
-        return values.Select(value => (double) value).ToList();
+        return values.Select(value => (double)value).ToList();
     }
 
     public async Task<IList<string>> SortedSetRangeByValueDescendingAsync(string key, string? min = default,
@@ -177,7 +177,7 @@ public partial class ZaabeeRedisDatabase
     {
         var values =
             await _db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, Order.Descending, skip, take);
-        return values.Select(value => (string) value).ToList();
+        return values.Select(value => (string)value).ToList();
     }
 
     public async Task<bool> SortedSetRemoveAsync<T>(string key, T? member) =>
@@ -185,7 +185,7 @@ public partial class ZaabeeRedisDatabase
 
     public async Task<long> SortedSetRemoveRangeAsync<T>(string key, IEnumerable<T> members) =>
         await _db.SortedSetRemoveAsync(key,
-            members.Select(member => (RedisValue) _serializer.ToBytes(member)).ToArray());
+            members.Select(member => (RedisValue)_serializer.ToBytes(member)).ToArray());
 
     public async Task<long> SortedSetRemoveRangeByScoreAsync<T>(string key, double start, double stop) =>
         await _db.SortedSetRemoveRangeByScoreAsync(key, start, stop);

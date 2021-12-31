@@ -41,7 +41,7 @@ public partial class ZaabeeRedisDatabase
         List<T> result;
         if (isBatch)
         {
-            var values = _db.StringGet(keys.Select(p => (RedisKey) p).ToArray());
+            var values = _db.StringGet(keys.Select(p => (RedisKey)p).ToArray());
             result = values.Select(value => _serializer.FromBytes<T>(value)).ToList();
         }
         else

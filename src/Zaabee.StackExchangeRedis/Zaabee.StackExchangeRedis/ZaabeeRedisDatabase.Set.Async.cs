@@ -6,7 +6,7 @@ public partial class ZaabeeRedisDatabase
         await _db.SetAddAsync(key, _serializer.ToBytes(value));
 
     public async Task<long> SetAddRangeAsync<T>(string key, IEnumerable<T> values) => await _db.SetAddAsync(key,
-        values.Select(value => (RedisValue) _serializer.ToBytes(value)).ToArray());
+        values.Select(value => (RedisValue)_serializer.ToBytes(value)).ToArray());
 
     public async Task<IList<T>> SetCombineUnionAsync<T>(string firstKey, string secondKey)
     {
@@ -16,7 +16,7 @@ public partial class ZaabeeRedisDatabase
 
     public async Task<IList<T>> SetCombineUnionAsync<T>(IEnumerable<string> keys)
     {
-        var values = await _db.SetCombineAsync(SetOperation.Union, keys.Select(key => (RedisKey) key).ToArray());
+        var values = await _db.SetCombineAsync(SetOperation.Union, keys.Select(key => (RedisKey)key).ToArray());
         return values.Select(value => value.HasValue ? _serializer.FromBytes<T>(value) : default).ToList();
     }
 
@@ -29,7 +29,7 @@ public partial class ZaabeeRedisDatabase
     public async Task<IList<T>> SetCombineIntersectAsync<T>(IEnumerable<string> keys)
     {
         var values =
-            await _db.SetCombineAsync(SetOperation.Intersect, keys.Select(key => (RedisKey) key).ToArray());
+            await _db.SetCombineAsync(SetOperation.Intersect, keys.Select(key => (RedisKey)key).ToArray());
         return values.Select(value => value.HasValue ? _serializer.FromBytes<T>(value) : default).ToList();
     }
 
@@ -42,7 +42,7 @@ public partial class ZaabeeRedisDatabase
     public async Task<IList<T>> SetCombineDifferenceAsync<T>(IEnumerable<string> keys)
     {
         var values =
-            await _db.SetCombineAsync(SetOperation.Difference, keys.Select(key => (RedisKey) key).ToArray());
+            await _db.SetCombineAsync(SetOperation.Difference, keys.Select(key => (RedisKey)key).ToArray());
         return values.Select(value => value.HasValue ? _serializer.FromBytes<T>(value) : default).ToList();
     }
 
@@ -52,7 +52,7 @@ public partial class ZaabeeRedisDatabase
 
     public async Task<long> SetCombineAndStoreUnionAsync<T>(string destination, IEnumerable<string> keys) =>
         await _db.SetCombineAndStoreAsync(SetOperation.Union, destination,
-            keys.Select(key => (RedisKey) key).ToArray());
+            keys.Select(key => (RedisKey)key).ToArray());
 
     public async Task<long> SetCombineAndStoreIntersectAsync<T>(string destination, string firstKey,
         string secondKey) =>
@@ -60,7 +60,7 @@ public partial class ZaabeeRedisDatabase
 
     public async Task<long> SetCombineAndStoreIntersectAsync<T>(string destination, IEnumerable<string> keys) =>
         await _db.SetCombineAndStoreAsync(SetOperation.Intersect, destination,
-            keys.Select(key => (RedisKey) key).ToArray());
+            keys.Select(key => (RedisKey)key).ToArray());
 
     public async Task<long> SetCombineAndStoreDifferenceAsync<T>(string destination, string firstKey,
         string secondKey) =>
@@ -68,7 +68,7 @@ public partial class ZaabeeRedisDatabase
 
     public async Task<long> SetCombineAndStoreDifferenceAsync<T>(string destination, IEnumerable<string> keys) =>
         await _db.SetCombineAndStoreAsync(SetOperation.Difference, destination,
-            keys.Select(key => (RedisKey) key).ToArray());
+            keys.Select(key => (RedisKey)key).ToArray());
 
     public async Task<bool> SetContainsAsync<T>(string key, T? value) =>
         await _db.SetContainsAsync(key, _serializer.ToBytes(value));
@@ -110,10 +110,10 @@ public partial class ZaabeeRedisDatabase
     }
 
     public async Task<bool> SetRemoveAsync<T>(string key, T? value) =>
-        await _db.SetRemoveAsync(key, (RedisValue) _serializer.ToBytes(value));
+        await _db.SetRemoveAsync(key, (RedisValue)_serializer.ToBytes(value));
 
     public async Task<long> SetRemoveRangeAsync<T>(string key, IEnumerable<T> values) =>
-        await _db.SetRemoveAsync(key, values.Select(value => (RedisValue) _serializer.ToBytes(value)).ToArray());
+        await _db.SetRemoveAsync(key, values.Select(value => (RedisValue)_serializer.ToBytes(value)).ToArray());
 
     public async Task<IList<T>> SetScanAsync<T>(string key, T? pattern = default, int pageSize = 10,
         long cursor = 0, int pageOffset = 0)
