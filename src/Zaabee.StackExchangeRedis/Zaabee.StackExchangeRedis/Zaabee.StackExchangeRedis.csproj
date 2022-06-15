@@ -2,8 +2,8 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageVersion>2022.4.8</PackageVersion>
-		<Version>2022.4.8</Version>
+		<PackageVersion>2022.4.8.2</PackageVersion>
+		<Version>2022.4.8.2</Version>
 		<Authors>Mutuduxf</Authors>
 		<Company>Mutuduxf</Company>
 		<PackageTags>Zaabee;Redis;StackExchange.Redis</PackageTags>
@@ -14,7 +14,7 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="StackExchange.Redis" Version="2.5.61"/>
+		<PackageReference Include="StackExchange.Redis" Version="2.6.45"/>
 		<PackageReference Include="Zaabee.Serializer.Abstractions" Version="2022.14.0"/>
 		<PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2022.2.0"/>
 	</ItemGroup>
