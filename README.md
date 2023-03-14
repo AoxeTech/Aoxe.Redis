@@ -17,23 +17,23 @@ Install-Package Zaabee.NewtonsoftJson
 
 ### Build Project
 
-Create an asp.net core project and import references in startup.cs. Get [Zaabee.StackExchangeRedis](https://github.com/PicoHex/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis) and [Zaabee.NewtonsoftJson](https://github.com/PicoHex/Zaabee.Serializers/tree/master/src/Zaabee.NewtonsoftJson) from Nuget,otherwise we have other serializers:
+Create an asp.net core project and import references in startup.cs. Get [Zaabee.StackExchangeRedis](https://github.com/PicoHex/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis) and [Zaabee.NewtonsoftJson](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.NewtonsoftJson) from Nuget,otherwise we have other serializers:
 
-[Zaabee.Binary](https://github.com/PicoHex/Zaabee.Serializers/tree/master/src/Zaabee.Binary)
+[Zaabee.Binary](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.Binary)
 
-[Zaabee.Jil](https://github.com/PicoHex/Zaabee.Serializers/tree/master/src/Zaabee.Jil)
+[Zaabee.Jil](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.Jil)
 
-[Zaabee.MsgPack](https://github.com/PicoHex/Zaabee.Serializers/tree/master/src/Zaabee.MsgPack)
+[Zaabee.MsgPack](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.MsgPack)
 
-[Zaabee.Protobuf](https://github.com/PicoHex/Zaabee.Serializers/tree/master/src/Zaabee.Protobuf)
+[Zaabee.Protobuf](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.Protobuf)
 
-[Zaabee.SystemTextJson](https://github.com/PicoHex/Zaabee.Serializers/tree/master/src/Zaabee.SystemTextJson)
+[Zaabee.SystemTextJson](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.SystemTextJson)
 
-[Zaabee.Utf8Json](https://github.com/PicoHex/Zaabee.Serializers/tree/master/src/Zaabee.Utf8Json)
+[Zaabee.Utf8Json](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.Utf8Json)
 
-[Zaabee.Xml](https://github.com/PicoHex/Zaabee.Serializers/tree/master/src/Zaabee.Xml)
+[Zaabee.Xml](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.Xml)
 
-[Zaabee.ZeroFormatter](https://github.com/PicoHex/Zaabee.Serializers/tree/master/src/Zaabee.ZeroFormatter)
+[Zaabee.ZeroFormatter](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.ZeroFormatter)
 
 ```CSharp
 using Zaabee.StackExchangeRedis;
