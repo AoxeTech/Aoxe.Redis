@@ -18,7 +18,7 @@
 		<PackageReference Include="Zaabee.MsgPack" Version="2023.2.0" />
 		<PackageReference Include="Zaabee.MessagePack" Version="2023.2.0" />
 		<PackageReference Include="Zaabee.NewtonsoftJson" Version="2023.2.0" />
-		<PackageReference Include="Zaabee.Protobuf" Version="2023.2.0" />
+		<PackageReference Include="Zaabee.Protobuf" Version="2023.2.1" />
 		<PackageReference Include="Zaabee.SystemTextJson" Version="2023.2.0" />
 		<PackageReference Include="Zaabee.Utf8Json" Version="2023.2.0" />
 		<PackageReference Include="Zaabee.Xml" Version="2023.2.0" />
