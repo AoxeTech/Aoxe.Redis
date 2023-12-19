@@ -9,23 +9,23 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
-		<PackageReference Include="xunit" Version="2.5.0" />
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.0">
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+		<PackageReference Include="xunit" Version="2.6.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.5">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Zaabee.Binary" Version="2023.4.1" />
-		<PackageReference Include="Zaabee.DataContractSerializer" Version="2023.6.0" />
-		<PackageReference Include="Zaabee.Jil" Version="2023.6.0" />
-		<PackageReference Include="Zaabee.MsgPack" Version="2023.6.0" />
-		<PackageReference Include="Zaabee.MessagePack" Version="2023.6.0" />
-		<PackageReference Include="Zaabee.NewtonsoftJson" Version="2023.6.0" />
-		<PackageReference Include="Zaabee.Protobuf" Version="2023.6.0" />
-		<PackageReference Include="Zaabee.SystemTextJson" Version="2023.6.0" />
-		<PackageReference Include="Zaabee.Utf8Json" Version="2023.6.0" />
-		<PackageReference Include="Zaabee.Xml" Version="2023.6.0" />
-		<PackageReference Include="Zaabee.ZeroFormatter" Version="2023.6.0" />
+		<PackageReference Include="Zaabee.DataContractSerializer" Version="2023.6.10" />
+		<PackageReference Include="Zaabee.Jil" Version="2023.6.10" />
+		<PackageReference Include="Zaabee.MsgPack" Version="2023.6.10" />
+		<PackageReference Include="Zaabee.MessagePack" Version="2023.6.10" />
+		<PackageReference Include="Zaabee.NewtonsoftJson" Version="2023.6.10" />
+		<PackageReference Include="Zaabee.Protobuf" Version="2023.6.10" />
+		<PackageReference Include="Zaabee.SystemTextJson" Version="2023.6.11" />
+		<PackageReference Include="Zaabee.Utf8Json" Version="2023.6.10" />
+		<PackageReference Include="Zaabee.Xml" Version="2023.6.10" />
+		<PackageReference Include="Zaabee.ZeroFormatter" Version="2023.6.10" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis\Zaabee.StackExchangeRedis.csproj" />

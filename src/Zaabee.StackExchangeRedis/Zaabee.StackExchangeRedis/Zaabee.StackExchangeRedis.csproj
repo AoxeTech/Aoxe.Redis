@@ -16,9 +16,12 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="StackExchange.Redis" Version="2.6.122" />
+		<PackageReference Include="StackExchange.Redis" Version="2.7.10" />
 		<PackageReference Include="Zaabee.Serializer.Abstractions" Version="2023.5.0" />
-		<PackageReference Include="Zaabee.StackExchangeRedis.Abstractions" Version="2023.1.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\Zaabee.StackExchangeRedis.Abstractions\Zaabee.StackExchangeRedis.Abstractions.csproj" />
 	</ItemGroup>
 	
 </Project>

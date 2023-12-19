@@ -2,94 +2,193 @@ namespace Zaabee.StackExchangeRedis.Abstractions;
 
 public partial interface IZaabeeRedisDatabase
 {
-    Task<bool> SortedSetAddAsync<T>(string key, T? member, double score);
+    ValueTask<bool> SortedSetAddAsync<T>(string key, T? member, double score);
 
-    Task<long> SortedSetAddAsync<T>(string key, IDictionary<T, double> values);
+    ValueTask<long> SortedSetAddAsync<T>(string key, IDictionary<T, double> values);
 
-    Task<double> SortedSetDecrementAsync<T>(string key, T? member, double value);
+    ValueTask<double> SortedSetDecrementAsync<T>(string key, T? member, double value);
 
-    Task<double> SortedSetIncrementAsync<T>(string key, T? member, double value);
+    ValueTask<double> SortedSetIncrementAsync<T>(string key, T? member, double value);
 
-    Task<long> SortedSetLengthAsync<T>(string key);
+    ValueTask<long> SortedSetLengthAsync<T>(string key);
 
-    Task<long> SortedSetLengthByValueAsync(string key, int min, int max);
+    ValueTask<long> SortedSetLengthByValueAsync(string key, int min, int max);
 
-    Task<long> SortedSetLengthByValueAsync(string key, long min, long max);
+    ValueTask<long> SortedSetLengthByValueAsync(string key, long min, long max);
 
-    Task<long> SortedSetLengthByValueAsync(string key, float min, float max);
+    ValueTask<long> SortedSetLengthByValueAsync(string key, float min, float max);
 
-    Task<long> SortedSetLengthByValueAsync(string key, double min, double max);
+    ValueTask<long> SortedSetLengthByValueAsync(string key, double min, double max);
 
-    Task<long> SortedSetLengthByValueAsync(string key, string min, string max);
+    ValueTask<long> SortedSetLengthByValueAsync(string key, string min, string max);
 
-    Task<IList<T>> SortedSetRangeByScoreAscendingAsync<T>(string key, double start = 0, double stop = -1);
+    ValueTask<List<T>> SortedSetRangeByScoreAscendingAsync<T>(
+        string key,
+        double start = 0,
+        double stop = -1
+    );
 
-    Task<IList<T>> SortedSetRangeByScoreDescendingAsync<T>(string key, double start = 0, double stop = -1);
+    ValueTask<List<T>> SortedSetRangeByScoreDescendingAsync<T>(
+        string key,
+        double start = 0,
+        double stop = -1
+    );
 
-    Task<IDictionary<T, double>> SortedSetRangeByScoreWithScoresAscendingAsync<T>(string key, long start = 0,
-        long stop = -1);
+    ValueTask<IDictionary<T, double>> SortedSetRangeByScoreWithScoresAscendingAsync<T>(
+        string key,
+        long start = 0,
+        long stop = -1
+    );
 
-    Task<IDictionary<T, double>> SortedSetRangeByScoreWithScoresDescendingAsync<T>(string key, double start = 0,
-        double stop = -1);
+    ValueTask<IDictionary<T, double>> SortedSetRangeByScoreWithScoresDescendingAsync<T>(
+        string key,
+        double start = 0,
+        double stop = -1
+    );
 
-    Task<IList<int>> SortedSetRangeByValueAsync(string key, int min, int max, long skip, long take = -1);
+    ValueTask<List<int>> SortedSetRangeByValueAsync(
+        string key,
+        int min,
+        int max,
+        long skip,
+        long take = -1
+    );
 
-    Task<IList<long>> SortedSetRangeByValueAsync(string key, long min, long max, long skip, long take = -1);
+    ValueTask<List<long>> SortedSetRangeByValueAsync(
+        string key,
+        long min,
+        long max,
+        long skip,
+        long take = -1
+    );
 
-    Task<IList<float>> SortedSetRangeByValueAsync(string key, float min, float max, long skip, long take = -1);
+    ValueTask<List<float>> SortedSetRangeByValueAsync(
+        string key,
+        float min,
+        float max,
+        long skip,
+        long take = -1
+    );
 
-    Task<IList<double>> SortedSetRangeByValueAsync(string key, double min, double max, long skip, long take = -1);
+    ValueTask<List<double>> SortedSetRangeByValueAsync(
+        string key,
+        double min,
+        double max,
+        long skip,
+        long take = -1
+    );
 
-    Task<IList<string>> SortedSetRangeByValueAsync(string key, string min, string max, long skip, long take = -1);
+    ValueTask<List<string>> SortedSetRangeByValueAsync(
+        string key,
+        string min,
+        string max,
+        long skip,
+        long take = -1
+    );
 
-    Task<IList<int>> SortedSetRangeByValueAscendingAsync(string key, int min = default, int max = default,
-        long skip = 0, long take = -1);
+    ValueTask<List<int>> SortedSetRangeByValueAscendingAsync(
+        string key,
+        int min = default,
+        int max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    Task<IList<long>> SortedSetRangeByValueAscendingAsync(string key, long min = default, long max = default,
-        long skip = 0, long take = -1);
+    ValueTask<List<long>> SortedSetRangeByValueAscendingAsync(
+        string key,
+        long min = default,
+        long max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    Task<IList<float>> SortedSetRangeByValueAscendingAsync(string key, float min = default, float max = default,
-        long skip = 0, long take = -1);
+    ValueTask<List<float>> SortedSetRangeByValueAscendingAsync(
+        string key,
+        float min = default,
+        float max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    Task<IList<double>> SortedSetRangeByValueAscendingAsync(string key, double min = default, double max = default,
-        long skip = 0, long take = -1);
+    ValueTask<List<double>> SortedSetRangeByValueAscendingAsync(
+        string key,
+        double min = default,
+        double max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    Task<IList<string>> SortedSetRangeByValueAscendingAsync(string key, string? min = default, string? max = default,
-        long skip = 0, long take = -1);
+    ValueTask<List<string>> SortedSetRangeByValueAscendingAsync(
+        string key,
+        string? min = default,
+        string? max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    Task<IList<int>> SortedSetRangeByValueDescendingAsync(string key, int min = default, int max = default,
-        long skip = 0, long take = -1);
+    ValueTask<List<int>> SortedSetRangeByValueDescendingAsync(
+        string key,
+        int min = default,
+        int max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    Task<IList<long>> SortedSetRangeByValueDescendingAsync(string key, long min = default, long max = default,
-        long skip = 0, long take = -1);
+    ValueTask<List<long>> SortedSetRangeByValueDescendingAsync(
+        string key,
+        long min = default,
+        long max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    Task<IList<float>> SortedSetRangeByValueDescendingAsync(string key, float min = default, float max = default,
-        long skip = 0, long take = -1);
+    ValueTask<List<float>> SortedSetRangeByValueDescendingAsync(
+        string key,
+        float min = default,
+        float max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    Task<IList<double>> SortedSetRangeByValueDescendingAsync(string key, double min = default, double max = default,
-        long skip = 0, long take = -1);
+    ValueTask<List<double>> SortedSetRangeByValueDescendingAsync(
+        string key,
+        double min = default,
+        double max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    Task<IList<string>> SortedSetRangeByValueDescendingAsync(string key, string? min = default, string? max = default,
-        long skip = 0, long take = -1);
+    ValueTask<List<string>> SortedSetRangeByValueDescendingAsync(
+        string key,
+        string? min = default,
+        string? max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    Task<bool> SortedSetRemoveAsync<T>(string key, T? member);
+    ValueTask<bool> SortedSetRemoveAsync<T>(string key, T? member);
 
-    Task<long> SortedSetRemoveRangeAsync<T>(string key, IEnumerable<T> members);
+    ValueTask<long> SortedSetRemoveRangeAsync<T>(string key, IEnumerable<T> members);
 
-    Task<long> SortedSetRemoveRangeByScoreAsync<T>(string key, double start, double stop);
+    ValueTask<long> SortedSetRemoveRangeByScoreAsync<T>(string key, double start, double stop);
 
-    Task<long> SortedSetRemoveRangeByValueAsync(string key, int min, int max);
+    ValueTask<long> SortedSetRemoveRangeByValueAsync(string key, int min, int max);
 
-    Task<long> SortedSetRemoveRangeByValueAsync(string key, long min, long max);
+    ValueTask<long> SortedSetRemoveRangeByValueAsync(string key, long min, long max);
 
-    Task<long> SortedSetRemoveRangeByValueAsync(string key, float min, float max);
+    ValueTask<long> SortedSetRemoveRangeByValueAsync(string key, float min, float max);
 
-    Task<long> SortedSetRemoveRangeByValueAsync(string key, double min, double max);
+    ValueTask<long> SortedSetRemoveRangeByValueAsync(string key, double min, double max);
 
-    Task<long> SortedSetRemoveRangeByValueAsync(string key, string min, string max);
+    ValueTask<long> SortedSetRemoveRangeByValueAsync(string key, string min, string max);
 
-    Task<IDictionary<T, double>> SortedSetScanAsync<T>(string key, T? pattern = default, int pageSize = 10,
-        long cursor = 0, int pageOffset = 0);
+    ValueTask<IDictionary<T, double>> SortedSetScanAsync<T>(
+        string key,
+        T? pattern = default,
+        int pageSize = 10,
+        long cursor = 0,
+        int pageOffset = 0
+    );
 
-    Task<double?> SortedSetScoreAsync<T>(string key, T? member);
+    ValueTask<double?> SortedSetScoreAsync<T>(string key, T? member);
 }

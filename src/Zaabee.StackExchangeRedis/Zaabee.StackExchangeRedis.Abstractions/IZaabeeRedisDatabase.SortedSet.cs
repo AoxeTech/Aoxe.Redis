@@ -22,55 +22,123 @@ public partial interface IZaabeeRedisDatabase
 
     long SortedSetLengthByValue(string key, string min, string max);
 
-    IList<T> SortedSetRangeByScoreAscending<T>(string key, double start = 0, double stop = -1);
+    List<T> SortedSetRangeByScoreAscending<T>(string key, double start = 0, double stop = -1);
 
-    IList<T> SortedSetRangeByScoreDescending<T>(string key, double start = 0, double stop = -1);
+    List<T> SortedSetRangeByScoreDescending<T>(string key, double start = 0, double stop = -1);
 
-    IDictionary<T, double> SortedSetRangeByScoreWithScoresAscending<T>(string key, double start = 0,
-        double stop = -1);
+    IDictionary<T, double> SortedSetRangeByScoreWithScoresAscending<T>(
+        string key,
+        double start = 0,
+        double stop = -1
+    );
 
-    IDictionary<T, double> SortedSetRangeByScoreWithScoresDescending<T>(string key, double start = 0,
-        double stop = -1);
+    IDictionary<T, double> SortedSetRangeByScoreWithScoresDescending<T>(
+        string key,
+        double start = 0,
+        double stop = -1
+    );
 
-    IList<int> SortedSetRangeByValue(string key, int min, int max, long skip, long take = -1);
+    List<int> SortedSetRangeByValue(string key, int min, int max, long skip, long take = -1);
 
-    IList<long> SortedSetRangeByValue(string key, long min, long max, long skip, long take = -1);
+    List<long> SortedSetRangeByValue(string key, long min, long max, long skip, long take = -1);
 
-    IList<float> SortedSetRangeByValue(string key, float min, float max, long skip, long take = -1);
+    List<float> SortedSetRangeByValue(string key, float min, float max, long skip, long take = -1);
 
-    IList<double> SortedSetRangeByValue(string key, double min, double max, long skip, long take = -1);
+    List<double> SortedSetRangeByValue(
+        string key,
+        double min,
+        double max,
+        long skip,
+        long take = -1
+    );
 
-    IList<string> SortedSetRangeByValue(string key, string min, string max, long skip, long take = -1);
+    List<string> SortedSetRangeByValue(
+        string key,
+        string min,
+        string max,
+        long skip,
+        long take = -1
+    );
 
-    IList<int> SortedSetRangeByValueAscending(string key, int min = default, int max = default, long skip = 0,
-        long take = -1);
+    List<int> SortedSetRangeByValueAscending(
+        string key,
+        int min = default,
+        int max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    IList<long> SortedSetRangeByValueAscending(string key, long min = default, long max = default, long skip = 0,
-        long take = -1);
+    List<long> SortedSetRangeByValueAscending(
+        string key,
+        long min = default,
+        long max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    IList<float> SortedSetRangeByValueAscending(string key, float min = default, float max = default, long skip = 0,
-        long take = -1);
+    List<float> SortedSetRangeByValueAscending(
+        string key,
+        float min = default,
+        float max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    IList<double> SortedSetRangeByValueAscending(string key, double min = default, double max = default,
-        long skip = 0, long take = -1);
+    List<double> SortedSetRangeByValueAscending(
+        string key,
+        double min = default,
+        double max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    IList<string> SortedSetRangeByValueAscending(string key, string? min = default, string? max = default,
-        long skip = 0, long take = -1);
+    List<string> SortedSetRangeByValueAscending(
+        string key,
+        string? min = default,
+        string? max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    IList<int> SortedSetRangeByValueDescending(string key, int min = default, int max = default, long skip = 0,
-        long take = -1);
+    List<int> SortedSetRangeByValueDescending(
+        string key,
+        int min = default,
+        int max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    IList<long> SortedSetRangeByValueDescending(string key, long min = default, long max = default, long skip = 0,
-        long take = -1);
+    List<long> SortedSetRangeByValueDescending(
+        string key,
+        long min = default,
+        long max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    IList<float> SortedSetRangeByValueDescending(string key, float min = default, float max = default,
-        long skip = 0, long take = -1);
+    List<float> SortedSetRangeByValueDescending(
+        string key,
+        float min = default,
+        float max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    IList<double> SortedSetRangeByValueDescending(string key, double min = default, double max = default,
-        long skip = 0, long take = -1);
+    List<double> SortedSetRangeByValueDescending(
+        string key,
+        double min = default,
+        double max = default,
+        long skip = 0,
+        long take = -1
+    );
 
-    IList<string> SortedSetRangeByValueDescending(string key, string? min = default, string? max = default,
-        long skip = 0, long take = -1);
+    List<string> SortedSetRangeByValueDescending(
+        string key,
+        string? min = default,
+        string? max = default,
+        long skip = 0,
+        long take = -1
+    );
 
     bool SortedSetRemove<T>(string key, T? member);
 
@@ -88,8 +156,13 @@ public partial interface IZaabeeRedisDatabase
 
     long SortedSetRemoveRangeByValue(string key, string min, string max);
 
-    IDictionary<T, double> SortedSetScan<T>(string key, T? pattern = default, int pageSize = 10,
-        long cursor = 0, int pageOffset = 0);
+    IDictionary<T, double> SortedSetScan<T>(
+        string key,
+        T? pattern = default,
+        int pageSize = 10,
+        long cursor = 0,
+        int pageOffset = 0
+    );
 
     double? SortedSetScore<T>(string key, T? member);
 }

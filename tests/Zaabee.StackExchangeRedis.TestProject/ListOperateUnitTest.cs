@@ -7,29 +7,53 @@ public class ListOperateUnitTest
     [Fact]
     public void ListSync()
     {
-        var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
+        var testModels = Enumerable
+            .Range(0, 10)
+            .Select(p => TestModelFactory.CreateTestModel())
+            .ToList();
         Assert.Equal(testModels.Count, _client.ListLeftPushRange("ListSync", testModels));
         Assert.Equal(testModels.Count, _client.ListLength("ListSync"));
         for (var i = 0; i < testModels.Count; i++)
-            Assert.Equal(testModels[i],
-                _client.ListGetByIndex<TestModel>("ListSync", testModels.Count - 1 - i));
+            Assert.Equal(
+                testModels[i],
+                _client.ListGetByIndex<TestModel>("ListSync", testModels.Count - 1 - i)
+            );
 
-        var testLeftModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
-        Assert.Equal(testLeftModels.Count + testModels.Count, _client.ListLeftPushRange("ListSync", testLeftModels));
+        var testLeftModels = Enumerable
+            .Range(0, 10)
+            .Select(p => TestModelFactory.CreateTestModel())
+            .ToList();
+        Assert.Equal(
+            testLeftModels.Count + testModels.Count,
+            _client.ListLeftPushRange("ListSync", testLeftModels)
+        );
         Assert.Equal(testLeftModels.Count + testModels.Count, _client.ListLength("ListSync"));
         for (var i = 0; i < testLeftModels.Count; i++)
-            Assert.Equal(testLeftModels[i],
-                _client.ListGetByIndex<TestModel>("ListSync", testLeftModels.Count - 1 - i));
+            Assert.Equal(
+                testLeftModels[i],
+                _client.ListGetByIndex<TestModel>("ListSync", testLeftModels.Count - 1 - i)
+            );
 
-        var testRightModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
-        Assert.Equal(testLeftModels.Count + testModels.Count + testRightModels.Count,
-            _client.ListRightPushRange("ListSync", testRightModels));
-        Assert.Equal(testLeftModels.Count + testModels.Count + testRightModels.Count,
-            _client.ListLength("ListSync"));
+        var testRightModels = Enumerable
+            .Range(0, 10)
+            .Select(p => TestModelFactory.CreateTestModel())
+            .ToList();
+        Assert.Equal(
+            testLeftModels.Count + testModels.Count + testRightModels.Count,
+            _client.ListRightPushRange("ListSync", testRightModels)
+        );
+        Assert.Equal(
+            testLeftModels.Count + testModels.Count + testRightModels.Count,
+            _client.ListLength("ListSync")
+        );
         for (var i = 0; i < testRightModels.Count; i++)
-            Assert.Equal(testRightModels[i],
-                _client.ListGetByIndex<TestModel>("ListSync",
-                    testLeftModels.Count + testModels.Count + i));
+            Assert.Equal(
+                testRightModels[i],
+                _client.ListGetByIndex<TestModel>(
+                    "ListSync",
+                    testLeftModels.Count + testModels.Count + i
+                )
+            );
 
         _client.Delete("ListSync");
     }
@@ -37,15 +61,20 @@ public class ListOperateUnitTest
     [Fact]
     public void ListPushPopSync()
     {
-        var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
+        var testModels = Enumerable
+            .Range(0, 10)
+            .Select(p => TestModelFactory.CreateTestModel())
+            .ToList();
 
         _client.ListLeftPushRange("ListPushPopSync", testModels);
-        testModels.ForEach(testModel =>
-            Assert.Equal(testModel, _client.ListRightPop<TestModel>("ListPushPopSync")));
+        testModels.ForEach(
+            testModel => Assert.Equal(testModel, _client.ListRightPop<TestModel>("ListPushPopSync"))
+        );
 
         _client.ListRightPushRange("ListPushPopSync", testModels);
-        testModels.ForEach(testModel =>
-            Assert.Equal(testModel, _client.ListLeftPop<TestModel>("ListPushPopSync")));
+        testModels.ForEach(
+            testModel => Assert.Equal(testModel, _client.ListLeftPop<TestModel>("ListPushPopSync"))
+        );
 
         _client.Delete("ListPushPopSync");
     }
@@ -53,7 +82,10 @@ public class ListOperateUnitTest
     [Fact]
     public void ListOprByIndexSync()
     {
-        var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
+        var testModels = Enumerable
+            .Range(0, 10)
+            .Select(p => TestModelFactory.CreateTestModel())
+            .ToList();
         for (var i = 0; i < 10; i++)
             _client.ListLeftPush("ListOprByIndexSync", (TestModel)null);
         for (var i = 0; i < testModels.Count; i++)
@@ -84,8 +116,14 @@ public class ListOperateUnitTest
     [Fact]
     public void ListRangeTrimSync()
     {
-        var testModelsA = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
-        var testModelsB = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
+        var testModelsA = Enumerable
+            .Range(0, 10)
+            .Select(p => TestModelFactory.CreateTestModel())
+            .ToList();
+        var testModelsB = Enumerable
+            .Range(0, 10)
+            .Select(p => TestModelFactory.CreateTestModel())
+            .ToList();
 
         _client.ListRightPushRange("ListRangeTrimSyncA", testModelsA);
         _client.ListRightPushRange("ListRangeTrimSyncB", testModelsB);

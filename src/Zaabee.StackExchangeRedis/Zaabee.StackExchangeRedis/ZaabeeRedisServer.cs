@@ -17,9 +17,10 @@ public class ZaabeeRedisServer : IZaabeeRedisServer
 
     public void FlushAllDatabases() => _server.FlushAllDatabases();
 
-    public async Task FlushAllDatabasesAsync() => await _server.FlushAllDatabasesAsync();
+    public async ValueTask FlushAllDatabasesAsync() => await _server.FlushAllDatabasesAsync();
 
     public void FlushDatabase(int database = 0) => _server.FlushDatabase(database);
 
-    public async Task FlushDatabaseAsync(int database = 0) => await _server.FlushDatabaseAsync(database);
+    public async ValueTask FlushDatabaseAsync(int database = 0) =>
+        await _server.FlushDatabaseAsync(database);
 }

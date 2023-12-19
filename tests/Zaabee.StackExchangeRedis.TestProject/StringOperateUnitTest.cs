@@ -17,11 +17,19 @@ public class StringOperateUnitTest
     [Fact]
     public void StringBatchSync()
     {
-        var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
+        var testModels = Enumerable
+            .Range(0, 10)
+            .Select(p => TestModelFactory.CreateTestModel())
+            .ToList();
         _client.AddRange(testModels.ToDictionary(k => k.Id.ToString(), v => v));
-        var results = _client.Get<TestModel>(testModels.Select(model => model.Id.ToString()).ToList());
+        var results = _client.Get<TestModel>(
+            testModels.Select(model => model.Id.ToString()).ToList()
+        );
         Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
-        Assert.Equal(results.Count, _client.DeleteAll(results.Select(result => result.Id.ToString()).ToList()));
+        Assert.Equal(
+            results.Count,
+            _client.DeleteAll(results.Select(result => result.Id.ToString()).ToList())
+        );
     }
 
     [Fact]
@@ -37,11 +45,18 @@ public class StringOperateUnitTest
     [Fact]
     public async void StringBatchAsync()
     {
-        var testModels = Enumerable.Range(0, 10).Select(p => TestModelFactory.CreateTestModel()).ToList();
+        var testModels = Enumerable
+            .Range(0, 10)
+            .Select(p => TestModelFactory.CreateTestModel())
+            .ToList();
         await _client.AddRangeAsync(testModels.ToDictionary(k => k.Id.ToString(), v => v));
-        var results = await _client.GetAsync<TestModel>(testModels.Select(model => model.Id.ToString()).ToList());
+        var results = await _client.GetAsync<TestModel>(
+            testModels.Select(model => model.Id.ToString()).ToList()
+        );
         Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
-        Assert.Equal(results.Count,
-            await _client.DeleteAllAsync(results.Select(result => result.Id.ToString()).ToList()));
+        Assert.Equal(
+            results.Count,
+            await _client.DeleteAllAsync(results.Select(result => result.Id.ToString()).ToList())
+        );
     }
 }

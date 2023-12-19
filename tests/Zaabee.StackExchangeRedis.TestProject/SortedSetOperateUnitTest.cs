@@ -1,6 +1,3 @@
 namespace Zaabee.StackExchangeRedis.TestProject;
 
-public class SortedSetOperateUnitTest
-{
-
-}
+public class SortedSetOperateUnitTest { }

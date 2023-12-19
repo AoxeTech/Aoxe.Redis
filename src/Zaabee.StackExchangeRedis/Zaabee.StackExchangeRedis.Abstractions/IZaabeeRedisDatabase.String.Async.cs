@@ -2,19 +2,23 @@ namespace Zaabee.StackExchangeRedis.Abstractions;
 
 public partial interface IZaabeeRedisDatabase
 {
-    Task<bool> AddAsync<T>(string key, T? entity, TimeSpan? expiry = null);
+    ValueTask<bool> AddAsync<T>(string key, T? entity, TimeSpan? expiry = null);
 
-    Task AddRangeAsync<T>(IDictionary<string, T?> entities, TimeSpan? expiry = null, bool isBatch = false);
+    ValueTask AddRangeAsync<T>(
+        IDictionary<string, T?> entities,
+        TimeSpan? expiry = null,
+        bool isBatch = false
+    );
 
-    Task<T?> GetAsync<T>(string key);
+    ValueTask<T?> GetAsync<T>(string key);
 
-    Task<IList<T>> GetAsync<T>(IEnumerable<string> keys, bool isBatch = false);
+    ValueTask<List<T>> GetAsync<T>(IEnumerable<string> keys, bool isBatch = false);
 
-    Task<bool> AddAsync(string key, long value, TimeSpan? expiry = null);
+    ValueTask<bool> AddAsync(string key, long value, TimeSpan? expiry = null);
 
-    Task<bool> AddAsync(string key, double value, TimeSpan? expiry = null);
+    ValueTask<bool> AddAsync(string key, double value, TimeSpan? expiry = null);
 
-    Task<double> IncrementAsync(string key, double value);
+    ValueTask<double> IncrementAsync(string key, double value);
 
-    Task<long> IncrementAsync(string key, long value);
+    ValueTask<long> IncrementAsync(string key, long value);
 }

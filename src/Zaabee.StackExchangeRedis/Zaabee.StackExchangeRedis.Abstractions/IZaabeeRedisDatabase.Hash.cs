@@ -12,11 +12,11 @@ public partial interface IZaabeeRedisDatabase
 
     T? HashGet<T>(string key, string entityKey);
 
-    IList<T> HashGet<T>(string key);
+    List<T?> HashGet<T>(string key);
 
-    IList<T> HashGetRange<T>(string key, IEnumerable<string> entityKeys);
+    List<T?> HashGetRange<T>(string key, IEnumerable<string> entityKeys);
 
-    IList<string> HashGetAllEntityKeys(string key);
+    List<string> HashGetAllEntityKeys(string key);
 
     long HashCount(string key);
 }

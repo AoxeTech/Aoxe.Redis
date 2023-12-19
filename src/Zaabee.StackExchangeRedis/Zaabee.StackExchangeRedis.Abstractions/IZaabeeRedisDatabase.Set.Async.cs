@@ -2,54 +2,77 @@ namespace Zaabee.StackExchangeRedis.Abstractions;
 
 public partial interface IZaabeeRedisDatabase
 {
-    Task<bool> SetAddAsync<T>(string key, T? value);
+    ValueTask<bool> SetAddAsync<T>(string key, T? value);
 
-    Task<long> SetAddRangeAsync<T>(string key, IEnumerable<T> values);
+    ValueTask<long> SetAddRangeAsync<T>(string key, IEnumerable<T> values);
 
-    Task<IList<T>> SetCombineUnionAsync<T>(string firstKey, string secondKey);
+    ValueTask<List<T>> SetCombineUnionAsync<T>(string firstKey, string secondKey);
 
-    Task<IList<T>> SetCombineUnionAsync<T>(IEnumerable<string> keys);
+    ValueTask<List<T>> SetCombineUnionAsync<T>(IEnumerable<string> keys);
 
-    Task<IList<T>> SetCombineIntersectAsync<T>(string firstKey, string secondKey);
+    ValueTask<List<T>> SetCombineIntersectAsync<T>(string firstKey, string secondKey);
 
-    Task<IList<T>> SetCombineIntersectAsync<T>(IEnumerable<string> keys);
+    ValueTask<List<T>> SetCombineIntersectAsync<T>(IEnumerable<string> keys);
 
-    Task<IList<T>> SetCombineDifferenceAsync<T>(string firstKey, string secondKey);
+    ValueTask<List<T>> SetCombineDifferenceAsync<T>(string firstKey, string secondKey);
 
-    Task<IList<T>> SetCombineDifferenceAsync<T>(IEnumerable<string> keys);
+    ValueTask<List<T>> SetCombineDifferenceAsync<T>(IEnumerable<string> keys);
 
-    Task<long> SetCombineAndStoreUnionAsync<T>(string destination, string firstKey, string secondKey);
+    ValueTask<long> SetCombineAndStoreUnionAsync<T>(
+        string destination,
+        string firstKey,
+        string secondKey
+    );
 
-    Task<long> SetCombineAndStoreUnionAsync<T>(string destination, IEnumerable<string> keys);
+    ValueTask<long> SetCombineAndStoreUnionAsync<T>(string destination, IEnumerable<string> keys);
 
-    Task<long> SetCombineAndStoreIntersectAsync<T>(string destination, string firstKey, string secondKey);
+    ValueTask<long> SetCombineAndStoreIntersectAsync<T>(
+        string destination,
+        string firstKey,
+        string secondKey
+    );
 
-    Task<long> SetCombineAndStoreIntersectAsync<T>(string destination, IEnumerable<string> keys);
+    ValueTask<long> SetCombineAndStoreIntersectAsync<T>(
+        string destination,
+        IEnumerable<string> keys
+    );
 
-    Task<long> SetCombineAndStoreDifferenceAsync<T>(string destination, string firstKey, string secondKey);
+    ValueTask<long> SetCombineAndStoreDifferenceAsync<T>(
+        string destination,
+        string firstKey,
+        string secondKey
+    );
 
-    Task<long> SetCombineAndStoreDifferenceAsync<T>(string destination, IEnumerable<string> keys);
+    ValueTask<long> SetCombineAndStoreDifferenceAsync<T>(
+        string destination,
+        IEnumerable<string> keys
+    );
 
-    Task<bool> SetContainsAsync<T>(string key, T? value);
+    ValueTask<bool> SetContainsAsync<T>(string key, T? value);
 
-    Task<long> SetLengthAsync<T>(string key);
+    ValueTask<long> SetLengthAsync<T>(string key);
 
-    Task<IList<T>> SetMembersAsync<T>(string key);
+    ValueTask<List<T>> SetMembersAsync<T>(string key);
 
-    Task<bool> SetMoveAsync<T>(string source, string destination, T? value);
+    ValueTask<bool> SetMoveAsync<T>(string source, string destination, T? value);
 
-    Task<T?> SetPopAsync<T>(string key);
+    ValueTask<T?> SetPopAsync<T>(string key);
 
-    Task<IList<T>> SetPopAsync<T>(string key, long count);
+    ValueTask<List<T>> SetPopAsync<T>(string key, long count);
 
-    Task<T?> SetRandomMemberAsync<T>(string key);
+    ValueTask<T?> SetRandomMemberAsync<T>(string key);
 
-    Task<IList<T>> SetRandomMembersAsync<T>(string key, long count);
+    ValueTask<List<T>> SetRandomMembersAsync<T>(string key, long count);
 
-    Task<bool> SetRemoveAsync<T>(string key, T? value);
+    ValueTask<bool> SetRemoveAsync<T>(string key, T? value);
 
-    Task<long> SetRemoveRangeAsync<T>(string key, IEnumerable<T> values);
+    ValueTask<long> SetRemoveRangeAsync<T>(string key, IEnumerable<T> values);
 
-    Task<IList<T>> SetScanAsync<T>(string key, T? pattern = default, int pageSize = 10,
-        long cursor = 0, int pageOffset = 0);
+    ValueTask<List<T>> SetScanAsync<T>(
+        string key,
+        T? pattern = default,
+        int pageSize = 10,
+        long cursor = 0,
+        int pageOffset = 0
+    );
 }

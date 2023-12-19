@@ -41,7 +41,7 @@
 //
 //         StreamPendingMessageInfo[] StreamPendingMessages(string key, string groupName, int count, string consumerName,
 //             string minId = null, string maxId = null);
-//  
+//
 //         Dictionary<string, (string Field,T? value)> StreamRange<T>(string key, string minId = null, string maxId = null,
 //             int? count = null);
 //

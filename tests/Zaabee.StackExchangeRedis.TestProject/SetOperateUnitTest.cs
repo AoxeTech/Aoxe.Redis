@@ -1,6 +1,3 @@
 namespace Zaabee.StackExchangeRedis.TestProject;
 
-public class SetOperateUnitTest
-{
-
-}
+public class SetOperateUnitTest { }

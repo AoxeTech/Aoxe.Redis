@@ -16,7 +16,7 @@ public partial interface IZaabeeRedisDatabase
 
     long ListLength(string key);
 
-    IList<T> ListRange<T>(string key, long start = 0, long stop = -1);
+    List<T?> ListRange<T>(string key, long start = 0, long stop = -1);
 
     long ListRemove<T>(string key, T? value, long count = 0);
 

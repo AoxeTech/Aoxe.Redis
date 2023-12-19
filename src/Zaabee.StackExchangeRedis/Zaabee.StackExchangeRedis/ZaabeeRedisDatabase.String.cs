@@ -4,21 +4,31 @@ public partial class ZaabeeRedisDatabase
 {
     public bool Add<T>(string key, T? entity, TimeSpan? expiry = null)
     {
-        if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+        if (string.IsNullOrWhiteSpace(key))
+            throw new ArgumentNullException(nameof(key));
         expiry ??= _defaultExpiry;
         var bytes = _serializer.ToBytes(entity);
         return _db.StringSet(key, bytes, expiry);
     }
 
-    public void AddRange<T>(IDictionary<string, T?> entities, TimeSpan? expiry = null, bool isBatch = false)
+    public void AddRange<T>(
+        IDictionary<string, T?> entities,
+        TimeSpan? expiry = null,
+        bool isBatch = false
+    )
     {
-        if (entities is null || !entities.Any()) return;
+        if (entities is null || !entities.Any())
+            return;
         expiry ??= _defaultExpiry;
         if (isBatch)
         {
             var batch = _db.CreateBatch();
-            Task.WhenAll(entities.Select(entity =>
-                batch.StringSetAsync(entity.Key, _serializer.ToBytes(entity.Value), expiry)));
+            ValueTask.WhenAll(
+                entities.Select(
+                    entity =>
+                        batch.StringSetAsync(entity.Key, _serializer.ToBytes(entity.Value), expiry)
+                )
+            );
             batch.Execute();
         }
         else
@@ -30,14 +40,16 @@ public partial class ZaabeeRedisDatabase
 
     public T? Get<T>(string key)
     {
-        if (string.IsNullOrWhiteSpace(key)) return default;
+        if (string.IsNullOrWhiteSpace(key))
+            return default;
         var value = _db.StringGet(key);
         return value.HasValue ? _serializer.FromBytes<T>(value) : default;
     }
 
-    public IList<T> Get<T>(IEnumerable<string> keys, bool isBatch = false)
+    public List<T> Get<T>(IEnumerable<string> keys, bool isBatch = false)
     {
-        if (keys is null || !keys.Any()) return new List<T>();
+        if (keys is null || !keys.Any())
+            return new List<T>();
         List<T> result;
         if (isBatch)
         {
@@ -54,14 +66,16 @@ public partial class ZaabeeRedisDatabase
 
     public bool Add(string key, long value, TimeSpan? expiry = null)
     {
-        if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+        if (string.IsNullOrWhiteSpace(key))
+            throw new ArgumentNullException(nameof(key));
         expiry ??= _defaultExpiry;
         return _db.StringSet(key, value, expiry);
     }
 
     public bool Add(string key, double value, TimeSpan? expiry = null)
     {
-        if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+        if (string.IsNullOrWhiteSpace(key))
+            throw new ArgumentNullException(nameof(key));
         expiry ??= _defaultExpiry;
         return _db.StringSet(key, value, expiry);
     }

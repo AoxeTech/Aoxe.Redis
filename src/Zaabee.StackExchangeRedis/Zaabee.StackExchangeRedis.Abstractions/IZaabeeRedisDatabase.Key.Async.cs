@@ -2,11 +2,11 @@ namespace Zaabee.StackExchangeRedis.Abstractions;
 
 public partial interface IZaabeeRedisDatabase
 {
-    Task<bool> DeleteAsync(string key);
+    ValueTask<bool> DeleteAsync(string key);
 
-    Task<long> DeleteAllAsync(IEnumerable<string> keys, bool isBatch = false);
+    ValueTask<long> DeleteAllAsync(IEnumerable<string> keys, bool isBatch = false);
 
-    Task<bool> ExistsAsync(string key);
+    ValueTask<bool> ExistsAsync(string key);
 
-    Task<bool> ExpireAsync(string key, TimeSpan? timeSpan);
+    ValueTask<bool> ExpireAsync(string key, TimeSpan? timeSpan);
 }

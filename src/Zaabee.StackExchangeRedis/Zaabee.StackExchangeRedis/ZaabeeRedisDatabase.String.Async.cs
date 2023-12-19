@@ -2,18 +2,23 @@ namespace Zaabee.StackExchangeRedis;
 
 public partial class ZaabeeRedisDatabase
 {
-    public async Task<bool> AddAsync<T>(string key, T? entity, TimeSpan? expiry = null)
+    public async ValueTask<bool> AddAsync<T>(string key, T? entity, TimeSpan? expiry = null)
     {
-        if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+        if (string.IsNullOrWhiteSpace(key))
+            throw new ArgumentNullException(nameof(key));
         expiry ??= _defaultExpiry;
         var bytes = _serializer.ToBytes(entity);
         return await _db.StringSetAsync(key, bytes, expiry);
     }
 
-    public async Task AddRangeAsync<T>(IDictionary<string, T?> entities, TimeSpan? expiry = null,
-        bool isBatch = false)
+    public async ValueTask AddRangeAsync<T>(
+        IDictionary<string, T?> entities,
+        TimeSpan? expiry = null,
+        bool isBatch = false
+    )
     {
-        if (entities == null || !entities.Any()) return;
+        if (entities == null || !entities.Any())
+            return;
         expiry ??= _defaultExpiry;
         if (isBatch)
         {
@@ -29,16 +34,18 @@ public partial class ZaabeeRedisDatabase
         }
     }
 
-    public async Task<T?> GetAsync<T>(string key)
+    public async ValueTask<T?> GetAsync<T>(string key)
     {
-        if (string.IsNullOrWhiteSpace(key)) return default;
+        if (string.IsNullOrWhiteSpace(key))
+            return default;
         var value = await _db.StringGetAsync(key);
         return value.HasValue ? _serializer.FromBytes<T>(value) : default;
     }
 
-    public async Task<IList<T>> GetAsync<T>(IEnumerable<string> keys, bool isBatch = false)
+    public async ValueTask<List<T>> GetAsync<T>(IEnumerable<string> keys, bool isBatch = false)
     {
-        if (keys is null || !keys.Any()) return new List<T>();
+        if (keys is null || !keys.Any())
+            return new List<T>();
         List<T> result;
         if (isBatch)
         {
@@ -48,28 +55,32 @@ public partial class ZaabeeRedisDatabase
         else
         {
             result = new List<T>();
-            foreach (var key in keys) result.Add(await GetAsync<T>(key));
+            foreach (var key in keys)
+                result.Add(await GetAsync<T>(key));
         }
 
         return result;
     }
 
-    public async Task<bool> AddAsync(string key, long value, TimeSpan? expiry = null)
+    public async ValueTask<bool> AddAsync(string key, long value, TimeSpan? expiry = null)
     {
-        if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+        if (string.IsNullOrWhiteSpace(key))
+            throw new ArgumentNullException(nameof(key));
         expiry ??= _defaultExpiry;
         return await _db.StringSetAsync(key, value, expiry);
     }
 
-    public async Task<bool> AddAsync(string key, double value, TimeSpan? expiry = null)
+    public async ValueTask<bool> AddAsync(string key, double value, TimeSpan? expiry = null)
     {
-        if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+        if (string.IsNullOrWhiteSpace(key))
+            throw new ArgumentNullException(nameof(key));
         expiry ??= _defaultExpiry;
         return await _db.StringSetAsync(key, value, expiry);
     }
 
-    public async Task<double> IncrementAsync(string key, double value) =>
+    public async ValueTask<double> IncrementAsync(string key, double value) =>
         await _db.StringIncrementAsync(key, value);
 
-    public async Task<long> IncrementAsync(string key, long value) => await _db.StringIncrementAsync(key, value);
+    public async ValueTask<long> IncrementAsync(string key, long value) =>
+        await _db.StringIncrementAsync(key, value);
 }
