@@ -4,7 +4,7 @@ public partial interface IZaabeeRedisDatabase
 {
     ValueTask<bool> SortedSetAddAsync<T>(string key, T? member, double score);
 
-    ValueTask<long> SortedSetAddAsync<T>(string key, IDictionary<T, double> values);
+    ValueTask<long> SortedSetAddAsync<T>(string key, Dictionary<T?, double> values);
 
     ValueTask<double> SortedSetDecrementAsync<T>(string key, T? member, double value);
 
@@ -22,25 +22,25 @@ public partial interface IZaabeeRedisDatabase
 
     ValueTask<long> SortedSetLengthByValueAsync(string key, string min, string max);
 
-    ValueTask<List<T>> SortedSetRangeByScoreAscendingAsync<T>(
+    ValueTask<List<T?>> SortedSetRangeByScoreAscendingAsync<T>(
         string key,
         double start = 0,
         double stop = -1
     );
 
-    ValueTask<List<T>> SortedSetRangeByScoreDescendingAsync<T>(
+    ValueTask<List<T?>> SortedSetRangeByScoreDescendingAsync<T>(
         string key,
         double start = 0,
         double stop = -1
     );
 
-    ValueTask<IDictionary<T, double>> SortedSetRangeByScoreWithScoresAscendingAsync<T>(
+    ValueTask<Dictionary<T?, double>> SortedSetRangeByScoreWithScoresAscendingAsync<T>(
         string key,
         long start = 0,
         long stop = -1
     );
 
-    ValueTask<IDictionary<T, double>> SortedSetRangeByScoreWithScoresDescendingAsync<T>(
+    ValueTask<Dictionary<T?, double>> SortedSetRangeByScoreWithScoresDescendingAsync<T>(
         string key,
         double start = 0,
         double stop = -1
@@ -181,14 +181,4 @@ public partial interface IZaabeeRedisDatabase
     ValueTask<long> SortedSetRemoveRangeByValueAsync(string key, double min, double max);
 
     ValueTask<long> SortedSetRemoveRangeByValueAsync(string key, string min, string max);
-
-    ValueTask<IDictionary<T, double>> SortedSetScanAsync<T>(
-        string key,
-        T? pattern = default,
-        int pageSize = 10,
-        long cursor = 0,
-        int pageOffset = 0
-    );
-
-    ValueTask<double?> SortedSetScoreAsync<T>(string key, T? member);
 }

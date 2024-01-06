@@ -12,7 +12,7 @@ public partial interface IZaabeeRedisDatabase
 
     ValueTask<T?> HashGetAsync<T>(string key, string entityKey);
 
-    ValueTask<List<T?>> HashGetAsync<T>(string key);
+    ValueTask<Dictionary<string, T?>> HashGetAsync<T>(string key);
 
     ValueTask<List<T?>> HashGetRangeAsync<T>(string key, IEnumerable<string> entityKeys);
 

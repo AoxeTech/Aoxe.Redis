@@ -2,12 +2,12 @@ namespace Zaabee.StackExchangeRedis;
 
 public partial class ZaabeeRedisDatabase
 {
-    public bool Delete(string key) => _db.KeyDelete(key);
+    public bool Delete(string key) => db.KeyDelete(key);
 
-    public long DeleteAll(IEnumerable<string> keys, bool isBatch = false) =>
-        isBatch ? _db.KeyDelete(keys.Select(x => (RedisKey)x).ToArray()) : keys.Count(Delete);
+    public long DeleteAll(IEnumerable<string> keys) =>
+        db.KeyDelete(keys.Select(x => (RedisKey)x).ToArray());
 
-    public bool Exists(string key) => _db.KeyExists(key);
+    public bool Exists(string key) => db.KeyExists(key);
 
-    public bool Expire(string key, TimeSpan? timeSpan) => _db.KeyExpire(key, timeSpan);
+    public bool Expire(string key, TimeSpan? timeSpan) => db.KeyExpire(key, timeSpan);
 }

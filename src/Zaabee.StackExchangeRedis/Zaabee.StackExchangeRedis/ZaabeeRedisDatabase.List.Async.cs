@@ -3,59 +3,55 @@ namespace Zaabee.StackExchangeRedis;
 public partial class ZaabeeRedisDatabase
 {
     public async ValueTask<T?> ListGetByIndexAsync<T>(string key, long index) =>
-        _serializer.FromBytes<T>(await _db.ListGetByIndexAsync(key, index));
+        serializer.FromBytes<T>(await db.ListGetByIndexAsync(key, index));
 
     public async ValueTask<long> ListInsertAfterAsync<T>(string key, T? pivot, T? value) =>
-        await _db.ListInsertAfterAsync(key, _serializer.ToBytes(pivot), _serializer.ToBytes(value));
+        await db.ListInsertAfterAsync(key, serializer.ToBytes(pivot), serializer.ToBytes(value));
 
     public async ValueTask<long> ListInsertBeforeAsync<T>(string key, T? pivot, T? value) =>
-        await _db.ListInsertBeforeAsync(
-            key,
-            _serializer.ToBytes(pivot),
-            _serializer.ToBytes(value)
-        );
+        await db.ListInsertBeforeAsync(key, serializer.ToBytes(pivot), serializer.ToBytes(value));
 
     public async ValueTask<T?> ListLeftPopAsync<T>(string key) =>
-        _serializer.FromBytes<T>(await _db.ListLeftPopAsync(key));
+        serializer.FromBytes<T>(await db.ListLeftPopAsync(key));
 
     public async ValueTask<long> ListLeftPushAsync<T>(string key, T? value) =>
-        await _db.ListLeftPushAsync(key, _serializer.ToBytes(value));
+        await db.ListLeftPushAsync(key, serializer.ToBytes(value));
 
     public async ValueTask<long> ListLeftPushRangeAsync<T>(string key, IEnumerable<T> values) =>
-        await _db.ListLeftPushAsync(
+        await db.ListLeftPushAsync(
             key,
-            values.Select(value => (RedisValue)_serializer.ToBytes(value)).ToArray()
+            values.Select(value => (RedisValue)serializer.ToBytes(value)).ToArray()
         );
 
-    public async ValueTask<long> ListLengthAsync(string key) => await _db.ListLengthAsync(key);
+    public async ValueTask<long> ListLengthAsync(string key) => await db.ListLengthAsync(key);
 
     public async ValueTask<List<T?>> ListRangeAsync<T>(string key, long start = 0, long stop = -1)
     {
-        var results = await _db.ListRangeAsync(key, start, stop);
-        return results.Select(value => _serializer.FromBytes<T>(value)).ToList();
+        var results = await db.ListRangeAsync(key, start, stop);
+        return results.Select(value => serializer.FromBytes<T>(value)).ToList();
     }
 
     public async ValueTask<long> ListRemoveAsync<T>(string key, T? value, long count = 0) =>
-        await _db.ListRemoveAsync(key, _serializer.ToBytes(value), count);
+        await db.ListRemoveAsync(key, serializer.ToBytes(value), count);
 
     public async ValueTask<T?> ListRightPopAsync<T>(string key) =>
-        _serializer.FromBytes<T>(await _db.ListRightPopAsync(key));
+        serializer.FromBytes<T>(await db.ListRightPopAsync(key));
 
     public async ValueTask<T?> ListRightPopLeftPushAsync<T>(string source, string destination) =>
-        _serializer.FromBytes<T>(await _db.ListRightPopLeftPushAsync(source, destination));
+        serializer.FromBytes<T>(await db.ListRightPopLeftPushAsync(source, destination));
 
     public async ValueTask<long> ListRightPushAsync<T>(string key, T? value) =>
-        await _db.ListRightPushAsync(key, _serializer.ToBytes(value));
+        await db.ListRightPushAsync(key, serializer.ToBytes(value));
 
     public async ValueTask<long> ListRightPushRangeAsync<T>(string key, IEnumerable<T> values) =>
-        await _db.ListRightPushAsync(
+        await db.ListRightPushAsync(
             key,
-            values.Select(value => (RedisValue)_serializer.ToBytes(value)).ToArray()
+            values.Select(value => (RedisValue)serializer.ToBytes(value)).ToArray()
         );
 
     public async ValueTask ListSetByIndexAsync<T>(string key, long index, T? value) =>
-        await _db.ListSetByIndexAsync(key, index, _serializer.ToBytes(value));
+        await db.ListSetByIndexAsync(key, index, serializer.ToBytes(value));
 
     public async ValueTask ListTrimAsync(string key, long start, long stop) =>
-        await _db.ListTrimAsync(key, start, stop);
+        await db.ListTrimAsync(key, start, stop);
 }

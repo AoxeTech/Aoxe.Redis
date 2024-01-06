@@ -12,7 +12,7 @@ public partial interface IZaabeeRedisDatabase
 
     T? HashGet<T>(string key, string entityKey);
 
-    List<T?> HashGet<T>(string key);
+    Dictionary<string, T?> HashGet<T>(string key);
 
     List<T?> HashGetRange<T>(string key, IEnumerable<string> entityKeys);
 

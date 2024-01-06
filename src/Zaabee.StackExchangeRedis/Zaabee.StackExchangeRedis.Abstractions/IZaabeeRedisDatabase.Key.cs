@@ -4,7 +4,7 @@ public partial interface IZaabeeRedisDatabase
 {
     bool Delete(string key);
 
-    long DeleteAll(IEnumerable<string> keys, bool isBatch = false);
+    long DeleteAll(IEnumerable<string> keys);
 
     bool Exists(string key);
 

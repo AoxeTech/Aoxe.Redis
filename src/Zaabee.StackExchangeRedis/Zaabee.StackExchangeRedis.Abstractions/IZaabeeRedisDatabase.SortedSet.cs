@@ -22,17 +22,17 @@ public partial interface IZaabeeRedisDatabase
 
     long SortedSetLengthByValue(string key, string min, string max);
 
-    List<T> SortedSetRangeByScoreAscending<T>(string key, double start = 0, double stop = -1);
+    List<T?> SortedSetRangeByScoreAscending<T>(string key, double start = 0, double stop = -1);
 
-    List<T> SortedSetRangeByScoreDescending<T>(string key, double start = 0, double stop = -1);
+    List<T?> SortedSetRangeByScoreDescending<T>(string key, double start = 0, double stop = -1);
 
-    IDictionary<T, double> SortedSetRangeByScoreWithScoresAscending<T>(
+    Dictionary<T?, double> SortedSetRangeByScoreWithScoresAscending<T>(
         string key,
         double start = 0,
         double stop = -1
     );
 
-    IDictionary<T, double> SortedSetRangeByScoreWithScoresDescending<T>(
+    Dictionary<T?, double> SortedSetRangeByScoreWithScoresDescending<T>(
         string key,
         double start = 0,
         double stop = -1
@@ -156,7 +156,7 @@ public partial interface IZaabeeRedisDatabase
 
     long SortedSetRemoveRangeByValue(string key, string min, string max);
 
-    IDictionary<T, double> SortedSetScan<T>(
+    Dictionary<T?, double> SortedSetScan<T>(
         string key,
         T? pattern = default,
         int pageSize = 10,

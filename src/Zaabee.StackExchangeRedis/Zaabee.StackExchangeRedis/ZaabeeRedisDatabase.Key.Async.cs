@@ -2,22 +2,13 @@ namespace Zaabee.StackExchangeRedis;
 
 public partial class ZaabeeRedisDatabase
 {
-    public async ValueTask<bool> DeleteAsync(string key) => await _db.KeyDeleteAsync(key);
+    public async ValueTask<bool> DeleteAsync(string key) => await db.KeyDeleteAsync(key);
 
-    public async ValueTask<long> DeleteAllAsync(IEnumerable<string> keys, bool isBatch = false)
-    {
-        if (isBatch)
-            await _db.KeyDeleteAsync(keys.Select(x => (RedisKey)x).ToArray());
-        var result = 0;
-        foreach (var key in keys)
-            if (await DeleteAsync(key))
-                result++;
+    public async ValueTask<long> DeleteAllAsync(IEnumerable<string> keys) =>
+        await db.KeyDeleteAsync(keys.Select(x => (RedisKey)x).ToArray());
 
-        return result;
-    }
+    public async ValueTask<bool> ExistsAsync(string key) => await db.KeyExistsAsync(key);
 
-    public ValueTask<bool> ExistsAsync(string key) => _db.KeyExistsAsync(key);
-
-    public ValueTask<bool> ExpireAsync(string key, TimeSpan? timeSpan) =>
-        _db.KeyExpireAsync(key, timeSpan);
+    public async ValueTask<bool> ExpireAsync(string key, TimeSpan? timeSpan) =>
+        await db.KeyExpireAsync(key, timeSpan);
 }
