@@ -1,6 +1,6 @@
 namespace Zaabee.StackExchangeRedis.Abstractions;
 
-public partial interface IZaabeeRedisDatabase
+public partial interface IZaabeeRedisClient
 {
     bool HashAdd<T>(string key, string entityKey, T? entity);
 

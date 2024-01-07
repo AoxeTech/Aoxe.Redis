@@ -1,6 +1,6 @@
 namespace Zaabee.StackExchangeRedis.TestProject;
 
-public class ZaabeeRedisClientFactory
+public static class ZaabeeRedisClientFactory
 {
     private static readonly IZaabeeRedisClient Client = new ZaabeeRedisClient(
         new ZaabeeStackExchangeRedisOptions

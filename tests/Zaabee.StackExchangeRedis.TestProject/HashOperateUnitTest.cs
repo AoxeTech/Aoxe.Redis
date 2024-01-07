@@ -61,12 +61,11 @@ public class HashOperateUnitTest
             .Range(0, 10)
             .Select(p => TestModelFactory.CreateTestModel())
             .ToList();
-        _client
+        await _client
             .HashAddRangeAsync(
                 "HashBatchAsyncTest",
                 testModels.ToDictionary(k => k.Id.ToString(), v => v)
-            )
-            .Wait();
+            );
         var results = await _client.HashGetRangeAsync<TestModel>(
             "HashBatchAsyncTest",
             testModels.Select(model => model.Id.ToString()).ToList()
@@ -104,12 +103,11 @@ public class HashOperateUnitTest
             .Range(0, 10)
             .Select(p => TestModelFactory.CreateTestModel())
             .ToList();
-        _client
+        await _client
             .HashAddRangeAsync(
                 "HashAllAsyncTest",
                 testModels.ToDictionary(k => k.Id.ToString(), v => v)
-            )
-            .Wait();
+            );
         var results = await _client.HashGetAsync<TestModel>("HashAllAsyncTest");
         Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
         var keys = await _client.HashGetAllEntityKeysAsync("HashAllAsyncTest");
