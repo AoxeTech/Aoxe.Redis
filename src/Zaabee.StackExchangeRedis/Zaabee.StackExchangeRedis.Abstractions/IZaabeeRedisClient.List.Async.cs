@@ -22,8 +22,6 @@ public partial interface IZaabeeRedisClient
 
     ValueTask<T?> ListRightPopAsync<T>(string key);
 
-    ValueTask<T?> ListRightPopLeftPushAsync<T>(string source, string destination);
-
     ValueTask<long> ListRightPushAsync<T>(string key, T? value);
 
     ValueTask<long> ListRightPushRangeAsync<T>(string key, IEnumerable<T> values);

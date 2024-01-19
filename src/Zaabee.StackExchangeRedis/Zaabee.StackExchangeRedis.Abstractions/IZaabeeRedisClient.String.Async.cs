@@ -7,4 +7,12 @@ public partial interface IZaabeeRedisClient
     ValueTask<T?> GetAsync<T>(string key);
 
     ValueTask<List<T?>> GetAsync<T>(IEnumerable<string> keys);
+
+    Task<bool> AddAsync(string key, long value, TimeSpan? expiry = null);
+
+    Task<bool> AddAsync(string key, double value, TimeSpan? expiry = null);
+
+    Task<double> IncrementAsync(string key, double value);
+
+    Task<long> IncrementAsync(string key, long value);
 }

@@ -22,8 +22,6 @@ public partial interface IZaabeeRedisClient
 
     T? ListRightPop<T>(string key);
 
-    T? ListRightPopLeftPush<T>(string source, string destination);
-
     long ListRightPush<T>(string key, T? value);
 
     long ListRightPushRange<T>(string key, IEnumerable<T> values);

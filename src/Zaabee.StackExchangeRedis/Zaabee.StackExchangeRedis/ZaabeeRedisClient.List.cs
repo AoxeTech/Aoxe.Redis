@@ -32,9 +32,6 @@ public partial class ZaabeeRedisClient
 
     public T? ListRightPop<T>(string key) => serializer.FromBytes<T>(db.ListRightPop(key));
 
-    public T? ListRightPopLeftPush<T>(string source, string destination) =>
-        serializer.FromBytes<T>(db.ListRightPopLeftPush(source, destination));
-
     public long ListRightPush<T>(string key, T? value) =>
         db.ListRightPush(key, serializer.ToBytes(value));
 

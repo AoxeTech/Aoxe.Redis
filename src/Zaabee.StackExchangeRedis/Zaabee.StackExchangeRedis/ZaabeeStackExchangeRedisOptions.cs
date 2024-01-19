@@ -20,8 +20,6 @@ public class ZaabeeStackExchangeRedisOptions
 
     public TimeSpan DefaultExpiry { get; set; } = TimeSpan.FromMinutes(10);
 
-    public ZaabeeStackExchangeRedisOptions() { }
-
     public ZaabeeStackExchangeRedisOptions(
         string connectionString,
         IBytesSerializer serializer,

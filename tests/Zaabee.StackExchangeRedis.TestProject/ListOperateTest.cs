@@ -1,6 +1,6 @@
 namespace Zaabee.StackExchangeRedis.TestProject;
 
-public class ListOperateUnitTest
+public class ListOperateTest
 {
     private readonly IZaabeeRedisClient _client = ZaabeeRedisClientFactory.GetClient();
 
@@ -127,7 +127,7 @@ public class ListOperateUnitTest
 
         _client.Delete("ListRangeTrimSyncA");
         _client.Delete("ListRangeTrimSyncB");
-        
+
         _client.ListRightPushRange("ListRangeTrimSyncA", testModelsA);
         _client.ListLeftPushRange("ListRangeTrimSyncB", testModelsB);
 
