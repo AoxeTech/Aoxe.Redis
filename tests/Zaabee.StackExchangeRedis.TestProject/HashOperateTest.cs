@@ -1,6 +1,6 @@
 namespace Zaabee.StackExchangeRedis.TestProject;
 
-public class HashOperateUnitTest
+public class HashOperateTest
 {
     private readonly IZaabeeRedisClient _client = ZaabeeRedisClientFactory.GetClient();
 
@@ -89,7 +89,7 @@ public class HashOperateUnitTest
             .ToList();
         _client.HashAddRange("HashAllTest", testModels.ToDictionary(k => k.Id.ToString(), v => v));
         var results = _client.HashGet<TestModel>("HashAllTest");
-        Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
+        Assert.True(results.All(kv => testModels.Any(model => model.Equals(kv.Value))));
         var keys = _client.HashGetAllEntityKeys("HashAllTest");
         Assert.True(keys.All(key => testModels.Any(model => model.Id.ToString() == key)));
         Assert.Equal(results.Count, _client.HashCount("HashAllTest"));
@@ -109,7 +109,7 @@ public class HashOperateUnitTest
                 testModels.ToDictionary(k => k.Id.ToString(), v => v)
             );
         var results = await _client.HashGetAsync<TestModel>("HashAllAsyncTest");
-        Assert.True(results.All(result => testModels.Any(model => model.Equals(result))));
+        Assert.True(results.All(kv => testModels.Any(model => model.Equals(kv.Value))));
         var keys = await _client.HashGetAllEntityKeysAsync("HashAllAsyncTest");
         Assert.True(keys.All(key => testModels.Any(model => model.Id.ToString() == key)));
         Assert.Equal(results.Count, await _client.HashCountAsync("HashAllAsyncTest"));

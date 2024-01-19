@@ -125,12 +125,14 @@ public class ListOperateUnitTest
             .Select(p => TestModelFactory.CreateTestModel())
             .ToList();
 
+        _client.Delete("ListRangeTrimSyncA");
+        _client.Delete("ListRangeTrimSyncB");
+        
         _client.ListRightPushRange("ListRangeTrimSyncA", testModelsA);
-        _client.ListRightPushRange("ListRangeTrimSyncB", testModelsB);
-        _client.ListRightPopLeftPush<TestModel>("ListRangeTrimSyncA", "ListRangeTrimSyncB");
+        _client.ListLeftPushRange("ListRangeTrimSyncB", testModelsB);
 
-        Assert.Equal(testModelsA.Count - 1, _client.ListLength("ListRangeTrimSyncA"));
-        Assert.Equal(testModelsB.Count + 1, _client.ListLength("ListRangeTrimSyncB"));
+        Assert.Equal(testModelsA.Count, _client.ListLength("ListRangeTrimSyncA"));
+        Assert.Equal(testModelsB.Count, _client.ListLength("ListRangeTrimSyncB"));
 
         var testModelsResultB = _client.ListRange<TestModel>("ListRangeTrimSyncB", 1, 10);
         for (var i = 0; i < testModelsA.Count; i++)

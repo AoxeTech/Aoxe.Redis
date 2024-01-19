@@ -1,6 +1,6 @@
 namespace Zaabee.StackExchangeRedis.TestProject;
 
-public class StringOperateUnitTest
+public class StringOperateTest
 {
     private readonly IZaabeeRedisClient _client = ZaabeeRedisClientFactory.GetClient();
 
