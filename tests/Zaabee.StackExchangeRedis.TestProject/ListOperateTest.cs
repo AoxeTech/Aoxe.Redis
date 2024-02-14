@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Zaabee.StackExchangeRedis.TestProject;
 
 public class ListOperateTest
@@ -7,6 +9,7 @@ public class ListOperateTest
     [Fact]
     public void ListSync()
     {
+        _client.Delete("ListSync");
         var testModels = Enumerable
             .Range(0, 10)
             .Select(p => TestModelFactory.CreateTestModel())
@@ -61,6 +64,7 @@ public class ListOperateTest
     [Fact]
     public void ListPushPopSync()
     {
+        _client.Delete("ListPushPopSync");
         var testModels = Enumerable
             .Range(0, 10)
             .Select(p => TestModelFactory.CreateTestModel())
@@ -82,6 +86,7 @@ public class ListOperateTest
     [Fact]
     public void ListOprByIndexSync()
     {
+        _client.Delete("ListOprByIndexSync");
         var testModels = Enumerable
             .Range(0, 10)
             .Select(p => TestModelFactory.CreateTestModel())
@@ -98,6 +103,7 @@ public class ListOperateTest
     [Fact]
     public void ListInsertSync()
     {
+        _client.Delete("ListInsertSync");
         var testModel = TestModelFactory.CreateTestModel();
         var testBeforeModel = TestModelFactory.CreateTestModel();
         var testAfterModel = TestModelFactory.CreateTestModel();
@@ -116,6 +122,9 @@ public class ListOperateTest
     [Fact]
     public void ListRangeTrimSync()
     {
+        _client.Delete("ListRangeTrimSyncA");
+        _client.Delete("ListRangeTrimSyncB");
+        
         var testModelsA = Enumerable
             .Range(0, 10)
             .Select(p => TestModelFactory.CreateTestModel())
@@ -125,22 +134,19 @@ public class ListOperateTest
             .Select(p => TestModelFactory.CreateTestModel())
             .ToList();
 
-        _client.Delete("ListRangeTrimSyncA");
-        _client.Delete("ListRangeTrimSyncB");
-
         _client.ListRightPushRange("ListRangeTrimSyncA", testModelsA);
         _client.ListLeftPushRange("ListRangeTrimSyncB", testModelsB);
 
         Assert.Equal(testModelsA.Count, _client.ListLength("ListRangeTrimSyncA"));
         Assert.Equal(testModelsB.Count, _client.ListLength("ListRangeTrimSyncB"));
 
-        var testModelsResultB = _client.ListRange<TestModel>("ListRangeTrimSyncB", 1, 10);
+        var testModelsResultA = _client.ListRange<TestModel>("ListRangeTrimSyncA", 0, 9);
         for (var i = 0; i < testModelsA.Count; i++)
-            Assert.Equal(testModelsB[i], testModelsResultB[i]);
+            Assert.Equal(testModelsA[i], testModelsResultA[i]);
 
         _client.ListTrim("ListRangeTrimSyncA", 0, 9);
-        for (var i = 0; i < testModelsA.Count - 1; i++)
-            Assert.Equal(testModelsA[i], _client.ListLeftPop<TestModel>("ListRangeTrimSyncA"));
+        foreach (var testModel in testModelsA)
+            Assert.Equal(testModel, _client.ListLeftPop<TestModel>("ListRangeTrimSyncA"));
 
         Assert.Equal(0, _client.ListLength("ListRangeTrimSyncA"));
 
