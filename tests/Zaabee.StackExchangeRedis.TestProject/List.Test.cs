@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-
 namespace Zaabee.StackExchangeRedis.TestProject;
 
-public class ListOperateTest
+public partial class ListTest
 {
     private readonly IZaabeeRedisClient _client = ZaabeeRedisClientFactory.GetClient();
 

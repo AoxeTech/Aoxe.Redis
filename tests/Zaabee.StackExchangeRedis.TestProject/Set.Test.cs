@@ -1,3 +1,6 @@
 namespace Zaabee.StackExchangeRedis.TestProject;
 
-public class SortedSetOperateTest { }
+public partial class SetTest
+{
+    
+}
