@@ -108,7 +108,7 @@ public class HashOperateTest
     [Fact]
     public async void HashAllAsync()
     {
-        await _client.DeleteAsync("HashAllTest");
+        await _client.DeleteAsync("HashAllAsyncTest");
         var testModels = Enumerable
             .Range(0, 10)
             .Select(p => TestModelFactory.CreateTestModel())
@@ -123,6 +123,6 @@ public class HashOperateTest
         Assert.True(keys.All(key => testModels.Any(model => model.Id.ToString() == key)));
         Assert.Equal(results.Count, await _client.HashCountAsync("HashAllAsyncTest"));
         Assert.True(await _client.DeleteAsync("HashAllAsyncTest"));
-        await _client.DeleteAsync("HashAllTest");
+        await _client.DeleteAsync("HashAllAsyncTest");
     }
 }
