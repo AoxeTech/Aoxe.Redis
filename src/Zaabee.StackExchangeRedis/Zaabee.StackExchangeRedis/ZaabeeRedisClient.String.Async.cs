@@ -11,7 +11,13 @@ public partial class ZaabeeRedisClient
     public async ValueTask<T?> GetAsync<T>(string key)
     {
         var value = await db.StringGetAsync(key);
-        return value.HasValue ? serializer.FromBytes<T>(value) : default;
+        if(!value.HasValue) return default;
+        return typeof(T) switch
+        {
+            { } t when t == typeof(long) => (T)(object)long.Parse(value!),
+            { } t when t == typeof(double) => (T)(object)double.Parse(value!),
+            _ => serializer.FromBytes<T>(value)
+        };
     }
 
     public async ValueTask<List<T?>> GetAsync<T>(IEnumerable<string> keys)

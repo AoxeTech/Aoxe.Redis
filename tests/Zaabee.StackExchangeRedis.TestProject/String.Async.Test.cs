@@ -22,19 +22,19 @@ public partial class StringTest
             TestModelFactory.CreateTestModel()
         };
 
-        var keys = testModels.Select(m => m.Id.ToString());
+        var keys = testModels.Select(m => $"{{Add_Get_Async_MultipleKeys}}{m.Id.ToString()}");
 
         foreach (var model in testModels)
         {
-            Assert.True(await _client.AddAsync(model.Id.ToString(), model));
+            Assert.True(await _client.AddAsync($"{{Add_Get_Async_MultipleKeys}}{model.Id.ToString()}", model));
         }
 
         var results = await _client.GetAsync<TestModel>(keys);
 
         foreach (var model in testModels)
         {
-            Assert.Contains(results, r => r.Id == model.Id);
-            Assert.True(await _client.DeleteAsync(model.Id.ToString()));
+            Assert.Contains(results, r => $"{{Add_Get_Async_MultipleKeys}}{r.Id.ToString()}" == $"{{Add_Get_Async_MultipleKeys}}{model.Id.ToString()}");
+            Assert.True(await _client.DeleteAsync($"{{Add_Get_Async_MultipleKeys}}{model.Id.ToString()}"));
         }
     }
 

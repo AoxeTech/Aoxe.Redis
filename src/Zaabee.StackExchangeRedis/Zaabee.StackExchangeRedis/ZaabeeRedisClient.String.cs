@@ -11,7 +11,13 @@ public partial class ZaabeeRedisClient
     public T? Get<T>(string key)
     {
         var value = db.StringGet(key);
-        return value.HasValue ? serializer.FromBytes<T>(value) : default;
+        if(!value.HasValue) return default;
+        return typeof(T) switch
+        {
+            { } t when t == typeof(long) => (T)(object)long.Parse(value!),
+            { } t when t == typeof(double) => (T)(object)double.Parse(value!),
+            _ => serializer.FromBytes<T>(value)
+        };
     }
 
     public List<T?> Get<T>(IEnumerable<string> keys) =>
