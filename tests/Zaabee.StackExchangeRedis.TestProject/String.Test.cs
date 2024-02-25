@@ -24,19 +24,19 @@ public partial class StringTest
             TestModelFactory.CreateTestModel()
         };
 
-        var keys = testModels.Select(m => m.Id.ToString());
+        var keys = testModels.Select(m => $"{{Add_Get_MultipleKeys}}{m.Id.ToString()}");
 
         foreach (var model in testModels)
         {
-            Assert.True(_client.Add(model.Id.ToString(), model));
+            Assert.True(_client.Add($"{{Add_Get_MultipleKeys}}{model.Id.ToString()}", model));
         }
 
         var results = _client.Get<TestModel>(keys);
 
         foreach (var model in testModels)
         {
-            Assert.Contains(results, r => r.Id == model.Id);
-            Assert.True(_client.Delete(model.Id.ToString()));
+            Assert.Contains(results, r => $"{{Add_Get_MultipleKeys}}{r.Id.ToString()}" == $"{{Add_Get_MultipleKeys}}{model.Id.ToString()}");
+            Assert.True(_client.Delete($"{{Add_Get_MultipleKeys}}{model.Id.ToString()}"));
         }
     }
 
