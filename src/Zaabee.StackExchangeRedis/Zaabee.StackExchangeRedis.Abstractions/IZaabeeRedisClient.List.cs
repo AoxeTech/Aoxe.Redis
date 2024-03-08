@@ -29,4 +29,6 @@ public partial interface IZaabeeRedisClient
     void ListSetByIndex<T>(string key, long index, T? value);
 
     void ListTrim(string key, long start, long stop);
+
+    T? ListRightPopLeftPush<T>(string source, string destination);
 }

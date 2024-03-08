@@ -122,7 +122,7 @@ public partial class ListTest
     {
         _client.Delete("ListRangeTrimSyncA");
         _client.Delete("ListRangeTrimSyncB");
-        
+
         var testModelsA = Enumerable
             .Range(0, 10)
             .Select(p => TestModelFactory.CreateTestModel())
@@ -150,5 +150,32 @@ public partial class ListTest
 
         _client.Delete("ListRangeTrimSyncA");
         _client.Delete("ListRangeTrimSyncB");
+    }
+
+    [Fact]
+    public void ListRightPopLeftPushSync()
+    {
+        _client.Delete("{ListRightPopLeftPushSync}A");
+        _client.Delete("{ListRightPopLeftPushSync}B");
+
+        var testModelsA = Enumerable
+            .Range(0, 10)
+            .Select(_ => TestModelFactory.CreateTestModel())
+            .ToList();
+        var testModelsB = Enumerable
+            .Range(0, 10)
+            .Select(_ => TestModelFactory.CreateTestModel())
+            .ToList();
+
+        _client.ListRightPushRange("{ListRightPopLeftPushSync}A", testModelsA);
+        _client.ListRightPushRange("{ListRightPopLeftPushSync}B", testModelsB);
+
+        var testModel = _client.ListRightPopLeftPush<TestModel>("{ListRightPopLeftPushSync}A", "{ListRightPopLeftPushSync}B");
+        Assert.Equal(testModelsA.Last(), testModel);
+        Assert.Equal(testModelsA.Count - 1, _client.ListLength("{ListRightPopLeftPushSync}A"));
+        Assert.Equal(testModelsB.Count + 1, _client.ListLength("{ListRightPopLeftPushSync}B"));
+
+        var result = _client.ListLeftPop<TestModel>("{ListRightPopLeftPushSync}B");
+        Assert.Equal(testModel, result);
     }
 }

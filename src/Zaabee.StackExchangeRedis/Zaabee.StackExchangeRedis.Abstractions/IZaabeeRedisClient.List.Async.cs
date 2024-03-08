@@ -29,4 +29,6 @@ public partial interface IZaabeeRedisClient
     ValueTask ListSetByIndexAsync<T>(string key, long index, T? value);
 
     ValueTask ListTrimAsync(string key, long start, long stop);
+
+    ValueTask<T?> ListRightPopLeftPushAsync<T>(string source, string destination);
 }

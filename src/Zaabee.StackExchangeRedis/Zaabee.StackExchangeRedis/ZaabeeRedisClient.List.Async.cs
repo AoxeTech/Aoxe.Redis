@@ -37,9 +37,6 @@ public partial class ZaabeeRedisClient
     public async ValueTask<T?> ListRightPopAsync<T>(string key) =>
         serializer.FromBytes<T>(await db.ListRightPopAsync(key));
 
-    public async ValueTask<T?> ListRightPopLeftPushAsync<T>(string source, string destination) =>
-        serializer.FromBytes<T>(await db.ListRightPopLeftPushAsync(source, destination));
-
     public async ValueTask<long> ListRightPushAsync<T>(string key, T? value) =>
         await db.ListRightPushAsync(key, serializer.ToBytes(value));
 
@@ -54,4 +51,7 @@ public partial class ZaabeeRedisClient
 
     public async ValueTask ListTrimAsync(string key, long start, long stop) =>
         await db.ListTrimAsync(key, start, stop);
+
+    public async ValueTask<T?> ListRightPopLeftPushAsync<T>(string source, string destination) =>
+        serializer.FromBytes<T>(await db.ListRightPopLeftPushAsync(source, destination));
 }

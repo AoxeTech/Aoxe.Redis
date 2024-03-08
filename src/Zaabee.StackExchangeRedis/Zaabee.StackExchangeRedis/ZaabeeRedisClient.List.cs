@@ -45,4 +45,7 @@ public partial class ZaabeeRedisClient
         db.ListSetByIndex(key, index, serializer.ToBytes(value));
 
     public void ListTrim(string key, long start, long stop) => db.ListTrim(key, start, stop);
+
+    public T? ListRightPopLeftPush<T>(string source, string destination) =>
+        serializer.FromBytes<T>(db.ListRightPopLeftPush(source, destination));
 }
