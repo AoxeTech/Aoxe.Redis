@@ -4,7 +4,7 @@ public partial class ZaabeeRedisClient
 {
     public async ValueTask<bool> AddAsync<T>(string key, T? entity, TimeSpan? expiry = null)
     {
-        var bytes = serializer.ToBytes(entity);
+        var bytes = ToRedisValue(entity);
         return await db.StringSetAsync(key, bytes, expiry ?? defaultExpiry);
     }
 
@@ -16,14 +16,14 @@ public partial class ZaabeeRedisClient
         {
             { } t when t == typeof(long) => (T)(object)long.Parse(value!),
             { } t when t == typeof(double) => (T)(object)double.Parse(value!),
-            _ => serializer.FromBytes<T>(value)
+            _ => FromRedisValue<T>(value)
         };
     }
 
     public async ValueTask<List<T?>> GetAsync<T>(IEnumerable<string> keys)
     {
         var values = await db.StringGetAsync(keys.Select(p => (RedisKey)p).ToArray());
-        return values.Select(value => serializer.FromBytes<T>(value)).ToList();
+        return values.Select(value => FromRedisValue<T>(value)).ToList();
     }
 
     public async Task<bool> AddAsync(string key, long value, TimeSpan? expiry = null) =>

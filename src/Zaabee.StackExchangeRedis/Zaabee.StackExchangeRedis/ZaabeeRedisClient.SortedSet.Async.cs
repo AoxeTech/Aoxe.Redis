@@ -3,13 +3,13 @@ namespace Zaabee.StackExchangeRedis;
 public partial class ZaabeeRedisClient
 {
     public async ValueTask<bool> SortedSetAddAsync<T>(string key, T member, double score) =>
-        await db.SortedSetAddAsync(key, serializer.ToBytes(member), score);
+        await db.SortedSetAddAsync(key, ToRedisValue(member), score);
 
     public async ValueTask<long> SortedSetAddAsync<T>(string key, IDictionary<T, double> values) =>
         await db.SortedSetAddAsync(
             key,
             values
-                .Select(value => new SortedSetEntry(serializer.ToBytes(value.Key), value.Value))
+                .Select(value => new SortedSetEntry(ToRedisValue(value.Key), value.Value))
                 .ToArray()
         );
 
@@ -17,13 +17,13 @@ public partial class ZaabeeRedisClient
         string key,
         T member,
         double value
-    ) => await db.SortedSetDecrementAsync(key, serializer.ToBytes(member), value);
+    ) => await db.SortedSetDecrementAsync(key, ToRedisValue(member), value);
 
     public async ValueTask<double> SortedSetIncrementAsync<T>(
         string key,
         T member,
         double value
-    ) => await db.SortedSetIncrementAsync(key, serializer.ToBytes(member), value);
+    ) => await db.SortedSetIncrementAsync(key, ToRedisValue(member), value);
 
     public async ValueTask<long> SortedSetLengthAsync<T>(string key) =>
         await db.SortedSetLengthAsync(key);
@@ -50,7 +50,7 @@ public partial class ZaabeeRedisClient
     )
     {
         var values = await db.SortedSetRangeByScoreAsync(key, start, stop);
-        return values.Select(value => serializer.FromBytes<T>(value)!).ToList();
+        return values.Select(value => FromRedisValue<T>(value)!).ToList();
     }
 
     public async ValueTask<List<T>> SortedSetRangeByScoreDescendingAsync<T>(
@@ -60,7 +60,7 @@ public partial class ZaabeeRedisClient
     )
     {
         var values = await db.SortedSetRangeByScoreAsync(key, start, stop, order: Order.Descending);
-        return values.Select(value => serializer.FromBytes<T>(value)!).ToList();
+        return values.Select(value => FromRedisValue<T>(value)!).ToList();
     }
 
     public async ValueTask<Dictionary<T, double>> SortedSetRangeByScoreWithScoresAscendingAsync<T>(
@@ -70,7 +70,7 @@ public partial class ZaabeeRedisClient
     )
     {
         var values = await db.SortedSetRangeByScoreWithScoresAsync(key, start, stop);
-        return values.ToDictionary(k => serializer.FromBytes<T>(k.Element), v => v.Score);
+        return values.ToDictionary(k => FromRedisValue<T>(k.Element)!, v => v.Score);
     }
 
     public async ValueTask<Dictionary<T, double>> SortedSetRangeByScoreWithScoresDescendingAsync<T>(
@@ -85,7 +85,7 @@ public partial class ZaabeeRedisClient
             stop,
             order: Order.Descending
         );
-        return values.ToDictionary(k => serializer.FromBytes<T>(k.Element), v => v.Score);
+        return values.ToDictionary(k => FromRedisValue<T>(k.Element)!, v => v.Score);
     }
 
     public async ValueTask<List<int>> SortedSetRangeByValueAsync(
@@ -349,12 +349,12 @@ public partial class ZaabeeRedisClient
     }
 
     public async ValueTask<bool> SortedSetRemoveAsync<T>(string key, T member) =>
-        await db.SortedSetRemoveAsync(key, serializer.ToBytes(member));
+        await db.SortedSetRemoveAsync(key, ToRedisValue(member));
 
     public async ValueTask<long> SortedSetRemoveRangeAsync<T>(string key, IEnumerable<T> members) =>
         await db.SortedSetRemoveAsync(
             key,
-            members.Select(member => (RedisValue)serializer.ToBytes(member)).ToArray()
+            members.Select(ToRedisValue).ToArray()
         );
 
     public async ValueTask<long> SortedSetRemoveRangeByScoreAsync<T>(

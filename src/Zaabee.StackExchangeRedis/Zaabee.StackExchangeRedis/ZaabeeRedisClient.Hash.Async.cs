@@ -4,14 +4,14 @@ public partial class ZaabeeRedisClient
 {
     public async ValueTask<bool> HashAddAsync<T>(string key, string entityKey, T? entity)
     {
-        var bytes = serializer.ToBytes(entity);
+        var bytes = ToRedisValue(entity);
         return await db.HashSetAsync(key, entityKey, bytes);
     }
 
     public async ValueTask HashAddRangeAsync<T>(string key, IDictionary<string, T?> entities)
     {
         var bytes = entities
-            .Select(kv => new HashEntry(kv.Key, serializer.ToBytes(kv.Value)))
+            .Select(kv => new HashEntry(kv.Key, ToRedisValue(kv.Value)))
             .ToArray();
         await db.HashSetAsync(key, bytes);
     }
@@ -28,13 +28,13 @@ public partial class ZaabeeRedisClient
     public async ValueTask<T?> HashGetAsync<T>(string key, string entityKey)
     {
         var value = await db.HashGetAsync(key, entityKey);
-        return value.HasValue ? serializer.FromBytes<T>(value) : default;
+        return value.HasValue ? FromRedisValue<T>(value) : default;
     }
 
     public async ValueTask<Dictionary<string, T?>> HashGetAsync<T>(string key)
     {
         var kvs = await db.HashGetAllAsync(key);
-        return kvs.ToDictionary(kv => kv.Name.ToString(), kv => serializer.FromBytes<T>(kv.Value));
+        return kvs.ToDictionary(kv => kv.Name.ToString(), kv => FromRedisValue<T>(kv.Value));
     }
 
     public async ValueTask<List<T?>> HashGetRangeAsync<T>(
@@ -46,7 +46,7 @@ public partial class ZaabeeRedisClient
             key,
             entityKeys.Select(entityKey => (RedisValue)entityKey).ToArray()
         );
-        return values?.Select(value => serializer.FromBytes<T>(value)).ToList() ?? [];
+        return values?.Select(value => FromRedisValue<T>(value)).ToList() ?? [];
     }
 
     public async ValueTask<List<string>> HashGetAllEntityKeysAsync(string key)

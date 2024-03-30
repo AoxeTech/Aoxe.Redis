@@ -3,21 +3,21 @@ namespace Zaabee.StackExchangeRedis;
 public partial class ZaabeeRedisClient
 {
     public bool SortedSetAdd<T>(string key, T member, double score) =>
-        db.SortedSetAdd(key, serializer.ToBytes(member), score);
+        db.SortedSetAdd(key, ToRedisValue(member), score);
 
     public long SortedSetAdd<T>(string key, IDictionary<T, double> values) =>
         db.SortedSetAdd(
             key,
             values
-                .Select(value => new SortedSetEntry(serializer.ToBytes(value.Key), value.Value))
+                .Select(value => new SortedSetEntry(ToRedisValue(value.Key), value.Value))
                 .ToArray()
         );
 
     public double SortedSetDecrement<T>(string key, T member, double value) =>
-        db.SortedSetDecrement(key, serializer.ToBytes(member), value);
+        db.SortedSetDecrement(key, ToRedisValue(member), value);
 
     public double SortedSetIncrement<T>(string key, T member, double value) =>
-        db.SortedSetIncrement(key, serializer.ToBytes(member), value);
+        db.SortedSetIncrement(key, ToRedisValue(member), value);
 
     public long SortedSetLength<T>(string key) => db.SortedSetLength(key);
 
@@ -37,7 +37,7 @@ public partial class ZaabeeRedisClient
         db.SortedSetLengthByValue(key, min, max);
 
     public long SortedSetLengthByValue<T>(string key, T min, T max) =>
-        db.SortedSetLengthByValue(key, serializer.ToBytes(min), serializer.ToBytes(max));
+        db.SortedSetLengthByValue(key, ToRedisValue(min), ToRedisValue(max));
 
     public List<T> SortedSetRangeByScoreAscending<T>(
         string key,
@@ -45,7 +45,7 @@ public partial class ZaabeeRedisClient
         double stop = -1
     ) =>
         db.SortedSetRangeByScore(key, start, stop)
-            .Select(value => serializer.FromBytes<T>(value))
+            .Select(value => FromRedisValue<T>(value)!)
             .ToList();
 
     public List<T> SortedSetRangeByScoreDescending<T>(
@@ -54,7 +54,7 @@ public partial class ZaabeeRedisClient
         double stop = -1
     ) =>
         db.SortedSetRangeByScore(key, start, stop, order: Order.Descending)
-            .Select(value => serializer.FromBytes<T>(value))
+            .Select(value => FromRedisValue<T>(value)!)
             .ToList();
 
     public Dictionary<T, double> SortedSetRangeByScoreWithScoresAscending<T>(
@@ -63,7 +63,7 @@ public partial class ZaabeeRedisClient
         double stop = -1
     ) =>
         db.SortedSetRangeByScoreWithScores(key, start, stop)
-            .ToDictionary(k => serializer.FromBytes<T>(k.Element), v => v.Score);
+            .ToDictionary(k => FromRedisValue<T>(k.Element)!, v => v.Score);
 
     public Dictionary<T, double> SortedSetRangeByScoreWithScoresDescending<T>(
         string key,
@@ -71,7 +71,7 @@ public partial class ZaabeeRedisClient
         double stop = -1
     ) =>
         db.SortedSetRangeByScoreWithScores(key, start, stop, order: Order.Descending)
-            .ToDictionary(k => serializer.FromBytes<T>(k.Element), v => v.Score);
+            .ToDictionary(k => FromRedisValue<T>(k.Element)!, v => v.Score);
 
     public List<int> SortedSetRangeByValue(
         string key,
@@ -239,12 +239,12 @@ public partial class ZaabeeRedisClient
             .ToList();
 
     public bool SortedSetRemove<T>(string key, T member) =>
-        db.SortedSetRemove(key, serializer.ToBytes(member));
+        db.SortedSetRemove(key, ToRedisValue(member));
 
     public long SortedSetRemoveRange<T>(string key, IEnumerable<T> members) =>
         db.SortedSetRemove(
             key,
-            members.Select(member => (RedisValue)serializer.ToBytes(member)).ToArray()
+            members.Select(member => (RedisValue)ToRedisValue(member)).ToArray()
         );
 
     public long SortedSetRemoveRangeByScore<T>(string key, double start, double stop) =>
@@ -272,9 +272,9 @@ public partial class ZaabeeRedisClient
         long cursor = 0,
         int pageOffset = 0
     ) =>
-        db.SortedSetScan(key, serializer.ToBytes(pattern), pageSize, cursor, pageOffset)
-            .ToDictionary(k => serializer.FromBytes<T>(k.Element), v => v.Score);
+        db.SortedSetScan(key, ToRedisValue(pattern), pageSize, cursor, pageOffset)
+            .ToDictionary(k => FromRedisValue<T>(k.Element)!, v => v.Score);
 
     public double? SortedSetScore<T>(string key, T member) =>
-        db.SortedSetScore(key, serializer.ToBytes(member));
+        db.SortedSetScore(key, ToRedisValue(member));
 }

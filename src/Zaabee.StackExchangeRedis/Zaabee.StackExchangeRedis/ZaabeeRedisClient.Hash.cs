@@ -3,12 +3,12 @@ namespace Zaabee.StackExchangeRedis;
 public partial class ZaabeeRedisClient
 {
     public bool HashAdd<T>(string key, string entityKey, T? entity) =>
-        db.HashSet(key, entityKey, serializer.ToBytes(entity));
+        db.HashSet(key, entityKey, ToRedisValue(entity));
 
     public void HashAddRange<T>(string key, IDictionary<string, T?> entities)
     {
         var bytes = entities
-            .Select(kv => new HashEntry(kv.Key, serializer.ToBytes(kv.Value)))
+            .Select(kv => new HashEntry(kv.Key, ToRedisValue(kv.Value)))
             .ToArray();
         db.HashSet(key, bytes);
     }
@@ -21,12 +21,12 @@ public partial class ZaabeeRedisClient
     public T? HashGet<T>(string key, string entityKey)
     {
         var value = db.HashGet(key, entityKey);
-        return value.HasValue ? serializer.FromBytes<T>(value) : default;
+        return value.HasValue ? FromRedisValue<T>(value) : default;
     }
 
     public Dictionary<string, T?> HashGet<T>(string key) =>
         db.HashGetAll(key)
-            .ToDictionary(kv => kv.Name.ToString(), kv => serializer.FromBytes<T>(kv.Value));
+            .ToDictionary(kv => kv.Name.ToString(), kv => FromRedisValue<T>(kv.Value));
 
     public List<T?> HashGetRange<T>(string key, IEnumerable<string> entityKeys)
     {
@@ -34,7 +34,7 @@ public partial class ZaabeeRedisClient
             key,
             entityKeys.Select(entityKey => (RedisValue)entityKey).ToArray()
         );
-        return values?.Select(value => serializer.FromBytes<T>(value)).ToList() ?? [];
+        return values?.Select(value => FromRedisValue<T>(value)).ToList() ?? [];
     }
 
     public List<string> HashGetAllEntityKeys(string key) =>
