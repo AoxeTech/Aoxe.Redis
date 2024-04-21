@@ -145,7 +145,7 @@ public partial class ZaabeeRedisClient
     )
     {
         var values = await db.SortedSetRangeByValueAsync(key, min, max, Exclude.None, skip, take);
-        return values.Select(value => (string)value).ToList();
+        return values.Select(value => (string)value!).ToList();
     }
 
     public async ValueTask<List<int>> SortedSetRangeByValueAscendingAsync(
@@ -245,7 +245,7 @@ public partial class ZaabeeRedisClient
             skip,
             take
         );
-        return values.Select(value => (string)value).ToList();
+        return values.Select(value => (string)value!).ToList();
     }
 
     public async ValueTask<List<int>> SortedSetRangeByValueDescendingAsync(
@@ -345,7 +345,7 @@ public partial class ZaabeeRedisClient
             skip,
             take
         );
-        return values.Select(value => (string)value).ToList();
+        return values.Select(value => (string)value!).ToList();
     }
 
     public async ValueTask<bool> SortedSetRemoveAsync<T>(string key, T member) =>

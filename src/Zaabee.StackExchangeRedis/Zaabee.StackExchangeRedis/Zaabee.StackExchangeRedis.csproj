@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageVersion>2023.2.1</PackageVersion>
 		<Version>2023.2.1</Version>
@@ -9,14 +9,17 @@
 		<Company>Mutuduxf</Company>
 		<PackageTags>Zaabee;Redis;StackExchange.Redis</PackageTags>
 		<Description>Redis wrappers by StackExchange.Redis</Description>
-		<PackageProjectUrl>https://github.com/PicoHex/Zaabee.Redis</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/PicoHex</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/PicoHex/Zaabee.Redis</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
+		<Authors>Roman Du</Authors>
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="StackExchange.Redis" Version="2.7.23" />
+		<PackageReference Include="StackExchange.Redis" Version="2.7.33" />
 		<PackageReference Include="Zaabee.Serializer.Abstractions" Version="2024.1.1" />
 	</ItemGroup>
 	

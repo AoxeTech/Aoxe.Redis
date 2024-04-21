@@ -15,14 +15,12 @@ public partial class ZaabeeRedisClient(
     {
     }
 
-    private T? FromRedisValue<T>(RedisValue value)
+    private T? FromRedisValue<T>(RedisValue redisValue)
     {
-        if (value.IsNull) return default;
-        if (Consts.RedisValueTypeCodes.Contains(typeof(T)))
-        {
-            return (T)Convert.ChangeType(value, typeof(T));
-        }
-        return serializer.FromBytes<T>(value);
+        if (redisValue.IsNull) return default;
+        if (RedisValueTypeCodes.Contains(typeof(T)))
+            return (T)(object)redisValue;
+        return serializer.FromBytes<T>(redisValue);
     }
 
     private RedisValue ToRedisValue<T>(T value) =>
@@ -43,4 +41,20 @@ public partial class ZaabeeRedisClient(
             string s => s,
             _ => serializer.ToBytes(value)
         };
+
+    private static readonly List<Type> RedisValueTypeCodes =
+    [
+        typeof(bool),
+        typeof(byte[]),
+        typeof(ReadOnlyMemory<byte>),
+        typeof(Memory<byte>),
+        typeof(short),
+        typeof(int),
+        typeof(uint),
+        typeof(long),
+        typeof(ulong),
+        typeof(float),
+        typeof(double),
+        typeof(string)
+    ];
 }

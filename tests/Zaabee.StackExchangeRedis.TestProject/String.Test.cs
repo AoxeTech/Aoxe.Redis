@@ -15,6 +15,16 @@ public partial class StringTest
     }
 
     [Fact]
+    public void Add_Get_StringKey_Int()
+    {
+        var id = Guid.NewGuid().ToString();
+        Assert.True(_client.Add(id, 1));
+        var result = _client.Get<int>(id);
+        Assert.Equal(1, result);
+        Assert.True(_client.Delete(id));
+    }
+
+    [Fact]
     public void Add_Get_MultipleKeys()
     {
         var testModels = new List<TestModel>

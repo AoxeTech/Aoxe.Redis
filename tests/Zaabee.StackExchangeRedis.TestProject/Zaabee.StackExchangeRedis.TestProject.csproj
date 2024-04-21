@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net48;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+		<TargetFrameworks>net48;net6.0;net8.0;net9.0</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="coverlet.collector" Version="6.0.1">
+		<PackageReference Include="coverlet.collector" Version="6.0.2">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

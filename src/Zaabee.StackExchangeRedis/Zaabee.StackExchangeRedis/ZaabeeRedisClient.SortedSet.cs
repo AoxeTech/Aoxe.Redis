@@ -125,7 +125,7 @@ public partial class ZaabeeRedisClient
         long take = -1
     ) =>
         db.SortedSetRangeByValue(key, min, max, Exclude.None, skip, take)
-            .Select(value => (string)value)
+            .Select(value => (string)value!)
             .ToList();
 
     public List<int> SortedSetRangeByValueAscending(
@@ -180,7 +180,7 @@ public partial class ZaabeeRedisClient
         long take = -1
     ) =>
         db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Ascending, skip, take)
-            .Select(value => (string)value)
+            .Select(value => (string)value!)
             .ToList();
 
     public List<int> SortedSetRangeByValueDescending(
@@ -235,7 +235,7 @@ public partial class ZaabeeRedisClient
         long take = -1
     ) =>
         db.SortedSetRangeByValue(key, min, max, Exclude.None, Order.Descending, skip, take)
-            .Select(value => (string)value)
+            .Select(value => (string)value!)
             .ToList();
 
     public bool SortedSetRemove<T>(string key, T member) =>
@@ -244,7 +244,7 @@ public partial class ZaabeeRedisClient
     public long SortedSetRemoveRange<T>(string key, IEnumerable<T> members) =>
         db.SortedSetRemove(
             key,
-            members.Select(member => (RedisValue)ToRedisValue(member)).ToArray()
+            members.Select(ToRedisValue).ToArray()
         );
 
     public long SortedSetRemoveRangeByScore<T>(string key, double start, double stop) =>
