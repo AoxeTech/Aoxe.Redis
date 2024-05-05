@@ -45,7 +45,12 @@ public partial class StringTest
 
         foreach (var model in testModels)
         {
-            Assert.Contains(results, r => $"{{Add_Get_MultipleKeys}}{r.Id.ToString()}" == $"{{Add_Get_MultipleKeys}}{model.Id.ToString()}");
+            Assert.Contains(
+                results,
+                r =>
+                    $"{{Add_Get_MultipleKeys}}{r.Id.ToString()}"
+                    == $"{{Add_Get_MultipleKeys}}{model.Id.ToString()}"
+            );
             Assert.True(_client.Delete($"{{Add_Get_MultipleKeys}}{model.Id.ToString()}"));
         }
     }

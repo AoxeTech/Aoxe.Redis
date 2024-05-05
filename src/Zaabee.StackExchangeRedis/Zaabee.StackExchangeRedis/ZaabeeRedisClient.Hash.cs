@@ -7,9 +7,7 @@ public partial class ZaabeeRedisClient
 
     public void HashAddRange<T>(string key, IDictionary<string, T?> entities)
     {
-        var bytes = entities
-            .Select(kv => new HashEntry(kv.Key, ToRedisValue(kv.Value)))
-            .ToArray();
+        var bytes = entities.Select(kv => new HashEntry(kv.Key, ToRedisValue(kv.Value))).ToArray();
         db.HashSet(key, bytes);
     }
 

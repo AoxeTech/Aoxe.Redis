@@ -10,9 +10,7 @@ public partial class ZaabeeRedisClient
 
     public async ValueTask HashAddRangeAsync<T>(string key, IDictionary<string, T?> entities)
     {
-        var bytes = entities
-            .Select(kv => new HashEntry(kv.Key, ToRedisValue(kv.Value)))
-            .ToArray();
+        var bytes = entities.Select(kv => new HashEntry(kv.Key, ToRedisValue(kv.Value))).ToArray();
         await db.HashSetAsync(key, bytes);
     }
 

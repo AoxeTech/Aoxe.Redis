@@ -8,22 +8,10 @@ public partial class ZaabeeRedisClient
         return db.StringSet(key, bytes, expiry ?? defaultExpiry);
     }
 
-    public T? Get<T>(string key)
-    {
-        var value = db.StringGet(key);
-        if(!value.HasValue) return default;
-        return typeof(T) switch
-        {
-            { } t when t == typeof(long) => (T)(object)long.Parse(value!),
-            { } t when t == typeof(double) => (T)(object)double.Parse(value!),
-            _ => FromRedisValue<T>(value)
-        };
-    }
+    public T? Get<T>(string key) => FromRedisValue<T>(db.StringGet(key));
 
     public List<T?> Get<T>(IEnumerable<string> keys) =>
-        db.StringGet(keys.Select(p => (RedisKey)p).ToArray())
-            .Select(value => FromRedisValue<T>(value))
-            .ToList();
+        db.StringGet(keys.Select(p => (RedisKey)p).ToArray()).Select(FromRedisValue<T>).ToList();
 
     public bool Add(string key, long value, TimeSpan? expiry = null) =>
         db.StringSet(key, value, expiry ?? defaultExpiry);

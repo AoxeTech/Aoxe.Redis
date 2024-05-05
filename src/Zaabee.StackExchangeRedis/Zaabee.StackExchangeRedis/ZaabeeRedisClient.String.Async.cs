@@ -8,22 +8,13 @@ public partial class ZaabeeRedisClient
         return await db.StringSetAsync(key, bytes, expiry ?? defaultExpiry);
     }
 
-    public async ValueTask<T?> GetAsync<T>(string key)
-    {
-        var value = await db.StringGetAsync(key);
-        if(!value.HasValue) return default;
-        return typeof(T) switch
-        {
-            { } t when t == typeof(long) => (T)(object)long.Parse(value!),
-            { } t when t == typeof(double) => (T)(object)double.Parse(value!),
-            _ => FromRedisValue<T>(value)
-        };
-    }
+    public async ValueTask<T?> GetAsync<T>(string key) =>
+        FromRedisValue<T>(await db.StringGetAsync(key));
 
     public async ValueTask<List<T?>> GetAsync<T>(IEnumerable<string> keys)
     {
         var values = await db.StringGetAsync(keys.Select(p => (RedisKey)p).ToArray());
-        return values.Select(value => FromRedisValue<T>(value)).ToList();
+        return values.Select(FromRedisValue<T>).ToList();
     }
 
     public async Task<bool> AddAsync(string key, long value, TimeSpan? expiry = null) =>

@@ -242,10 +242,7 @@ public partial class ZaabeeRedisClient
         db.SortedSetRemove(key, ToRedisValue(member));
 
     public long SortedSetRemoveRange<T>(string key, IEnumerable<T> members) =>
-        db.SortedSetRemove(
-            key,
-            members.Select(ToRedisValue).ToArray()
-        );
+        db.SortedSetRemove(key, members.Select(ToRedisValue).ToArray());
 
     public long SortedSetRemoveRangeByScore<T>(string key, double start, double stop) =>
         db.SortedSetRemoveRangeByScore(key, start, stop);

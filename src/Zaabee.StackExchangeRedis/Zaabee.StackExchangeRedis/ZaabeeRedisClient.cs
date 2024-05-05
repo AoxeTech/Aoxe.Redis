@@ -11,16 +11,28 @@ public partial class ZaabeeRedisClient(
             ConnectionMultiplexer.Connect(zaabeeStackExchangeRedisOptions.Options).GetDatabase(),
             zaabeeStackExchangeRedisOptions.Serializer,
             zaabeeStackExchangeRedisOptions.DefaultExpiry
-        )
-    {
-    }
+        ) { }
 
     private T? FromRedisValue<T>(RedisValue redisValue)
     {
-        if (redisValue.IsNull) return default;
-        if (RedisValueTypeCodes.Contains(typeof(T)))
-            return (T)(object)redisValue;
-        return serializer.FromBytes<T>(redisValue);
+        if (redisValue.IsNullOrEmpty || !redisValue.HasValue)
+            return default;
+        return typeof(T) switch
+        {
+            { } t when t == typeof(bool) => (T)(object)bool.Parse(redisValue!),
+            { } t when t == typeof(short) => (T)(object)short.Parse(redisValue!),
+            { } t when t == typeof(int) => (T)(object)int.Parse(redisValue!),
+            { } t when t == typeof(uint) => (T)(object)uint.Parse(redisValue!),
+            { } t when t == typeof(long) => (T)(object)long.Parse(redisValue!),
+            { } t when t == typeof(ulong) => (T)(object)ulong.Parse(redisValue!),
+            { } t when t == typeof(float) => (T)(object)float.Parse(redisValue!),
+            { } t when t == typeof(double) => (T)(object)double.Parse(redisValue!),
+            { } t when t == typeof(string) => (T)(object)redisValue.ToString(),
+            { } t when t == typeof(byte[]) => (T)(object)(byte[])redisValue!,
+            { } t when t == typeof(float) => (T)(object)(ReadOnlyMemory<byte>)redisValue!,
+            { } t when t == typeof(double) => (T)(object)new Memory<byte>(redisValue!),
+            _ => FromRedisValue<T>(redisValue)
+        };
     }
 
     private RedisValue ToRedisValue<T>(T value) =>
@@ -28,9 +40,6 @@ public partial class ZaabeeRedisClient(
         {
             null => RedisValue.Null,
             bool b => b,
-            byte[] b => b,
-            ReadOnlyMemory<byte> b => b,
-            Memory<byte> b => b,
             short i => i,
             int i => i,
             uint i => i,
@@ -39,22 +48,9 @@ public partial class ZaabeeRedisClient(
             float f => f,
             double d => d,
             string s => s,
+            byte[] b => b,
+            ReadOnlyMemory<byte> b => b,
+            Memory<byte> b => b,
             _ => serializer.ToBytes(value)
         };
-
-    private static readonly List<Type> RedisValueTypeCodes =
-    [
-        typeof(bool),
-        typeof(byte[]),
-        typeof(ReadOnlyMemory<byte>),
-        typeof(Memory<byte>),
-        typeof(short),
-        typeof(int),
-        typeof(uint),
-        typeof(long),
-        typeof(ulong),
-        typeof(float),
-        typeof(double),
-        typeof(string)
-    ];
 }

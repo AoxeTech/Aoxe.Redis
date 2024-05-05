@@ -14,9 +14,7 @@ public partial class ZaabeeRedisClient
     public async ValueTask<List<T?>> SetCombineUnionAsync<T>(string firstKey, string secondKey)
     {
         var values = await db.SetCombineAsync(SetOperation.Union, firstKey, secondKey);
-        return values
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
-            .ToList();
+        return values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default).ToList();
     }
 
     public async ValueTask<List<T?>> SetCombineUnionAsync<T>(IEnumerable<string> keys)
@@ -25,17 +23,13 @@ public partial class ZaabeeRedisClient
             SetOperation.Union,
             keys.Select(key => (RedisKey)key).ToArray()
         );
-        return values
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
-            .ToList();
+        return values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default).ToList();
     }
 
     public async ValueTask<List<T?>> SetCombineIntersectAsync<T>(string firstKey, string secondKey)
     {
         var values = await db.SetCombineAsync(SetOperation.Intersect, firstKey, secondKey);
-        return values
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
-            .ToList();
+        return values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default).ToList();
     }
 
     public async ValueTask<List<T?>> SetCombineIntersectAsync<T>(IEnumerable<string> keys)
@@ -44,17 +38,13 @@ public partial class ZaabeeRedisClient
             SetOperation.Intersect,
             keys.Select(key => (RedisKey)key).ToArray()
         );
-        return values
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
-            .ToList();
+        return values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default).ToList();
     }
 
     public async ValueTask<List<T?>> SetCombineDifferenceAsync<T>(string firstKey, string secondKey)
     {
         var values = await db.SetCombineAsync(SetOperation.Difference, firstKey, secondKey);
-        return values
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
-            .ToList();
+        return values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default).ToList();
     }
 
     public async ValueTask<List<T?>> SetCombineDifferenceAsync<T>(IEnumerable<string> keys)
@@ -63,9 +53,7 @@ public partial class ZaabeeRedisClient
             SetOperation.Difference,
             keys.Select(key => (RedisKey)key).ToArray()
         );
-        return values
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
-            .ToList();
+        return values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default).ToList();
     }
 
     public async ValueTask<long> SetCombineAndStoreUnionAsync<T>(
@@ -142,9 +130,7 @@ public partial class ZaabeeRedisClient
     public async ValueTask<List<T?>> SetPopAsync<T>(string key, long count)
     {
         var values = await db.SetPopAsync(key, count);
-        return values
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
-            .ToList();
+        return values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default).ToList();
     }
 
     public async ValueTask<T?> SetRandomMemberAsync<T>(string key)
@@ -156,9 +142,7 @@ public partial class ZaabeeRedisClient
     public async ValueTask<List<T?>> SetRandomMembersAsync<T>(string key, long count)
     {
         var values = await db.SetRandomMembersAsync(key, count);
-        return values
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
-            .ToList();
+        return values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default).ToList();
     }
 
     public async ValueTask<bool> SetRemoveAsync<T>(string key, T? value) =>

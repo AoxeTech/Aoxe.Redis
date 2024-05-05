@@ -1,6 +1,3 @@
 namespace Zaabee.StackExchangeRedis.TestProject;
 
-public partial class SetTest
-{
-    
-}
+public partial class SetTest { }

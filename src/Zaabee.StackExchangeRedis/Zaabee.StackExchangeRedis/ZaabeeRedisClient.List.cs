@@ -17,10 +17,7 @@ public partial class ZaabeeRedisClient
         db.ListLeftPush(key, (RedisValue)ToRedisValue(value));
 
     public long ListLeftPushRange<T>(string key, IEnumerable<T> values) =>
-        db.ListLeftPush(
-            key,
-            values.Select(value => (RedisValue)ToRedisValue(value)).ToArray()
-        );
+        db.ListLeftPush(key, values.Select(value => (RedisValue)ToRedisValue(value)).ToArray());
 
     public long ListLength(string key) => db.ListLength(key);
 
@@ -36,10 +33,7 @@ public partial class ZaabeeRedisClient
         db.ListRightPush(key, ToRedisValue(value));
 
     public long ListRightPushRange<T>(string key, IEnumerable<T> values) =>
-        db.ListRightPush(
-            key,
-            values.Select(value => (RedisValue)ToRedisValue(value)).ToArray()
-        );
+        db.ListRightPush(key, values.Select(value => (RedisValue)ToRedisValue(value)).ToArray());
 
     public void ListSetByIndex<T>(string key, long index, T? value) =>
         db.ListSetByIndex(key, index, ToRedisValue(value));

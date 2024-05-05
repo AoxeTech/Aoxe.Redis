@@ -13,17 +13,11 @@ public partial class ZaabeeRedisClient
                 .ToArray()
         );
 
-    public async ValueTask<double> SortedSetDecrementAsync<T>(
-        string key,
-        T member,
-        double value
-    ) => await db.SortedSetDecrementAsync(key, ToRedisValue(member), value);
+    public async ValueTask<double> SortedSetDecrementAsync<T>(string key, T member, double value) =>
+        await db.SortedSetDecrementAsync(key, ToRedisValue(member), value);
 
-    public async ValueTask<double> SortedSetIncrementAsync<T>(
-        string key,
-        T member,
-        double value
-    ) => await db.SortedSetIncrementAsync(key, ToRedisValue(member), value);
+    public async ValueTask<double> SortedSetIncrementAsync<T>(string key, T member, double value) =>
+        await db.SortedSetIncrementAsync(key, ToRedisValue(member), value);
 
     public async ValueTask<long> SortedSetLengthAsync<T>(string key) =>
         await db.SortedSetLengthAsync(key);
@@ -352,10 +346,7 @@ public partial class ZaabeeRedisClient
         await db.SortedSetRemoveAsync(key, ToRedisValue(member));
 
     public async ValueTask<long> SortedSetRemoveRangeAsync<T>(string key, IEnumerable<T> members) =>
-        await db.SortedSetRemoveAsync(
-            key,
-            members.Select(ToRedisValue).ToArray()
-        );
+        await db.SortedSetRemoveAsync(key, members.Select(ToRedisValue).ToArray());
 
     public async ValueTask<long> SortedSetRemoveRangeByScoreAsync<T>(
         string key,

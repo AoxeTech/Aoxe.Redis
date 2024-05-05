@@ -2,8 +2,7 @@ namespace Zaabee.StackExchangeRedis;
 
 public partial class ZaabeeRedisClient
 {
-    public bool SetAdd<T>(string key, T? value) =>
-        db.SetAdd(key, (RedisValue)ToRedisValue(value));
+    public bool SetAdd<T>(string key, T? value) => db.SetAdd(key, (RedisValue)ToRedisValue(value));
 
     public long SetAddRange<T>(string key, IEnumerable<T> values) =>
         db.SetAdd(key, values.Select(value => (RedisValue)ToRedisValue(value)).ToArray());
@@ -74,8 +73,7 @@ public partial class ZaabeeRedisClient
             keys.Select(key => (RedisKey)key).ToArray()
         );
 
-    public bool SetContains<T>(string key, T? value) =>
-        db.SetContains(key, ToRedisValue(value));
+    public bool SetContains<T>(string key, T? value) => db.SetContains(key, ToRedisValue(value));
 
     public long SetLength(string key) => db.SetLength(key);
 

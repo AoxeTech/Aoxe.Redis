@@ -2,7 +2,6 @@ namespace Zaabee.StackExchangeRedis.TestProject;
 
 public partial class ListTest
 {
-
     [Fact]
     public async Task ListAsync()
     {
@@ -11,7 +10,10 @@ public partial class ListTest
             .Range(0, 10)
             .Select(p => TestModelFactory.CreateTestModel())
             .ToList();
-        Assert.Equal(testModels.Count, await _client.ListLeftPushRangeAsync("ListAsync", testModels));
+        Assert.Equal(
+            testModels.Count,
+            await _client.ListLeftPushRangeAsync("ListAsync", testModels)
+        );
         Assert.Equal(testModels.Count, await _client.ListLengthAsync("ListAsync"));
         for (var i = 0; i < testModels.Count; i++)
             Assert.Equal(
@@ -31,7 +33,10 @@ public partial class ListTest
         for (var i = 0; i < testLeftModels.Count; i++)
             Assert.Equal(
                 testLeftModels[i],
-                await _client.ListGetByIndexAsync<TestModel>("ListAsync", testLeftModels.Count - 1 - i)
+                await _client.ListGetByIndexAsync<TestModel>(
+                    "ListAsync",
+                    testLeftModels.Count - 1 - i
+                )
             );
 
         var testRightModels = Enumerable
@@ -91,7 +96,10 @@ public partial class ListTest
         for (var i = 0; i < testModels.Count; i++)
             await _client.ListSetByIndexAsync("ListOprByIndexAsync", i, testModels[i]);
         for (var i = 0; i < testModels.Count; i++)
-            Assert.Equal(testModels[i], await _client.ListGetByIndexAsync<TestModel>("ListOprByIndexAsync", i));
+            Assert.Equal(
+                testModels[i],
+                await _client.ListGetByIndexAsync<TestModel>("ListOprByIndexAsync", i)
+            );
         await _client.DeleteAsync("ListOprByIndexAsync");
     }
 
@@ -135,13 +143,20 @@ public partial class ListTest
         Assert.Equal(testModelsA.Count, await _client.ListLengthAsync("ListRangeTrimAsyncA"));
         Assert.Equal(testModelsB.Count, await _client.ListLengthAsync("ListRangeTrimAsyncB"));
 
-        var testModelsResultA = await _client.ListRangeAsync<TestModel>("ListRangeTrimAsyncA", 0, 9);
+        var testModelsResultA = await _client.ListRangeAsync<TestModel>(
+            "ListRangeTrimAsyncA",
+            0,
+            9
+        );
         for (var i = 0; i < testModelsA.Count; i++)
             Assert.Equal(testModelsA[i], testModelsResultA[i]);
 
         await _client.ListTrimAsync("ListRangeTrimAsyncA", 0, 9);
         foreach (var testModel in testModelsA)
-            Assert.Equal(testModel, await _client.ListLeftPopAsync<TestModel>("ListRangeTrimAsyncA"));
+            Assert.Equal(
+                testModel,
+                await _client.ListLeftPopAsync<TestModel>("ListRangeTrimAsyncA")
+            );
 
         Assert.Equal(0, await _client.ListLengthAsync("ListRangeTrimAsyncA"));
 
@@ -167,10 +182,19 @@ public partial class ListTest
         await _client.ListRightPushRangeAsync("{ListRightPopLeftPushAsync}A", testModelsA);
         await _client.ListRightPushRangeAsync("{ListRightPopLeftPushAsync}B", testModelsB);
 
-        var testModel = _client.ListRightPopLeftPush<TestModel>("{ListRightPopLeftPushAsync}A", "{ListRightPopLeftPushAsync}B");
+        var testModel = _client.ListRightPopLeftPush<TestModel>(
+            "{ListRightPopLeftPushAsync}A",
+            "{ListRightPopLeftPushAsync}B"
+        );
         Assert.Equal(testModelsA.Last(), testModel);
-        Assert.Equal(testModelsA.Count - 1, await _client.ListLengthAsync("{ListRightPopLeftPushAsync}A"));
-        Assert.Equal(testModelsB.Count + 1, await _client.ListLengthAsync("{ListRightPopLeftPushAsync}B"));
+        Assert.Equal(
+            testModelsA.Count - 1,
+            await _client.ListLengthAsync("{ListRightPopLeftPushAsync}A")
+        );
+        Assert.Equal(
+            testModelsB.Count + 1,
+            await _client.ListLengthAsync("{ListRightPopLeftPushAsync}B")
+        );
 
         var result = await _client.ListLeftPopAsync<TestModel>("{ListRightPopLeftPushAsync}B");
         Assert.Equal(testModel, result);

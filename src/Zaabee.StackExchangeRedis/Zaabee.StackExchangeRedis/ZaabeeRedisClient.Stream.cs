@@ -1,6 +1,3 @@
 namespace Zaabee.StackExchangeRedis;
 
-public partial class ZaabeeRedisClient
-{
-    
-}
+public partial class ZaabeeRedisClient { }

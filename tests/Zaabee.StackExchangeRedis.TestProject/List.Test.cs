@@ -170,7 +170,10 @@ public partial class ListTest
         _client.ListRightPushRange("{ListRightPopLeftPushSync}A", testModelsA);
         _client.ListRightPushRange("{ListRightPopLeftPushSync}B", testModelsB);
 
-        var testModel = _client.ListRightPopLeftPush<TestModel>("{ListRightPopLeftPushSync}A", "{ListRightPopLeftPushSync}B");
+        var testModel = _client.ListRightPopLeftPush<TestModel>(
+            "{ListRightPopLeftPushSync}A",
+            "{ListRightPopLeftPushSync}B"
+        );
         Assert.Equal(testModelsA.Last(), testModel);
         Assert.Equal(testModelsA.Count - 1, _client.ListLength("{ListRightPopLeftPushSync}A"));
         Assert.Equal(testModelsB.Count + 1, _client.ListLength("{ListRightPopLeftPushSync}B"));

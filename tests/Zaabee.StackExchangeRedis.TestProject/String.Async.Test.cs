@@ -26,15 +26,27 @@ public partial class StringTest
 
         foreach (var model in testModels)
         {
-            Assert.True(await _client.AddAsync($"{{Add_Get_Async_MultipleKeys}}{model.Id.ToString()}", model));
+            Assert.True(
+                await _client.AddAsync(
+                    $"{{Add_Get_Async_MultipleKeys}}{model.Id.ToString()}",
+                    model
+                )
+            );
         }
 
         var results = await _client.GetAsync<TestModel>(keys);
 
         foreach (var model in testModels)
         {
-            Assert.Contains(results, r => $"{{Add_Get_Async_MultipleKeys}}{r.Id.ToString()}" == $"{{Add_Get_Async_MultipleKeys}}{model.Id.ToString()}");
-            Assert.True(await _client.DeleteAsync($"{{Add_Get_Async_MultipleKeys}}{model.Id.ToString()}"));
+            Assert.Contains(
+                results,
+                r =>
+                    $"{{Add_Get_Async_MultipleKeys}}{r.Id.ToString()}"
+                    == $"{{Add_Get_Async_MultipleKeys}}{model.Id.ToString()}"
+            );
+            Assert.True(
+                await _client.DeleteAsync($"{{Add_Get_Async_MultipleKeys}}{model.Id.ToString()}")
+            );
         }
     }
 
