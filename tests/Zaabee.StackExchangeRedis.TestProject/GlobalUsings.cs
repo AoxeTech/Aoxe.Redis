@@ -7,4 +7,3 @@ global using System.Threading.Tasks;
 global using ProtoBuf;
 global using Xunit;
 global using Zaabee.StackExchangeRedis.Abstractions;
-global using ZeroFormatter;
