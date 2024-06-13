@@ -1,4 +1,4 @@
-# Zaabee.Redis
+# Aoxe.Redis
 
 [Redis](https://github.com/antirez/redis) is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. [http://redis.io](http://redis.io)
 
@@ -11,48 +11,48 @@ This redis client wrappers and serializers.
 ### NuGet
 
 ```CLI
-Install-Package Zaabee.StackExchangeRedis
-Install-Package Zaabee.NewtonsoftJson
+Install-Package Aoxe.StackExchangeRedis
+Install-Package Aoxe.NewtonsoftJson
 ```
 
 ### Build Project
 
-Create an asp.net core project and import references in startup.cs. Get [Zaabee.StackExchangeRedis](https://github.com/PicoHex/Zaabee.Redis/tree/master/src/Zaabee.StackExchangeRedis/Zaabee.StackExchangeRedis) and [Zaabee.NewtonsoftJson](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.NewtonsoftJson) from Nuget,otherwise we have other serializers:
+Create an asp.net core project and import references in startup.cs. Get [Aoxe.StackExchangeRedis](https://github.com/AoxeTech/Aoxe.Redis/tree/master/src/Aoxe.StackExchangeRedis/Aoxe.StackExchangeRedis) and [Aoxe.NewtonsoftJson](https://github.com/AoxeTech/Aoxe.Serialization/tree/master/src/Aoxe.NewtonsoftJson) from Nuget,otherwise we have other serializers:
 
-[Zaabee.Binary](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.Binary)
+[Aoxe.Binary](https://github.com/AoxeTech/Aoxe.Serialization/tree/master/src/Aoxe.Binary)
 
-[Zaabee.Jil](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.Jil)
+[Aoxe.Jil](https://github.com/AoxeTech/Aoxe.Serialization/tree/master/src/Aoxe.Jil)
 
-[Zaabee.MsgPack](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.MsgPack)
+[Aoxe.MsgPack](https://github.com/AoxeTech/Aoxe.Serialization/tree/master/src/Aoxe.MsgPack)
 
-[Zaabee.Protobuf](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.Protobuf)
+[Aoxe.Protobuf](https://github.com/AoxeTech/Aoxe.Serialization/tree/master/src/Aoxe.Protobuf)
 
-[Zaabee.SystemTextJson](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.SystemTextJson)
+[Aoxe.SystemTextJson](https://github.com/AoxeTech/Aoxe.Serialization/tree/master/src/Aoxe.SystemTextJson)
 
-[Zaabee.Utf8Json](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.Utf8Json)
+[Aoxe.Utf8Json](https://github.com/AoxeTech/Aoxe.Serialization/tree/master/src/Aoxe.Utf8Json)
 
-[Zaabee.Xml](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.Xml)
+[Aoxe.Xml](https://github.com/AoxeTech/Aoxe.Serialization/tree/master/src/Aoxe.Xml)
 
-[Zaabee.ZeroFormatter](https://github.com/PicoHex/Zaabee.Serialization/tree/master/src/Zaabee.ZeroFormatter)
+[Aoxe.ZeroFormatter](https://github.com/AoxeTech/Aoxe.Serialization/tree/master/src/Aoxe.ZeroFormatter)
 
 ```CSharp
-using Zaabee.StackExchangeRedis;
-using Zaabee.StackExchangeRedis.Abstractions;
-using Zaabee.NewtonsoftJson;
+using Aoxe.StackExchangeRedis;
+using Aoxe.StackExchangeRedis.Abstractions;
+using Aoxe.NewtonsoftJson;
 ```
 
-Register ZaabyRedisClient in Configuration like
+Register AoxeRedisClient in Configuration like
 
 ```CSharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddMvc();
-    services.AddSingleton<IZaabeeRedisClient>(p =>
-        new ZaabeeRedisClient(new ZaabeeStackExchangeRedisOptions
+    services.AddSingleton<IAoxeRedisClient>(p =>
+        new AoxeRedisClient(new AoxeStackExchangeRedisOptions
                 {
                     ConnectionString = "192.168.78.140:6379,abortConnect=false,syncTimeout=3000"),
                     DefaultExpiry = TimeSpan.FromMinutes(10),
-                    Serializer = new ZaabeeSerializer()
+                    Serializer = new AoxeSerializer()
                 });
 }
 ```
@@ -79,9 +79,9 @@ Create a controller like this
 [ApiController]
 public class RedisDemoController : ControllerBase
 {
-    private readonly IZaabeeRedisClient _redisHandler;
+    private readonly IAoxeRedisClient _redisHandler;
 
-    public RedisDemoController(IZaabeeRedisClient handler)
+    public RedisDemoController(IAoxeRedisClient handler)
     {
         _redisHandler = handler;
     }
@@ -154,4 +154,4 @@ public class RedisDemoController : ControllerBase
 }
 ```
 
-Now you can run a [Postman](https://www.getpostman.com/) and send some requests to try it.And the ZaabyRedisClient has async methods like AddAsync/AddRangeAsync/DeleteAsync/DeleteAllAsync,you can try it yourself.
+Now you can run a [Postman](https://www.getpostman.com/) and send some requests to try it.And the AoxeRedisClient has async methods like AddAsync/AddRangeAsync/DeleteAsync/DeleteAllAsync,you can try it yourself.
