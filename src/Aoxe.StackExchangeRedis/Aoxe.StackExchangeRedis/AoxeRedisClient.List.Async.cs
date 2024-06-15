@@ -18,17 +18,14 @@ public partial class AoxeRedisClient
         await db.ListLeftPushAsync(key, ToRedisValue(value));
 
     public async ValueTask<long> ListLeftPushRangeAsync<T>(string key, IEnumerable<T> values) =>
-        await db.ListLeftPushAsync(
-            key,
-            values.Select(value => (RedisValue)ToRedisValue(value)).ToArray()
-        );
+        await db.ListLeftPushAsync(key, values.Select(ToRedisValue).ToArray());
 
     public async ValueTask<long> ListLengthAsync(string key) => await db.ListLengthAsync(key);
 
     public async ValueTask<List<T?>> ListRangeAsync<T>(string key, long start = 0, long stop = -1)
     {
         var results = await db.ListRangeAsync(key, start, stop);
-        return results.Select(value => FromRedisValue<T>(value)).ToList();
+        return results.Select(FromRedisValue<T>).ToList();
     }
 
     public async ValueTask<long> ListRemoveAsync<T>(string key, T? value, long count = 0) =>
@@ -41,10 +38,7 @@ public partial class AoxeRedisClient
         await db.ListRightPushAsync(key, ToRedisValue(value));
 
     public async ValueTask<long> ListRightPushRangeAsync<T>(string key, IEnumerable<T> values) =>
-        await db.ListRightPushAsync(
-            key,
-            values.Select(value => (RedisValue)ToRedisValue(value)).ToArray()
-        );
+        await db.ListRightPushAsync(key, values.Select(ToRedisValue).ToArray());
 
     public async ValueTask ListSetByIndexAsync<T>(string key, long index, T? value) =>
         await db.ListSetByIndexAsync(key, index, ToRedisValue(value));

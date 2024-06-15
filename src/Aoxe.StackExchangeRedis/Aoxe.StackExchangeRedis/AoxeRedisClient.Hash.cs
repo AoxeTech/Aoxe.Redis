@@ -32,7 +32,7 @@ public partial class AoxeRedisClient
             key,
             entityKeys.Select(entityKey => (RedisValue)entityKey).ToArray()
         );
-        return values?.Select(value => FromRedisValue<T>(value)).ToList() ?? [];
+        return values.Select(FromRedisValue<T>).ToList() ?? [];
     }
 
     public List<string> HashGetAllEntityKeys(string key) =>

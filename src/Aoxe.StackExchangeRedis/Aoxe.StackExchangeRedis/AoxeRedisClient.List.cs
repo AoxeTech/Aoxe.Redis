@@ -13,11 +13,10 @@ public partial class AoxeRedisClient
 
     public T? ListLeftPop<T>(string key) => FromRedisValue<T>(db.ListLeftPop(key));
 
-    public long ListLeftPush<T>(string key, T? value) =>
-        db.ListLeftPush(key, (RedisValue)ToRedisValue(value));
+    public long ListLeftPush<T>(string key, T? value) => db.ListLeftPush(key, ToRedisValue(value));
 
     public long ListLeftPushRange<T>(string key, IEnumerable<T> values) =>
-        db.ListLeftPush(key, values.Select(value => (RedisValue)ToRedisValue(value)).ToArray());
+        db.ListLeftPush(key, values.Select(ToRedisValue).ToArray());
 
     public long ListLength(string key) => db.ListLength(key);
 
@@ -33,7 +32,7 @@ public partial class AoxeRedisClient
         db.ListRightPush(key, ToRedisValue(value));
 
     public long ListRightPushRange<T>(string key, IEnumerable<T> values) =>
-        db.ListRightPush(key, values.Select(value => (RedisValue)ToRedisValue(value)).ToArray());
+        db.ListRightPush(key, values.Select(ToRedisValue).ToArray());
 
     public void ListSetByIndex<T>(string key, long index, T? value) =>
         db.ListSetByIndex(key, index, ToRedisValue(value));
