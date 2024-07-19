@@ -5,7 +5,7 @@ public partial class AoxeRedisClient
     public bool SetAdd<T>(string key, T? value) => db.SetAdd(key, ToRedisValue(value));
 
     public long SetAddRange<T>(string key, ISet<T> values) =>
-        db.SetAdd(key, values.Select(value => ToRedisValue(value)).ToArray());
+        db.SetAdd(key, values.Select(ToRedisValue).ToArray());
 
     public HashSet<T?> SetCombineUnion<T>(string firstKey, string secondKey) =>
 
@@ -128,7 +128,7 @@ public partial class AoxeRedisClient
     public bool SetRemove<T>(string key, T? value) => db.SetRemove(key, ToRedisValue(value));
 
     public long SetRemoveRange<T>(string key, ISet<T> values) =>
-        db.SetRemove(key, values.Select(value => (RedisValue)ToRedisValue(value)).ToArray());
+        db.SetRemove(key, values.Select(ToRedisValue).ToArray());
 
     public HashSet<T?> SetScan<T>(
         string key,
