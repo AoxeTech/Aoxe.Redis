@@ -1,4 +1,4 @@
-// namespace Aoxe.StackExchangeRedis.TestProject;
+// namespace Aoxe.StackExchangeRedis.Client.TestProject;
 //
 // public partial class SetTest
 // {

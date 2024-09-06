@@ -1,24 +1,11 @@
-﻿namespace Aoxe.StackExchangeRedis;
+﻿namespace Aoxe.StackExchangeRedis.Client;
 
 public class AoxeStackExchangeRedisOptions
 {
-    private string _connectionString;
-    private ConfigurationOptions _options;
     public IBytesSerializer Serializer { get; set; }
-
-    public string ConnectionString
-    {
-        get => _connectionString;
-        set => _options = ConfigurationOptions.Parse(_connectionString = value);
-    }
-
-    public ConfigurationOptions Options
-    {
-        get => _options;
-        set => _connectionString = (_options = value).ToString();
-    }
-
     public TimeSpan DefaultExpiry { get; set; } = TimeSpan.FromMinutes(10);
+    public string ConnectionString { get; set; }
+    public ConfigurationOptions Options { get; set; }
 
     public AoxeStackExchangeRedisOptions(
         string connectionString,
@@ -27,6 +14,7 @@ public class AoxeStackExchangeRedisOptions
     )
     {
         ConnectionString = connectionString;
+        Options = ConfigurationOptions.Parse(ConnectionString);
         Serializer = serializer;
         DefaultExpiry = defaultExpiry ?? DefaultExpiry;
     }
@@ -38,6 +26,7 @@ public class AoxeStackExchangeRedisOptions
     )
     {
         Options = options;
+        ConnectionString = Options.ToString();
         Serializer = serializer;
         DefaultExpiry = defaultExpiry ?? DefaultExpiry;
     }

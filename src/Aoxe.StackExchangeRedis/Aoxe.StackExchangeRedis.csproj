@@ -2,12 +2,13 @@
 
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
-        <PackageVersion>2024.2.0</PackageVersion>
-        <Version>2024.2.0</Version>
-        <Description>Core abstractions library of Aoxe.StackExchangeRedis</Description>
-        <PackageTags>Aoxe;Redis;StackExchange.Redis;Abstraction</PackageTags>
+        <PackageVersion>2024.2.2</PackageVersion>
+        <Version>2024.2.2</Version>
+        <Description>The dependency injection extensions for Aoxe.StackExchangeRedis.Client.</Description>
+        <PackageTags>Aoxe;StackExchangeRedis;Redis;Dependency Injection</PackageTags>
         <PackageProjectUrl>https://github.com/AoxeTech</PackageProjectUrl>
         <RepositoryUrl>https://github.com/AoxeTech/Aoxe.Redis</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
@@ -23,11 +24,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Aoxe.StackExchangeRedis.Client" Version="2024.1.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" Condition="'$(TargetFramework)' == 'netstandard2.0'"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>

@@ -69,13 +69,13 @@ public partial class ListTest
             .ToList();
 
         _client.ListLeftPushRange("ListPushPopSync", testModels);
-        testModels.ForEach(
-            testModel => Assert.Equal(testModel, _client.ListRightPop<TestModel>("ListPushPopSync"))
+        testModels.ForEach(testModel =>
+            Assert.Equal(testModel, _client.ListRightPop<TestModel>("ListPushPopSync"))
         );
 
         _client.ListRightPushRange("ListPushPopSync", testModels);
-        testModels.ForEach(
-            testModel => Assert.Equal(testModel, _client.ListLeftPop<TestModel>("ListPushPopSync"))
+        testModels.ForEach(testModel =>
+            Assert.Equal(testModel, _client.ListLeftPop<TestModel>("ListPushPopSync"))
         );
 
         _client.Delete("ListPushPopSync");

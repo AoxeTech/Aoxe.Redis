@@ -1,4 +1,4 @@
-namespace Aoxe.StackExchangeRedis;
+namespace Aoxe.StackExchangeRedis.Client;
 
 public partial class AoxeRedisClient
 {
@@ -8,45 +8,39 @@ public partial class AoxeRedisClient
         db.SetAdd(key, values.Select(ToRedisValue).ToArray());
 
     public HashSet<T?> SetCombineUnion<T>(string firstKey, string secondKey) =>
-
         [
-            ..db.SetCombine(SetOperation.Union, firstKey, secondKey)
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
+            .. db.SetCombine(SetOperation.Union, firstKey, secondKey)
+                .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
         ];
 
     public HashSet<T?> SetCombineUnion<T>(ISet<string> keys) =>
-
         [
-            ..db.SetCombine(SetOperation.Union, keys.Select(key => (RedisKey)key).ToArray())
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
+            .. db.SetCombine(SetOperation.Union, keys.Select(key => (RedisKey)key).ToArray())
+                .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
         ];
 
     public HashSet<T?> SetCombineIntersect<T>(string firstKey, string secondKey) =>
-
         [
-            ..db.SetCombine(SetOperation.Intersect, firstKey, secondKey)
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
+            .. db.SetCombine(SetOperation.Intersect, firstKey, secondKey)
+                .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
         ];
 
     public HashSet<T?> SetCombineIntersect<T>(ISet<string> keys) =>
-
         [
-            ..db.SetCombine(SetOperation.Intersect, keys.Select(key => (RedisKey)key).ToArray())
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
+            .. db.SetCombine(SetOperation.Intersect, keys.Select(key => (RedisKey)key).ToArray())
+                .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
         ];
 
     public HashSet<T?> SetCombineDifference<T>(string firstKey, string secondKey) =>
-
         [
-            ..db.SetCombine(SetOperation.Difference, firstKey, secondKey)
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
+            .. db.SetCombine(SetOperation.Difference, firstKey, secondKey)
+                .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
         ];
 
     public HashSet<T?> SetCombineDifference<T>(ISet<string> keys) =>
-
         [
-            ..db.SetCombine(SetOperation.Difference, keys.Select(key => (RedisKey)key).ToArray())
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
+            .. db.SetCombine(SetOperation.Difference, keys.Select(key => (RedisKey)key).ToArray())
+                .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
         ];
 
     public long SetCombineAndStoreUnion(string destination, string firstKey, string secondKey) =>
@@ -90,10 +84,9 @@ public partial class AoxeRedisClient
     public long SetLength(string key) => db.SetLength(key);
 
     public HashSet<T?> SetMembers<T>(string key) =>
-
         [
-            ..db.SetMembers(key)
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
+            .. db.SetMembers(key)
+                .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
         ];
 
     public bool SetMove<T>(string source, string destination, T? value) =>
@@ -106,10 +99,9 @@ public partial class AoxeRedisClient
     }
 
     public HashSet<T?> SetPop<T>(string key, long count) =>
-
         [
-            ..db.SetPop(key, count)
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
+            .. db.SetPop(key, count)
+                .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
         ];
 
     public T? SetRandomMember<T>(string key)
@@ -119,10 +111,9 @@ public partial class AoxeRedisClient
     }
 
     public HashSet<T?> SetRandomMembers<T>(string key, long count) =>
-
         [
-            ..db.SetRandomMembers(key, count)
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
+            .. db.SetRandomMembers(key, count)
+                .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
         ];
 
     public bool SetRemove<T>(string key, T? value) => db.SetRemove(key, ToRedisValue(value));
@@ -137,9 +128,8 @@ public partial class AoxeRedisClient
         long cursor = 0,
         int pageOffset = 0
     ) =>
-
         [
-            ..db.SetScan(key, ToRedisValue(pattern), pageSize, cursor, pageOffset)
-            .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
+            .. db.SetScan(key, ToRedisValue(pattern), pageSize, cursor, pageOffset)
+                .Select(value => value.HasValue ? FromRedisValue<T>(value) : default)
         ];
 }

@@ -1,4 +1,4 @@
-namespace Aoxe.StackExchangeRedis;
+namespace Aoxe.StackExchangeRedis.Client;
 
 public partial class AoxeRedisClient
 {
@@ -11,7 +11,7 @@ public partial class AoxeRedisClient
     public async ValueTask<HashSet<T?>> SetCombineUnionAsync<T>(string firstKey, string secondKey)
     {
         var values = await db.SetCombineAsync(SetOperation.Union, firstKey, secondKey);
-        return [..values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
+        return [.. values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
     }
 
     public async ValueTask<HashSet<T?>> SetCombineUnionAsync<T>(ISet<string> keys)
@@ -20,7 +20,7 @@ public partial class AoxeRedisClient
             SetOperation.Union,
             keys.Select(key => (RedisKey)key).ToArray()
         );
-        return [..values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
+        return [.. values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
     }
 
     public async ValueTask<HashSet<T?>> SetCombineIntersectAsync<T>(
@@ -29,7 +29,7 @@ public partial class AoxeRedisClient
     )
     {
         var values = await db.SetCombineAsync(SetOperation.Intersect, firstKey, secondKey);
-        return [..values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
+        return [.. values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
     }
 
     public async ValueTask<HashSet<T?>> SetCombineIntersectAsync<T>(ISet<string> keys)
@@ -38,7 +38,7 @@ public partial class AoxeRedisClient
             SetOperation.Intersect,
             keys.Select(key => (RedisKey)key).ToArray()
         );
-        return [..values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
+        return [.. values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
     }
 
     public async ValueTask<HashSet<T?>> SetCombineDifferenceAsync<T>(
@@ -47,7 +47,7 @@ public partial class AoxeRedisClient
     )
     {
         var values = await db.SetCombineAsync(SetOperation.Difference, firstKey, secondKey);
-        return [..values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
+        return [.. values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
     }
 
     public async ValueTask<HashSet<T?>> SetCombineDifferenceAsync<T>(ISet<string> keys)
@@ -56,7 +56,7 @@ public partial class AoxeRedisClient
             SetOperation.Difference,
             keys.Select(key => (RedisKey)key).ToArray()
         );
-        return [..values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
+        return [.. values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
     }
 
     public async ValueTask<long> SetCombineAndStoreUnionAsync<T>(
@@ -116,7 +116,7 @@ public partial class AoxeRedisClient
     public async ValueTask<HashSet<T?>> SetMembersAsync<T>(string key)
     {
         var results = await db.SetMembersAsync(key);
-        return [..results.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
+        return [.. results.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
     }
 
     public async ValueTask<bool> SetMoveAsync<T>(string source, string destination, T? value) =>
@@ -131,7 +131,7 @@ public partial class AoxeRedisClient
     public async ValueTask<HashSet<T?>> SetPopAsync<T>(string key, long count)
     {
         var values = await db.SetPopAsync(key, count);
-        return [..values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
+        return [.. values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
     }
 
     public async ValueTask<T?> SetRandomMemberAsync<T>(string key)
@@ -143,7 +143,7 @@ public partial class AoxeRedisClient
     public async ValueTask<HashSet<T?>> SetRandomMembersAsync<T>(string key, long count)
     {
         var values = await db.SetRandomMembersAsync(key, count);
-        return [..values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
+        return [.. values.Select(value => value.HasValue ? FromRedisValue<T>(value) : default)];
     }
 
     public async ValueTask<bool> SetRemoveAsync<T>(string key, T? value) =>
