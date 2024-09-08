@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
-        <PackageVersion>2024.2.2</PackageVersion>
-        <Version>2024.2.2</Version>
+        <PackageVersion>2024.2.3</PackageVersion>
+        <Version>2024.2.3</Version>
         <Description>The dependency injection extensions for Aoxe.StackExchangeRedis.Client.</Description>
         <PackageTags>Aoxe;StackExchangeRedis;Redis;Dependency Injection</PackageTags>
         <PackageProjectUrl>https://github.com/AoxeTech</PackageProjectUrl>
@@ -24,7 +24,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aoxe.StackExchangeRedis.Client" Version="2024.1.0" />
+        <PackageReference Include="Aoxe.StackExchangeRedis.Client" Version="2024.1.1" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>

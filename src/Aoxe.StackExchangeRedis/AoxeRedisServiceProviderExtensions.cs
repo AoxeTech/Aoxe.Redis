@@ -4,8 +4,8 @@ public static class AoxeRedisServiceProviderExtensions
 {
     public static IServiceCollection AddAoxeMongo(
         this IServiceCollection services,
-        Func<AoxeStackExchangeRedisOptions> optionsFunc
-    ) => services.AddSingleton<IAoxeRedisClient>(new AoxeRedisClient(optionsFunc()));
+        Func<AoxeStackExchangeRedisOptions> optionsFactory
+    ) => services.AddSingleton<IAoxeRedisClient>(new AoxeRedisClient(optionsFactory));
 
     public static IServiceCollection AddAoxeMongo(
         this IServiceCollection services,

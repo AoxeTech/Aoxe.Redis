@@ -6,11 +6,14 @@ public partial class AoxeRedisClient(
     TimeSpan defaultExpiry
 ) : IAoxeRedisClient
 {
-    public AoxeRedisClient(AoxeStackExchangeRedisOptions aoxeStackExchangeRedisOptions)
+    public AoxeRedisClient(Func<AoxeStackExchangeRedisOptions> optionsFactory)
+        : this(optionsFactory()) { }
+
+    public AoxeRedisClient(AoxeStackExchangeRedisOptions options)
         : this(
-            ConnectionMultiplexer.Connect(aoxeStackExchangeRedisOptions.Options).GetDatabase(),
-            aoxeStackExchangeRedisOptions.Serializer,
-            aoxeStackExchangeRedisOptions.DefaultExpiry
+            ConnectionMultiplexer.Connect(options.Options).GetDatabase(),
+            options.Serializer,
+            options.DefaultExpiry
         ) { }
 
     private T? FromRedisValue<T>(RedisValue redisValue)
