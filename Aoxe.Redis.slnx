@@ -1,0 +1,10 @@
+﻿<Solution>
+  <Folder Name="/src/">
+    <Project Path="src\Aoxe.StackExchangeRedis.Abstractions\Aoxe.StackExchangeRedis.Abstractions.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.StackExchangeRedis.Client\Aoxe.StackExchangeRedis.Client.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.StackExchangeRedis\Aoxe.StackExchangeRedis.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests\Aoxe.StackExchangeRedis.TestProject\Aoxe.StackExchangeRedis.TestProject.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>

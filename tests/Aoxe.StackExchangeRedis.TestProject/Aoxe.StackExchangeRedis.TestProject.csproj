@@ -5,8 +5,8 @@
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Aoxe.Protobuf" Version="2024.2.1" />
-		<PackageReference Include="Aoxe.SystemTextJson" Version="2024.2.1" />
+		<PackageReference Include="Aoxe.Protobuf" Version="2024.3.0" />
+		<PackageReference Include="Aoxe.SystemTextJson" Version="2024.3.0" />
 		<PackageReference Include="coverlet.collector" Version="6.0.2">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
